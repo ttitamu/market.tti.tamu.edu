@@ -1,0 +1,122 @@
+{
+  "Pharr": {
+     "Percent Ag":0.454893062
+    ,"Live animals/fish":0.000921871
+    ,"Cereal grains":0.00231838
+    ,"Other ag prods.":0.403604875
+    ,"Animal feed":8.14003E-06
+    ,"Meat/seafood":0.009493474
+    ,"Milled grain prods.":0.006243471
+    ,"Other foodstuffs":0.032302851
+
+    },
+  "Progresso": {
+     "Percent Ag":0.923320275
+    ,"Live animals/fish":0
+    ,"Cereal grains":0.492420625
+    ,"Other ag prods.":0.409695915
+    ,"Animal feed":0
+    ,"Meat/seafood":5.15038E-05
+    ,"Milled grain prods.":0.008068329
+    ,"Other foodstuffs":0.013083902
+
+    },
+  "Laredo": {
+     "Percent Ag":0.108048583
+    ,"Live animals/fish":0.000894171
+    ,"Cereal grains":0.000772418
+    ,"Other ag prods.":0.044911145
+    ,"Animal feed":3.93438E-05
+    ,"Meat/seafood":0.016907327
+    ,"Milled grain prods.":0.012264236
+    ,"Other foodstuffs":0.032259943
+
+    },
+  "El Paso": {
+     "Percent Ag":0.082569567
+    ,"Live animals/fish":0.000239418
+    ,"Cereal grains":0.002151351
+    ,"Other ag prods.":0.03883326
+    ,"Animal feed":3.70462E-07
+    ,"Meat/seafood":0.007774646
+    ,"Milled grain prods.":0.002075312
+    ,"Other foodstuffs":0.031495209
+
+    },
+  "Santa Theresa": {
+     "Percent Ag":0.138019162
+    ,"Live animals/fish":0.010978082
+    ,"Cereal grains":0.022189766
+    ,"Other ag prods.":0.046409092
+    ,"Animal feed":0
+    ,"Meat/seafood":0
+    ,"Milled grain prods.":1.06277E-05
+    ,"Other foodstuffs":0.058431595
+
+    },
+  "Columbus": {
+     "Percent Ag":0.934199126
+    ,"Live animals/fish":0.000804997
+    ,"Cereal grains":0.019361873
+    ,"Other ag prods.":0.899821972
+    ,"Animal feed":0
+    ,"Meat/seafood":0
+    ,"Milled grain prods.":0.000936132
+    ,"Other foodstuffs":0.013274151
+
+    },
+  "Nogales": {
+     "Percent Ag":0.663473889
+    ,"Live animals/fish":0.008460267
+    ,"Cereal grains":0.003516167
+    ,"Other ag prods.":0.618679582
+    ,"Animal feed":0
+    ,"Meat/seafood":0.006057742
+    ,"Milled grain prods.":0.007107694
+    ,"Other foodstuffs":0.019652436
+
+    },
+  "San Luis II": {
+     "Percent Ag":0.42231464
+    ,"Live animals/fish":7.87308E-05
+    ,"Cereal grains":0
+    ,"Other ag prods.":0.390330069
+    ,"Animal feed":1.47961E-05
+    ,"Meat/seafood":0.013783849
+    ,"Milled grain prods.":0.008637746
+    ,"Other foodstuffs":0.009469449
+
+    },
+  "Calexico East": {
+     "Percent Ag":0.242909692
+    ,"Live animals/fish":7.53907E-06
+    ,"Cereal grains":0.001236577
+    ,"Other ag prods.":0.154952265
+    ,"Animal feed":1.99737E-06
+    ,"Meat/seafood":0.013694774
+    ,"Milled grain prods.":0.049132194
+    ,"Other foodstuffs":0.023884345
+
+    },
+  "Otay Mesa": {
+     "Percent Ag":0.249491365
+    ,"Live animals/fish":0.00269419
+    ,"Cereal grains":0.003730619
+    ,"Other ag prods.":0.184524885
+    ,"Animal feed":1.90699E-05
+    ,"Meat/seafood":0.005008271
+    ,"Milled grain prods.":0.010841428
+    ,"Other foodstuffs":0.042672901
+
+  },
+  "Passenger Mix": {
+    "Live animals/fish":0.009865753
+    ,"Cereal grains":0.05338026
+    ,"Other ag prods.":0.018317571
+    ,"Animal feed":0.013793801
+    ,"Meat/seafood":0.010991182
+    ,"Milled grain prods.":0.008924386
+    ,"Other foodstuffs":0.034479339
+
+    }
+}

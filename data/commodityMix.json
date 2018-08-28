@@ -1,0 +1,508 @@
+{
+  "Pharr": {
+     "Percent Ag":0.454893062
+    ,"Live animals/fish":0.000921871
+    ,"Cereal grains":0.00231838
+    ,"Other ag prods.":0.403604875
+    ,"Animal feed":8.14003E-06
+    ,"Meat/seafood":0.009493474
+    ,"Milled grain prods.":0.006243471
+    ,"Other foodstuffs":0.032302851
+    ,"Alcoholic beverages":0.000964781
+    ,"Tobacco prods.":1.57651E-05
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.002967726
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":0.187046925
+    ,"Basic chemicals":0.00067954
+    ,"Pharmaceuticals":0.000119172
+    ,"Fertilizers":0.00025772
+    ,"Chemical prods.":0.011733113
+    ,"Plastics/rubber":0.034960919
+    ,"Logs":0
+    ,"Wood prods.":0.002933898
+    ,"Newsprint/paper":0.00584658
+    ,"Paper articles":0.022327146
+    ,"Printed prods.":0.001054232
+    ,"Textiles/leather":0.010946432
+    ,"Nonmetal min. prods.":0.010324521
+    ,"Base metals":0.034452854
+    ,"Articles-base metal":0.01473991
+    ,"Machinery":0.076212167
+    ,"Electronics":0.057356499
+    ,"Motorized vehicles":0.026778831
+    ,"Transport equip.":0.0009964
+    ,"Precision instruments":0
+    ,"Furniture":0.020340275
+    ,"Misc. mfg. prods.":0.010621641
+    ,"Waste/scrap":0.002550824
+    ,"Mixed freight":0.008879069
+    ,"Unknown":0
+    },
+  "Progresso": {
+     "Percent Ag":0.923320275
+    ,"Live animals/fish":0
+    ,"Cereal grains":0.492420625
+    ,"Other ag prods.":0.409695915
+    ,"Animal feed":0
+    ,"Meat/seafood":5.15038E-05
+    ,"Milled grain prods.":0.008068329
+    ,"Other foodstuffs":0.013083902
+    ,"Alcoholic beverages":0.000165247
+    ,"Tobacco prods.":3.65247E-06
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.062387836
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":0
+    ,"Basic chemicals":1.98579E-06
+    ,"Pharmaceuticals":0
+    ,"Fertilizers":0.001021188
+    ,"Chemical prods.":1.12474E-07
+    ,"Plastics/rubber":8.70438E-05
+    ,"Logs":0
+    ,"Wood prods.":4.24752E-07
+    ,"Newsprint/paper":0
+    ,"Paper articles":5.03222E-05
+    ,"Printed prods.":0
+    ,"Textiles/leather":0.001388708
+    ,"Nonmetal min. prods.":0.000255698
+    ,"Base metals":3.29769E-05
+    ,"Articles-base metal":1.14912E-05
+    ,"Machinery":0.000331014
+    ,"Electronics":0.000159519
+    ,"Motorized vehicles":0.000310986
+    ,"Transport equip.":0
+    ,"Precision instruments":0
+    ,"Furniture":0.010411913
+    ,"Misc. mfg. prods.":8.60928E-06
+    ,"Waste/scrap":0
+    ,"Mixed freight":5.09983E-05
+    ,"Unknown":0
+    },
+  "Laredo": {
+     "Percent Ag":0.108048583
+    ,"Live animals/fish":0.000894171
+    ,"Cereal grains":0.000772418
+    ,"Other ag prods.":0.044911145
+    ,"Animal feed":3.93438E-05
+    ,"Meat/seafood":0.016907327
+    ,"Milled grain prods.":0.012264236
+    ,"Other foodstuffs":0.032259943
+    ,"Alcoholic beverages":0.024602982
+    ,"Tobacco prods.":0.000220308
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.215792195
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":0.032861969
+    ,"Basic chemicals":0.023751085
+    ,"Pharmaceuticals":0.00432435
+    ,"Fertilizers":0.000595693
+    ,"Chemical prods.":0.065197959
+    ,"Plastics/rubber":0.07076254
+    ,"Logs":0
+    ,"Wood prods.":0.00503539
+    ,"Newsprint/paper":0.008536611
+    ,"Paper articles":0.019234884
+    ,"Printed prods.":0.000601653
+    ,"Textiles/leather":0.01116189
+    ,"Nonmetal min. prods.":0.035162515
+    ,"Base metals":0.062014945
+    ,"Articles-base metal":0.04712576
+    ,"Machinery":0.046961764
+    ,"Electronics":0.086712832
+    ,"Motorized vehicles":0.100140432
+    ,"Transport equip.":0.004159221
+    ,"Precision instruments":0
+    ,"Furniture":0.014426434
+    ,"Misc. mfg. prods.":0.008046339
+    ,"Waste/scrap":8.44398E-05
+    ,"Mixed freight":0.004437227
+    ,"Unknown":0
+    },
+  "El Paso": {
+     "Percent Ag":0.082569567
+    ,"Live animals/fish":0.000239418
+    ,"Cereal grains":0.002151351
+    ,"Other ag prods.":0.03883326
+    ,"Animal feed":3.70462E-07
+    ,"Meat/seafood":0.007774646
+    ,"Milled grain prods.":0.002075312
+    ,"Other foodstuffs":0.031495209
+    ,"Alcoholic beverages":0.00211263
+    ,"Tobacco prods.":1.13567E-06
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.022038855
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":0.088648848
+    ,"Basic chemicals":0.004227925
+    ,"Pharmaceuticals":0.00114018
+    ,"Fertilizers":0.000256229
+    ,"Chemical prods.":0.02398215
+    ,"Plastics/rubber":0.10761559
+    ,"Logs":0
+    ,"Wood prods.":0.042074891
+    ,"Newsprint/paper":0.007260298
+    ,"Paper articles":0.042540992
+    ,"Printed prods.":0.004634994
+    ,"Textiles/leather":0.029268456
+    ,"Nonmetal min. prods.":0.018939294
+    ,"Base metals":0.111166055
+    ,"Articles-base metal":0.034770606
+    ,"Machinery":0.151048163
+    ,"Electronics":0.120077414
+    ,"Motorized vehicles":0.05010069
+    ,"Transport equip.":0.000826291
+    ,"Precision instruments":0
+    ,"Furniture":0.026814912
+    ,"Misc. mfg. prods.":0.01937595
+    ,"Waste/scrap":7.85069E-05
+    ,"Mixed freight":0.008429379
+    ,"Unknown":0
+    },
+  "Santa Theresa": {
+     "Percent Ag":0.138019162
+    ,"Live animals/fish":0.010978082
+    ,"Cereal grains":0.022189766
+    ,"Other ag prods.":0.046409092
+    ,"Animal feed":0
+    ,"Meat/seafood":0
+    ,"Milled grain prods.":1.06277E-05
+    ,"Other foodstuffs":0.058431595
+    ,"Alcoholic beverages":0.000141996
+    ,"Tobacco prods.":0
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.081431292
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":8.22064E-05
+    ,"Basic chemicals":3.41284E-05
+    ,"Pharmaceuticals":0.000526989
+    ,"Fertilizers":0.000883645
+    ,"Chemical prods.":0.029574562
+    ,"Plastics/rubber":0.055679312
+    ,"Logs":0
+    ,"Wood prods.":0.039921009
+    ,"Newsprint/paper":0.000187963
+    ,"Paper articles":0.02025101
+    ,"Printed prods.":0.00231282
+    ,"Textiles/leather":0.001884121
+    ,"Nonmetal min. prods.":0.098332093
+    ,"Base metals":0.152864126
+    ,"Articles-base metal":0.048851853
+    ,"Machinery":0.077199578
+    ,"Electronics":0.221979668
+    ,"Motorized vehicles":0.021815117
+    ,"Transport equip.":1.54787E-05
+    ,"Precision instruments":0
+    ,"Furniture":0.001628368
+    ,"Misc. mfg. prods.":0.002515377
+    ,"Waste/scrap":1.76657E-06
+    ,"Mixed freight":0.003866358
+    ,"Unknown":0
+    },
+  "Columbus": {
+     "Percent Ag":0.934199126
+    ,"Live animals/fish":0.000804997
+    ,"Cereal grains":0.019361873
+    ,"Other ag prods.":0.899821972
+    ,"Animal feed":0
+    ,"Meat/seafood":0
+    ,"Milled grain prods.":0.000936132
+    ,"Other foodstuffs":0.013274151
+    ,"Alcoholic beverages":0
+    ,"Tobacco prods.":0
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.046744777
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":0.000156598
+    ,"Basic chemicals":1.92928E-05
+    ,"Pharmaceuticals":0
+    ,"Fertilizers":0.000745094
+    ,"Chemical prods.":3.8167E-06
+    ,"Plastics/rubber":0.00028903
+    ,"Logs":0
+    ,"Wood prods.":0.001361428
+    ,"Newsprint/paper":0
+    ,"Paper articles":0.002063013
+    ,"Printed prods.":0
+    ,"Textiles/leather":0.005825392
+    ,"Nonmetal min. prods.":0.000457805
+    ,"Base metals":0.000997953
+    ,"Articles-base metal":0.000139923
+    ,"Machinery":0.000577885
+    ,"Electronics":0.003404139
+    ,"Motorized vehicles":0.002053527
+    ,"Transport equip.":4.3621E-06
+    ,"Precision instruments":0
+    ,"Furniture":0.000792185
+    ,"Misc. mfg. prods.":0.000123893
+    ,"Waste/scrap":0
+    ,"Mixed freight":4.07608E-05
+    ,"Unknown":0
+    },
+  "Nogales": {
+     "Percent Ag":0.663473889
+    ,"Live animals/fish":0.008460267
+    ,"Cereal grains":0.003516167
+    ,"Other ag prods.":0.618679582
+    ,"Animal feed":0
+    ,"Meat/seafood":0.006057742
+    ,"Milled grain prods.":0.007107694
+    ,"Other foodstuffs":0.019652436
+    ,"Alcoholic beverages":0.00397362
+    ,"Tobacco prods.":1.8199E-06
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.031531151
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":0.014292058
+    ,"Basic chemicals":0.009240302
+    ,"Pharmaceuticals":0.002293524
+    ,"Fertilizers":0.012969053
+    ,"Chemical prods.":0.002622107
+    ,"Plastics/rubber":0.048585049
+    ,"Logs":0
+    ,"Wood prods.":0.011535484
+    ,"Newsprint/paper":0.000316252
+    ,"Paper articles":0.019848919
+    ,"Printed prods.":0.000349157
+    ,"Textiles/leather":0.008063872
+    ,"Nonmetal min. prods.":0.000673261
+    ,"Base metals":0.051648317
+    ,"Articles-base metal":0.018743205
+    ,"Machinery":0.033808467
+    ,"Electronics":0.039688641
+    ,"Motorized vehicles":0.004692575
+    ,"Transport equip.":0.000217598
+    ,"Precision instruments":0
+    ,"Furniture":0.00513604
+    ,"Misc. mfg. prods.":0.010216059
+    ,"Waste/scrap":9.8655E-05
+    ,"Mixed freight":0.005980925
+    ,"Unknown":0
+    },
+  "San Luis II": {
+     "Percent Ag":0.42231464
+    ,"Live animals/fish":7.87308E-05
+    ,"Cereal grains":0
+    ,"Other ag prods.":0.390330069
+    ,"Animal feed":1.47961E-05
+    ,"Meat/seafood":0.013783849
+    ,"Milled grain prods.":0.008637746
+    ,"Other foodstuffs":0.009469449
+    ,"Alcoholic beverages":0.001902677
+    ,"Tobacco prods.":0
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.000381532
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":0.002904238
+    ,"Basic chemicals":0.002465486
+    ,"Pharmaceuticals":0
+    ,"Fertilizers":0.031480031
+    ,"Chemical prods.":0.00520441
+    ,"Plastics/rubber":0.150092145
+    ,"Logs":0
+    ,"Wood prods.":0.035305657
+    ,"Newsprint/paper":0.000232424
+    ,"Paper articles":0.018551269
+    ,"Printed prods.":0.012685885
+    ,"Textiles/leather":0.01100414
+    ,"Nonmetal min. prods.":0.004544839
+    ,"Base metals":0.041493909
+    ,"Articles-base metal":0.079370582
+    ,"Machinery":0.062673564
+    ,"Electronics":0.04375483
+    ,"Motorized vehicles":0.035072295
+    ,"Transport equip.":0
+    ,"Precision instruments":0
+    ,"Furniture":0.003284283
+    ,"Misc. mfg. prods.":0.003711903
+    ,"Waste/scrap":5.41103E-05
+    ,"Mixed freight":0.031515151
+    ,"Unknown":0
+    },
+  "Calexico East": {
+     "Percent Ag":0.242909692
+    ,"Live animals/fish":7.53907E-06
+    ,"Cereal grains":0.001236577
+    ,"Other ag prods.":0.154952265
+    ,"Animal feed":1.99737E-06
+    ,"Meat/seafood":0.013694774
+    ,"Milled grain prods.":0.049132194
+    ,"Other foodstuffs":0.023884345
+    ,"Alcoholic beverages":0.039158048
+    ,"Tobacco prods.":0
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.179800012
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":0.014932446
+    ,"Basic chemicals":0.001183184
+    ,"Pharmaceuticals":0.000786608
+    ,"Fertilizers":0.003110488
+    ,"Chemical prods.":0.046270104
+    ,"Plastics/rubber":0.044270256
+    ,"Logs":0
+    ,"Wood prods.":0.010130345
+    ,"Newsprint/paper":0.070176939
+    ,"Paper articles":0.027849045
+    ,"Printed prods.":0.001170115
+    ,"Textiles/leather":0.003300931
+    ,"Nonmetal min. prods.":0.064220992
+    ,"Base metals":0.068813405
+    ,"Articles-base metal":0.040189525
+    ,"Machinery":0.04651495
+    ,"Electronics":0.036565554
+    ,"Motorized vehicles":0.029788496
+    ,"Transport equip.":0.000652892
+    ,"Precision instruments":0
+    ,"Furniture":0.009739149
+    ,"Misc. mfg. prods.":0.009122091
+    ,"Waste/scrap":9.01678E-05
+    ,"Mixed freight":0.009254564
+    ,"Unknown":0
+    },
+  "Otay Mesa": {
+     "Percent Ag":0.249491365
+    ,"Live animals/fish":0.00269419
+    ,"Cereal grains":0.003730619
+    ,"Other ag prods.":0.184524885
+    ,"Animal feed":1.90699E-05
+    ,"Meat/seafood":0.005008271
+    ,"Milled grain prods.":0.010841428
+    ,"Other foodstuffs":0.042672901
+    ,"Alcoholic beverages":0.048396706
+    ,"Tobacco prods.":2.9602E-05
+    ,"Building stone":0
+    ,"Natural sands":0
+    ,"Gravel":0
+    ,"Nonmetallic minerals":0.033988238
+    ,"Metallic ores":0
+    ,"Coal":0
+    ,"Crude petroleum":0
+    ,"Gasoline":0
+    ,"Fuel oils":0
+    ,"Coal-n.e.c.":0.019840906
+    ,"Basic chemicals":0.003315578
+    ,"Pharmaceuticals":0.001291798
+    ,"Fertilizers":0.00339553
+    ,"Chemical prods.":0.02271871
+    ,"Plastics/rubber":0.071062217
+    ,"Logs":0
+    ,"Wood prods.":0.017795059
+    ,"Newsprint/paper":0.012438726
+    ,"Paper articles":0.035410119
+    ,"Printed prods.":0.002340193
+    ,"Textiles/leather":0.016456516
+    ,"Nonmetal min. prods.":0.008125507
+    ,"Base metals":0.129661002
+    ,"Articles-base metal":0.032982642
+    ,"Machinery":0.081100356
+    ,"Electronics":0.036850858
+    ,"Motorized vehicles":0.100238483
+    ,"Transport equip.":0.000278228
+    ,"Precision instruments":0
+    ,"Furniture":0.029776867
+    ,"Misc. mfg. prods.":0.029593497
+    ,"Waste/scrap":4.66635E-05
+    ,"Mixed freight":0.013374633
+    ,"Unknown":0
+    },
+  "Passenger Mix": {
+     "Percent Ag":0.149752292
+    ,"Live animals/fish":0.009865753
+    ,"Cereal grains":0.05338026
+    ,"Other ag prods.":0.018317571
+    ,"Animal feed":0.013793801
+    ,"Meat/seafood":0.010991182
+    ,"Milled grain prods.":0.008924386
+    ,"Other foodstuffs":0.034479339
+    ,"Alcoholic beverages":0.010940046
+    ,"Tobacco prods.":0.000142082
+    ,"Building stone":0.003253264
+    ,"Natural sands":0.051709166
+    ,"Gravel":0.130117974
+    ,"Nonmetallic minerals":0.012842794
+    ,"Metallic ores":0.006408449
+    ,"Coal":0.01087319
+    ,"Crude petroleum":0.002005237
+    ,"Gasoline":0.069503406
+    ,"Fuel oils":0.046109177
+    ,"Coal-n.e.c.":0.049849327
+    ,"Basic chemicals":0.035445184
+    ,"Pharmaceuticals":0.001571029
+    ,"Fertilizers":0.009316969
+    ,"Chemical prods.":0.013652522
+    ,"Plastics/rubber":0.022581136
+    ,"Logs":0.012938667
+    ,"Wood prods.":0.023110268
+    ,"Newsprint/paper":0.005851956
+    ,"Paper articles":0.006525779
+    ,"Printed prods.":0.002211185
+    ,"Textiles/leather":0.00508651
+    ,"Nonmetal min. prods.":0.130883946
+    ,"Base metals":0.031213952
+    ,"Articles-base metal":0.025592167
+    ,"Machinery":0.019152985
+    ,"Electronics":0.01161856
+    ,"Motorized vehicles":0.014935036
+    ,"Transport equip.":0.000825671
+    ,"Precision instruments":0.000737299
+    ,"Furniture":0.004326757
+    ,"Misc. mfg. prods.":0.008948984
+    ,"Waste/scrap":0.069967034
+    ,"Mixed freight":0
+    ,"Unknown":0
+    }
+}

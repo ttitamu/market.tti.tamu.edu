@@ -1,0 +1,247 @@
+[
+    {
+        "row": 2,
+        "city": "Addison",
+        "standard": 2.4,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 3,
+        "city": "Allen",
+        "standard": 6.7,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 4,
+        "city": "Arlington",
+        "standard": 2.4,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 5,
+        "city": "Balch Springs",
+        "standard": 8.8,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 6,
+        "city": "Carrollton",
+        "standard": 3.2,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 7,
+        "city": "Cedar Hill",
+        "standard": 7.7,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 8,
+        "city": "Cockrell Hill",
+        "standard": 14.7,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 9,
+        "city": "Coppell",
+        "standard": 7.6,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 10,
+        "city": "Dallas",
+        "standard": 1.8,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 11,
+        "city": "DeSoto",
+        "standard": 6.1,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 12,
+        "city": "Duncanville",
+        "standard": 3.8,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 13,
+        "city": "Euless",
+        "standard": 6.6,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 14,
+        "city": "Farmers Branch",
+        "standard": 1.7,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 15,
+        "city": "Flower Mound",
+        "standard": 8.8,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 16,
+        "city": "Forney",
+        "standard": 15.9,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 17,
+        "city": "Frisco",
+        "standard": 10.3,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 18,
+        "city": "Garland",
+        "standard": 3.7,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 19,
+        "city": "Glenn Heights",
+        "standard": 14.6,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 20,
+        "city": "Grand Prairie",
+        "standard": 4.7,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 21,
+        "city": "Grapevine",
+        "standard": 5.9,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 22,
+        "city": "Highland Park",
+        "standard": 6.9,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 23,
+        "city": "Hurst",
+        "standard": 1.9,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 24,
+        "city": "Irving",
+        "standard": 5.6,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 25,
+        "city": "Lancaster",
+        "standard": 2.5,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 26,
+        "city": "Lewisville",
+        "standard": 3,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 27,
+        "city": "McKinney",
+        "standard": 8.6,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 28,
+        "city": "Mesquite",
+        "standard": 0.8,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 29,
+        "city": "Plano",
+        "standard": 3.3,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 30,
+        "city": "Richardson",
+        "standard": 0,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 31,
+        "city": "Rockwall",
+        "standard": 7.7,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 32,
+        "city": "Rowlett",
+        "standard": 9,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 33,
+        "city": "Southlake",
+        "standard": 8,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 34,
+        "city": "Sunnyvale",
+        "standard": 5.7,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 35,
+        "city": "The Colony",
+        "standard": 13.3,
+        "inflation": 2.4,
+        "landUse": 3
+    },
+    {
+        "row": 36,
+        "city": "University Park",
+        "standard": 4.2,
+        "inflation": 2.4,
+        "landUse": 3
+    }
+]

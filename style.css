@@ -1,0 +1,670 @@
+.dart-yellow-fg {
+    color: #FCD006;
+}
+.dart-yellow-bg {
+    background-color: #FCD006;
+}
+.dart-blue-fg {
+    color: #173A79;
+}
+.dart-blue-bg {
+    background-color: #173A79;
+}
+.white-fg {
+    color: #fff;
+}
+.black-fg {
+    color: #000;
+}
+.red-fg {
+    color: red
+}
+.blue-fg {
+    color: blue
+}
+.green-fg {
+    color: green
+}
+.orange-fg {
+    color: orange
+}
+.padding-top {
+    padding-top: 60px
+}
+.credit {
+    font-size: 18px;
+    display: inline-block;
+    margin-left: 60%;
+    width: 38%;
+}
+.center {
+    margin: auto;
+    width: 60%;
+    /*  border: 3px solid #73AD21; */
+    padding: 10px;
+}
+.valign-top {
+    vertical-align: top
+}
+.valign-center {
+    vertical-align: center
+}
+.align-right {
+    align: right;
+    text-align: right;
+}
+.tooltip-inner {
+    text-align: justify;
+}
+body {
+    overflow-y: scroll;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+.clear-both {
+    clear: both;
+}
+.specials {
+    margin-bottom: 10px;
+}
+.specials-inner {
+    border: 1px solid #888;
+    max-height: 100px;
+    overflow-y: auto;
+    padding: 1rem;
+}
+.specials-inner div:nth-child(even) {
+    background: #fff;
+}
+.specials-inner div:nth-child(odd) {
+    background: #cdf;
+}
+.boxes input[type=range] {
+    width: 20%;
+}
+.boxes input[type=text] {
+    text-align: right;
+}
+.boxes table {
+    width: 100%;
+}
+.boxes td {}
+.boxes td input[type=text], .boxes td input[type=number] {
+    text-align: right;
+    width: 75px;
+    float: right;
+}
+.page-header {
+    float: right;
+    text-align: right;
+    font-size: 0.5em;
+}
+.number-long td input[type=text] {
+    width: 120px;
+}
+.number-long td input[type=number] {
+    width: 120px;
+}
+.percent:after {
+    content: "%";
+    float: right;
+}
+.boxes input.changed {
+    background: #dff;
+}
+.sliders .changed {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+}
+table.dropdowns {
+    width: 100%;
+}
+table.boxes {
+    width: 100%;
+}
+.dropdowns table {
+    width: 100%;
+}
+.guru-wrap table.controls {
+    width: 100%;
+}
+.inputs .dropdowns, .inputs .boxes {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.inputs .dropdowns li select {
+    float: right;
+    width: 55%
+}
+.inputs .boxes li input {
+    float: right;
+    text-align: right;
+    width: 55%
+}
+.inputs .dropdowns td:last-child {
+    width: 55%
+}
+.inputs .dropdowns td select {}
+.inputs table {
+    border-spacing: 0 0.1em;
+    border-collapse: separate;
+}
+.inputs table.controls td:first-child {
+    font-size: 1em
+}
+.inputs .dropdowns td select {
+    height: 2.8em;
+    float: right;
+}
+.outputs table td {
+    background-color: white;
+}
+.outputs table tr.total-benefits td {
+    background-color: #FCD006;
+}
+.outputs table tr.total-costs td {
+    background-color: #FCD006;
+}
+.outputs table tr.benefit-cost-ratio td {
+    background-color: #FCD006;
+}
+.outputs table td, .outputs table th {
+    padding: 0.35rem;
+    padding-right: 3px;
+}
+
+/***
+.outputs table {
+  border-right: 1px solid #ddd;
+}
+***/
+
+.outputs table tr.dart-yellow-bg th {
+    text-align: center;
+    font-weight: normal;
+    color: #173A79;
+    border-right: 1px solid #db0;
+}
+.outputs table td {
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.outputs table td:first-child {
+    border-left: 1px solid #ddd;
+}
+.cost-outputs th {
+    width: 33.3%;
+}
+
+/* .report-row .column.outputs td { text-align: right; } */
+
+.report-title {
+    background-color: #173A79;
+    color: white
+}
+;
+.navbar-brand, navbar-brand:hover {
+    background: white;
+    padding: 0;
+}
+.navbar-brand, navbar-brand:focus {
+    background: white;
+    padding: 0;
+}
+.navbar-brand a, navbar-brand:hover a {
+    background: white;
+    padding: 0;
+}
+.navbar-brand a:hover {
+    background: white;
+    padding: 0;
+}
+.navbar-brand img {
+    height: 100%;
+}
+.dart .ui-widget-content {
+    border: 0;
+}
+.dart .ui-slider .ui-slider-range {
+    background: #FCD006;
+    border-bottom: 1px solid #ca0;
+    border-top: 0;
+    cursor: pointer;
+}
+
+/* #9D8277; } /*  #007989; } */
+
+.dart .ui-slider .ui-slider-handle {
+    border-color: #999;
+    background: #ccc;
+    cursor: pointer;
+    top: -.2em;
+}
+
+/* #9D8277; } /*#007989; } */
+
+.dart .ui-slider-horizontal {
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.navbar-dart {
+    background: #1B3E7A;
+}
+.navbar-dart a {
+    color: #ddd;
+}
+.navbar-dart a:hover {
+    background: background: #FCD006;
+    color: black;
+}
+.navbar-dart .navbar-nav>.active>a {
+    background: #FCD006;
+    color: black;
+}
+.navbar-dart .active {
+    background: #FCD006;
+    color: black;
+}
+.navbar-dart .navbar-nav>li>a {
+    color: #ddd;
+}
+.container-dart {}
+td.value-cell {
+    text-align: right;
+}
+tr.title-row th {
+    background: #ddd;
+}
+
+/**
+tr.remain th, tr.remain td { background-color: #afa; }
+**/
+
+tr.year-row th {
+    text-align: right;
+}
+body.property-tax-summary li.property-tax-summary a {
+    background: #FCD006;
+    color: black;
+}
+body.sales-tax-summary li.sales-tax-summary a {
+    background: #FCD006;
+    color: black;
+}
+body.economic-impact-summary li.economic-impact-summary a {
+    background: #FCD006;
+    color: black;
+}
+body.benefit-cost-summary li.benefit-cost-summary a {
+    background: #FCD006;
+    color: black;
+}
+body.development-summary li.development-summary a {
+    background: #FCD006;
+    color: black;
+}
+body.total-summary li.total-summary a {
+    background: #FCD006;
+    color: black;
+}
+body.glossary li.glossary a {
+    background: #FCD006;
+    color: black;
+}
+.table-sm {
+    font-size: 50%;
+}
+.table-md {
+    font-size: 85%;
+}
+.table-width33pct {
+    width: 33.3%;
+}
+.table-width20pct {
+    width: 20%;
+}
+.table-width25pct {
+    width: 25%;
+}
+.jumbotron {
+    background: transparent url(images/DFWAirportStation1920x1280.jpg) 0 0 no-repeat;
+    background-size: 100% auto;
+    background-attachment: fixed;
+    background-position: 0%, 60px;
+    min-height: 900px;
+    margin-top: 0px;
+    margin-bottom: 8px;
+}
+.jumbotron h1 {
+    font-size: 4rem;
+}
+.error {
+    background: red;
+    color: white;
+    padding: 1rem;
+}
+.warn {
+    background: yellow;
+    color: black;
+    padding: 1rem;
+}
+.land-use-percentage {
+    padding: 1rem;
+}
+
+/** STYLED PANELS **/
+
+.panel {
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 99%;
+    margin-right: 0.5%;
+}
+.panel p {
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.panel>h1, .panel>h2 {
+    color: #eee;
+}
+
+/* opacity/transparency */
+
+.white-bg-90pct {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.white-bg-80pct {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.white-bg-70pct {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+.white-bg-60pct {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+.white-bg-50pct {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.white-bg-40pct {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+.white-bg-30pct {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.white-bg-20pct {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.white-bg-10pct {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.black-bg-90pct {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+.black-bg-80pct {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.black-bg-70pct {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.black-bg-60pct {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.black-bg-50pct {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.black-bg-40pct {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.black-bg-30pct {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.black-bg-20pct {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.black-bg-10pct {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.width-20pct {
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.width-50pct {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.width-60pct {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.width-80pct {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.width-100pct {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.padding-left-5pct {
+    padding-left: 5%;
+}
+
+/* per-wizard page CSS hiding things */
+
+
+/* STEP 1: Type of Service, County, City, School District, Special per-district/county rates */
+
+
+/* .step1 .jumbotron {
+  background-size: 150% auto;
+  background-position: 50% 0;
+} */
+
+.step1 .pt-inputs .boxes .distribution-fields-body-wrap .collapse {
+    display: block;
+}
+.step1 .pt-inputs .boxes a, .step1 .distribution-fields {
+    display: none;
+}
+.step1 .pt-inputs .sliders {
+    display: none;
+}
+.step1 .pt-inputs .specials-inner {
+    background-color: rgba(0, 0, 0, 0.1);
+    max-height: none;
+    border-style: inset;
+    border-width: 0.1rem;
+    border-radius: 1rem;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+.step1 .pt-inputs .specials-inner div {
+    padding: 1rem;
+    color: #222;
+}
+.step1 .pt-inputs .specials-inner div {
+    /* background-color: rgba(200,200,200,0.9); color: #fff; */
+    background-color: rgba(200, 200, 200, 0.3);
+    border-bottom: 1px solid #bbb;
+}
+.step1 .pt-inputs .specials-inner div:nth-child(odd) {
+    /* background-color: rgba(200,200,200,0.3); color: #fff; */
+}
+.step1 .bc-inputs .dropdowns {
+    display: none;
+}
+.step1 .bc-inputs tr.number-long {
+    display: none;
+}
+.step1 .bc-inputs .changed {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+}
+.step1 input[type=checkbox] {
+    margin-right: 0.5rem;
+}
+
+/* STEP 2: Land Use Inputs */
+
+.step2 .pt-inputs .dropdowns {
+    display: none;
+}
+.step2 .pt-inputs .sliders {
+    display: none;
+}
+.step2 .pt-inputs .specials {
+    display: none;
+}
+.step2 .pt-inputs .boxes .distribution-fields {
+    display: none;
+}
+.step2 .pt-inputs .heading .title .btn {
+    display: none;
+}
+.step2 .pt-inputs .collapse {
+    display: block;
+}
+.step2 .land-use-wrap input {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.step2 .land-use-wrap input.changed {
+    background-color: rgba(0, 203, 188, 0.9);
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+    color: #fff;
+}
+.step2 .land-use-inner tbody tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.6);
+    ;
+}
+
+/* STEP 3: Property Tax Growth Rates */
+
+.step3 .pt-inputs .dropdowns {
+    display: none;
+}
+.step3 .pt-inputs .boxes {
+    display: none;
+}
+.step3 .pt-inputs .specials {
+    display: none;
+}
+.step3 .changed {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+    color: #fff;
+}
+
+/* STEP 4: Sales Tax Growth Rates */
+
+.step4 .pt-inputs .dropdowns {
+    display: none;
+}
+
+/* .step4 .pt-inputs .boxes { display: none; } */
+
+.step4 .pt-inputs .boxes a {
+    display: none;
+}
+.step4 .pt-inputs .specials {
+    display: none;
+}
+.step4 .changed {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+}
+.step4 .slider .changed {
+    color: #fff;
+}
+.step4 .sliders .btn-reset-sliders {
+    display: none;
+}
+
+/*** Local option possibly move these to step1 ***/
+
+.step4 .boxes .distribution-fields-body-wrap .collapse {
+    display: block;
+}
+.step4 .boxes .distribution-fields-body-wrap table tr {
+    display: none;
+}
+.step4 .boxes .distribution-fields-body-wrap table tr.hint-4A4B {
+    display: block;
+}
+.step4 .boxes .distribution-fields-body-wrap table tr.cos-input {
+    display: block;
+}
+.step4 .boxes .distribution-fields-body-wrap table tr.cos-definition {
+    display: block;
+}
+.step4 .boxes .distribution-fields-body-wrap table tr.cos-reset {
+    display: block;
+}
+
+/* PER-PAGE CUSTOM CSS */
+
+.benefit-cost-model-report table {
+    margin: 0 auto;
+    width: 80%;
+}
+.benefit-cost-model-report table tr td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+td.subhead {
+    text-align: left;
+}
+.economic-impact-summary .outputs table {
+    margin: 0 auto;
+    width: 80%;
+}
+.economic-impact-summary .outputs table tr td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+    border-right: 0;
+}
+
+/** TOTAL SUMMARY **/
+
+.total-summary .locale {
+    text-align: center;
+}
+.total-summary .outputs table {
+    margin: 0 auto;
+    width: 80%;
+}
+.total-summary .outputs table tr td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+.total-summary caption {
+    padding: 0.4rem 1rem;
+}
+tr.environmental-benefits {
+    display: none;
+}
+.development-summary .year-inputs-inner {
+    display: none;
+}
+td.hide-column
+/**overwrite highchart default**/
+
+
+/*.highcharts-container{width:100% !important; height:100% !important;}*/
+
+
+/**
+body.property-tax-summary .controls .operationstartyear { display: none; }
+body.sales-tax-summary .controls .operationstartyear { display: none; }
+**/
