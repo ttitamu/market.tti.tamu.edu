@@ -331,15 +331,7 @@ body.glossary li.glossary a {
 .table-width25pct {
     width: 25%;
 }
-.jumbotron {
-    background: transparent url(images/DFWAirportStation1920x1280.jpg) 0 0 no-repeat;
-    background-size: 100% auto;
-    background-attachment: fixed;
-    background-position: 0%, 60px;
-    min-height: 900px;
-    margin-top: 0px;
-    margin-bottom: 8px;
-}
+
 .jumbotron h1 {
     font-size: 4rem;
 }
@@ -668,3 +660,297 @@ td.hide-column
 body.property-tax-summary .controls .operationstartyear { display: none; }
 body.sales-tax-summary .controls .operationstartyear { display: none; }
 **/
+.dart-yellow-fg {
+    color: #FCD006;
+}
+.dart-yellow-bg {
+    background-color: #FCD006;
+}
+.dart-blue-fg {
+    color: #173A79;
+}
+.dart-blue-bg {
+    background-color: #173A79;
+}
+.white-fg {
+    color: #fff;
+}
+.black-fg {
+    color: #000;
+}
+.red-fg {
+    color: red
+}
+.blue-fg {
+    color: blue
+}
+.green-fg {
+    color: green
+}
+.orange-fg {
+    color: orange
+}
+.padding-top {
+    padding-top: 60px
+}
+.center {
+    margin: auto;
+    width: 60%;
+    /*  border: 3px solid #73AD21; */
+    padding: 10px;
+}
+.right {
+    float: right;
+}
+.collapse {
+    display: none;
+}
+table {
+    margin: auto;
+    width: 80%;
+}
+tr.header-row {
+    background-color: #173A79;
+    color: #fff;
+}
+.page-header {
+    width: 100%;
+    font-size: 0.8em;
+}
+.page {
+    page-break-inside: avoid;
+    page-break-after: always;
+}
+.clear-both {
+    clear: both;
+}
+.outputs table td {
+    background-color: white;
+}
+.outputs table tr.total-benefits td {
+    background-color: #FCD006;
+}
+.outputs table tr.total-costs td {
+    background-color: #FCD006;
+}
+.outputs table tr.benefit-cost-ratio td {
+    background-color: #FCD006;
+}
+.outputs table td, .outputs table th {
+    padding: 0.35rem;
+    padding-right: 3px;
+}
+
+/***
+.outputs table {
+  border-right: 1px solid #ddd;
+}
+***/
+
+.outputs table tr.dart-yellow-bg th {
+    text-align: center;
+    font-weight: normal;
+    color: #173A79;
+    border-right: 1px solid #db0;
+}
+.outputs table td {
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.outputs table td:first-child {
+    border-left: 1px solid #ddd;
+}
+.cost-outputs th {
+    width: 33.3%;
+}
+
+/* .report-row .column.outputs td { text-align: right; } */
+
+.report-title {
+    background-color: #173A79;
+    color: white
+}
+td.value-cell {
+    text-align: right;
+}
+tr.title-row th {
+    background: #ddd;
+}
+
+/**
+tr.remain th, tr.remain td { background-color: #afa; }
+**/
+
+tr.year-row th {
+    text-align: right;
+}
+.table-sm {
+    font-size: 50%;
+}
+.table-md {
+    font-size: 85%;
+}
+.table-width33pct {
+    width: 33.3%;
+}
+.table-width20pct {
+    width: 20%;
+}
+.table-width25pct {
+    width: 25%;
+}
+.error {
+    background: red;
+    color: white;
+    padding: 1rem;
+}
+.warn {
+    background: yellow;
+    color: black;
+    padding: 1rem;
+}
+.land-use-percentage {
+    padding: 1rem;
+}
+
+/* opacity/transparency */
+
+.white-bg-90pct {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.white-bg-80pct {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.white-bg-70pct {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+.white-bg-60pct {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+.white-bg-50pct {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.white-bg-40pct {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+.white-bg-30pct {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.white-bg-20pct {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.white-bg-10pct {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.black-bg-90pct {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+.black-bg-80pct {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.black-bg-70pct {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.black-bg-60pct {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.black-bg-50pct {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.black-bg-40pct {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.black-bg-30pct {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.black-bg-20pct {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.black-bg-10pct {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.width-20pct {
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.width-50pct {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.width-60pct {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.width-80pct {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.width-100pct {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.padding-left-5pct {
+    padding-left: 5%;
+}
+
+/* PER-PAGE CUSTOM CSS */
+
+.benefit-cost-model-report table {
+    margin: 0 auto;
+    width: 80%;
+}
+.benefit-cost-model-report table tr td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+td.subhead {
+    text-align: left;
+}
+.economic-impact-summary .outputs table {
+    margin: 0 auto;
+    width: 80%;
+}
+.economic-impact-summary .outputs table tr td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+    border-right: 0;
+}
+
+/**Input Summary**/
+
+.input-summary tr td:nth-child(1) {
+    width: 75%
+}
+.input-summary tr td:nth-child(2) {
+    width: 25%
+}
+
+/** TOTAL SUMMARY **/
+
+.total-summary .locale {
+    text-align: center;
+}
+.total-summary .outputs table {
+    margin: 0 auto;
+    width: 80%;
+}
+.total-summary .outputs table tr td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+.total-summary caption {
+    padding: 0.4rem 1rem;
+}
+tr.environmental-benefits {
+    display: none;
+}
+.footer {
+    margin: auto;
+    top: 0;
+    clear: both;
+}

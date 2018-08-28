@@ -292,10 +292,14 @@ TTI.noParens = function(o) {
   }
   return o.replace(/\(.*\)/, '').trim();
 };
+TTI.report = DOM.div().addClass('outputs');
+
 campfire.subscribe('boot-ui', function() {
   TTI.checkVersion(function() {
     TTI.clearLocalStorage();
   });
+  campfire.publish("import-json");
+  campfire.publish("render-inputs");
 });
 
 
@@ -438,8 +442,91 @@ TTI.Widgets.PDFHelper = function(spec) {
   return self;
 }
 
-TTI.report = DOM.div().addClass('outputs');
 
+TTI.Widgets.ConvertToTbl = function(spec){
+  var self = TTI.PubSub({});
+  self.table = false;
+
+  self.convert=function convertToTbl(d) {
+    //d:{Headers:[],RowIndex:[],Rows[]}
+    var keys = Object.keys(d);
+    //console.log(keys);
+    var tbl = DOM.table();
+    var headerRow = DOM.tr().addClass('header-row');
+    if (keys.indexOf('Rows') !== -1) {
+      //headerRow.append(DOM.td('id'));
+      d.Headers.forEach(function(h) {
+        var c = DOM.th(h);
+        headerRow.append(c);
+      });
+      tbl.append(headerRow);
+      d.RowIndex.forEach(function(y) {
+        var id = y - d.RowIndex[0];
+        var row = DOM.tr();
+
+        var bcRatio = false;
+        var jobs = false;
+        var agBenefits = false;
+        var ppFactor = false;
+        ////var cssClass =
+        var dataRow = d.Rows[id];
+        //row.append(DOM.td(y));
+        d.Headers.forEach(function(h) {
+          var c;
+          var v;
+          if (isNaN(v = dataRow[h])) { // labeled cell
+
+            if (v.match(/benefit.*cost.*ratio/i)) {
+              bcRatio = true;
+            }
+
+            if (v.match(/jobs/i)) {
+              jobs = true;
+            }
+            if (v.match(/factor/i)){
+              ppFactor = true;
+            }
+            c = DOM.td(v);
+            var slug = TTI.slugify(v);
+            row.addClass(slug);
+          } else { //value cell
+            var rounded = v/1000000;
+            rounded = accounting.formatMoney(rounded, '$', 2) + 'M';
+            c = DOM.td(rounded);
+            if (bcRatio||ppFactor) {
+              rounded = v.toFixed(2);
+              c = DOM.td(rounded + ' : 1');
+            }
+            if (jobs) {
+                rounded = accounting.toFixed(rounded, 0);
+                c = DOM.td(rounded);
+            }
+
+
+
+
+
+            c.addClass('value-cell');
+          }
+          row.append(c);
+        });
+        tbl.append(row);
+      });
+      self.table= tbl;
+    } else {
+      keys.forEach(function(k) {
+        var nTbl = DOM.table();
+        nTbl.append(DOM.caption(k));
+        nTbl.append(convertToTbl(d[k]));
+        tbl.append(nTbl);
+      });
+     self.table=tbl;
+
+    }
+    return self.table;
+  };
+  return self;
+}
 TTI.Widgets.BenefitCostInputs = function(spec) {
   var self = TTI.PubSub({});
   var cityList = ["Pharr","Progresso","Laredo","El Paso","Santa Theresa","Columbus","Nogales","San Luis II","Calexico East","Otay Mesa"];
@@ -449,21 +536,23 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       label: "Construction Cost(M$)",
       control:"input",
       value: 77.59,
+      format:function(x){return x;},
+      unit: "M$"
     },
     {
-      propertyName: "constructionStartYear"
+      propertyName: "constructionStartYear",
       label: "Construction Start Year",
       control:"input",
       value: 2022
     },
     {
-      propertyName: "operationStartYear"
+      propertyName: "operationStartYear",
       label: "Operation Start Year",
       control:"input",
       value: 2027
     },
     {
-      propertyName: "constantYear"
+      propertyName: "constantYear",
       label: "Constant Dollar Year",
       control:"input",
       value: 2018
@@ -472,47 +561,56 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
 
   var inputItemsBase = [
     {
-      propertyName: "truckPercent"
+      propertyName: "truckPercent",
       label: "Truck Percent",
       control:"input",
-      value: 0.286,
+      value: 28.6,
+      unit:"%"
     },
     {
-      propertyName: "AADT"
+      propertyName: "AADT",
       label: "AADT",
       control:"input",
-      value: 15397
+      value: 15397,
+      format: function(x){
+        x=x.toLocaleString();
+        return parseFloat(x.replace(/\,/g,''),10);
+      }
     },
     {
-      propertyName: "averageSpeedBase"
+      propertyName: "averageSpeedBase",
       label: "Average Speed (Base)",
       control:"input",
-      value: 64.8
+      value: 64.8,
+      unit:"mph"
     }
   ];
 
   var inputItemsProj = [
     {
-      propertyName: "averageSpeedProj"
+      propertyName: "averageSpeedProj",
       label: "Average Speed (Project)",
       control:"input",
       value: 65.8,
+      unit:"mph"
     },
     {
-      propertyName: "projectLength"
+      propertyName: "projectLength",
       label: "Project Length (Miles)",
       control:"input",
-      value: 15397
+      value: 10,
+      format:function(x){return x;},
+      unit:"miles"
     },
     {
-      propertyName: "region"
+      propertyName: "region",
       label: "Type (Urban, Suburban,Rural)",
       control:"dropdown list",
       value: "Rural",
       options: ["Urban","Suburban","Rural"]
     },
     {
-      propertyName: "city"
+      propertyName: "city",
       label: "City",
       control:"dropdown list",
       value: "Pharr",
@@ -521,48 +619,101 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
   ];
 
   function getInputDOM(item){
-    var inputGroup = DOM.div().class("input-group input-group-lg");
-    inputGroup.append(DOM.div().class("input-group-addon").val(item.label));
+    var inputGroup = DOM.div().addClass("input-group input-group-lg");
+    inputGroup.append(DOM.div().addClass("input-group-addon").html(item.label));
     var input;
-    if (item.control==="input") input=DOM.input().val(item.value).attr('value',item.value);
+    if (item.control==="input")
+    {
+      input=DOM.input();
+      var v = item.value;
+      if (item.format) {
+        v = item.format(item.value);
+        // input.on('keyup',function(){
+        //   var n = item.format($(this).val());
+        //   $(this).val(n.toLocaleString());
+        // });
+      }
+      input.val(v);
+
+    }
+
     if (item.control==="dropdown list")
     {
-      input = DOM.select.addClass('form-control');
+      input = DOM.select().addClass('form-control');
       item.options.forEach(function(o,i){
-        var opt = DOM.options().val(o);
+        var opt = DOM.option().val(o).html(o);
         if (item.value===o) opt.attr('selected',true);
         input.append(opt);
       });
     }
     input.addClass('form-control').attr('id',item.propertyName);
     inputGroup.append(input);
+    inputGroup.append(DOM.span().addClass("form-control-feedback pull-right").html(item.unit?item.unit:""));
     return inputGroup;
 
   }
   function drawOn(arr,wrap){
     arr.forEach(function(o,i){
-      wrap.append(getInputDOM);
+      wrap.append(getInputDOM(o));
     });
   }
 
   self.renderOn = function(wrap) {
-    var headerCost = DOM.h4('Cost');
-    var headerBaseline = DOM.h4('Baseline');
-    var headerProject = DOM.h4('Project');
-    wrap.append(headerCost);
-    drawOn(inputItemsCost,wrap);
-    wrap.append(headerBaseline);
-    drawOn(inputItemsCost,wrap);
-    wrap.append(headerProject);
-    drawOn(inputItemsCost,wrap);
+    var box = DOM.ul().addClass('list-group');
+    var headerCost = DOM.li('Cost').addClass('list-group-item');
+    var headerBaseline = DOM.li('Baseline').addClass('list-group-item');
+    var headerProject = DOM.li('Project').addClass('list-group-item');;
+    box.append(headerCost);
+    drawOn(inputItemsCost,box);
+    box.append(headerBaseline);
+    drawOn(inputItemsBase,box);
+    box.append(headerProject);
+    drawOn(inputItemsProj,box);
+    wrap.append(box);
   };
   return self;
 };
+
+TTI.Widgets.BenefitCostReports = function(spec){
+  var self = TTI.PubSub({});
+  var converter = TTI.Widgets.ConvertToTbl({});
+  var data;
+  merge = function(dataArr){
+    var d = dataArr[0];
+    var elem = {};
+    var headers = dataArr[0].Headers;
+    elem = dataArr[1].Rows[8];
+    elem[headers[0]] = "Total Agriculture Benefits","Present Value";
+    d.Rows.push(elem);
+    d.RowIndex.push(d.RowIndex.length);
+    elem = dataArr[1].Rows[12];
+    elem[headers[0]] = "Project Prioritization Factor","Present Value";
+    d.Rows.push(elem);
+    d.RowIndex.push(d.RowIndex.length);
+    return d;
+  }
+  var wrap = spec.container;
+  var data;
+  self.renderOn = function(){
+    if (Array.isArray(spec.data))
+    {
+      data = merge(spec.data);
+    }
+    else {
+      data=spec.data;
+    }
+    wrap.append(converter.convert(data));
+  }
+  return self;
+}
 campfire.subscribe('render-inputs',function(){
   TTI.Widgets.BenefitCostInputs({}).renderOn($('#panel-inputs'));
-
-
 });
+campfire.subscribe('render-outputs',function(){
+  $('#panel-outputs').empty();
+  TTI.Widgets.BenefitCostReports({data:[TTI.results[0].report,TTI.results[1].report],container:$('#panel-outputs')}).renderOn();
+});
+
 campfire.subscribe('generate-report-economic-impacts-o', function() { //Economic Impact
   TTI.report.append(DOM.h1($('label.locale').html()));
   TTI.report.append(DOM.h2('Economic Impacts Report'));
@@ -579,7 +730,6 @@ campfire.subscribe('generate-report-traveler-impacts-o', function() { //Traveler
   });
 
 });
-
 
 campfire.subscribe('generate-report', function() {
   TTI.report.empty();

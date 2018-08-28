@@ -968,14 +968,14 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
       category: 'Benefits',
       data: costs,
       items: ['Total Costs'],
-      factor: [econFactors[region].businessOutputMultiplier]
+      factor: [econFactors[region].businessOutputMultiplier*args.scale.Passenger]
     },
     {
       name: 'Positive Economic Effect of Wage Income',
       category: 'Benefits',
       data: costs,
       items: ['Total Costs'],
-      factor:[econFactors[region].wageIncomeMultiplier]
+      factor:[econFactors[region].wageIncomeMultiplier*args.scale.Passenger]
     }];
 
     var cItems=[{
@@ -994,7 +994,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
     },
   ];
   var r = { Headers: [], RowIndex: [], Rows: [] };
-  r.Headers = ['Benefits and Costs', 'Present Value (2015)'];
+  r.Headers = ['Benefits and Costs', 'Present Value (2018)'];
   var sum = 0;
   var val = {};
 
@@ -1056,7 +1056,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
     category: 'Jobs',
     data: costs,
     items: ['O&M Costs'],
-    factor: [1/econFactors[region].omJobFactor/yearsToAvg[1]]
+    factor: [1/econFactors[region].omJobFactor/yearsToAvg[0]]
   },];
   jItems.forEach(function (k) {
     r.RowIndex.push(id++);
@@ -1107,7 +1107,8 @@ self.run = function(){
   results.report = computeResults({
     benefits: results.benefits.Totals,
     costs: results.costs,
-    region:inputs.region
+    region:inputs.region,
+    scale:inputs.scale//mask the businessOutput in the Ag model
   }
 );
 
@@ -1153,6 +1154,7 @@ self.setInputs = function(args)
   a = args;
 
   if (a.region) inputs.region = a.region;
+  if (a.scale) inputs.scale = a.scale;
   //var d = existingStations(a.closestStation);
   var d = {
     "projectLength":a.projectLength,
