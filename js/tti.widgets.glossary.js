@@ -10,30 +10,9 @@ TTI.glossary = {
     "Logistics/Freight Cost Savings": " Savings related to costs for freight handling, including costs of loading dock handling, inventory warehousing, and product delivery. ",
     "Business Output": " The value of business production. For productivity analysis, it is measured as net value added. (For other analyses, it may be measured as gross business revenue.)",
     "Positive Economic Effect of Wage Income": " The degree to which wage compensation is positively affected by the effects of commuting time reliability on business productivity.",
-
-
     "Capital Costs":"Capital Costs include startup costs to initialize, design, and construct the project.",
-    "O&M Costs":" Costs to operate and maintain the improvement.",
-
-
     "Benefit/Cost Ratio": "The benefit/cost ratio is simply the total benefits derived from the project divided by the total cost of the project. A benefit/cost ratio of greater than 1.0 is positive (the benefits of building the project outweigh the cost).",
-    "Construction Jobs":"Jobs attributed to capital investment",
-    "O&M Jobs":"Jobs attributed to the investment in Operations & Maintenance",
-    "Commercial": "Parcels with land and improvements associated with businesses that sell goods or services to the general public.",
-    "Industrial": " Parcels with land and improvements of businesses that add value to a product through development, manufacturing, fabrication or processing of that product.",
-    "Multi-Family (MF) Residential": " Parcels with residential improvements containing two or more residential units under single ownership. Properties classified as MF Family generally include apartment complexes.",
-    "No Data": " Includes parcels with no data present.",
-    "Open Space/ Agriculture": " Parcels with acreage qualified for productivity (e.g. farming) valuation under Texas Constitution, Article VIII, 1-d or 1-d-1, and Tax Code Chapter 23, Subchapters C, D, E and H. Also includes rural land that is not qualified for productivity valuation and the improvements, including residential, on that land. Rural land in this category is outside of the city limits and is not considered personal property.    ",
 
-    "Other": "Includes all other Texas Property Classifications not included in the condensed classifications. The majority of these classification deal with tangible and intangible personal property used for residential, commercial, industrial, or utility purposes.",
-
-    "Rail": " A subgroup of the ‘Utilities’ property code. Includes parcels with railroad rolling stock used in the operation of a railroad.",
-
-    "Single-Family (SF) Residential": " Parcels with single-family residential improvements and land on which they are situated. Typically, SF Residential properties are single-family homes on tracts of land or platted lots. Townhouses, condominiums, row houses, owner-occupied duplexes, and mobile homes are also included in this category.",
-
-    "Utilities": "Parcels that include the real and personal property of utility companies and co-ops.",
-
-    "Vacant": " Unimproved land parcels usually located within or adjacent to cities with no minimum or maximum size requirement including Colonia properties that may not be sold pursuant to Local Government Code Chapter 232.",
 };
 
 TTI.createTooltips = function() {
@@ -61,4 +40,13 @@ TTI.createTooltips = function() {
     //         $('b:contains(k)').attr('data-toggle', 'tooltip').attr('title', items[k]).tooltip();
     //     });
     // });
+}
+
+TTI.createGlossaryTxt = function(){
+  var items = Object.keys(TTI.glossary);
+  var wrap = $("#modal-glossary .modal-body");
+  wrap.empty();
+  items.forEach(function(k){
+    wrap.append(DOM.h4(k)).append(DOM.p(TTI.glossary[k]));
+  });
 }

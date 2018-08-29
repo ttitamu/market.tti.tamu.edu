@@ -28,9 +28,7 @@
 .orange-fg {
     color: orange
 }
-.padding-top {
-    padding-top: 60px
-}
+
 .credit {
     font-size: 18px;
     display: inline-block;
@@ -208,7 +206,7 @@ table.boxes {
     color: white
 }
 ;
-.navbar-brand, navbar-brand:hover {
+/* .navbar-brand, navbar-brand:hover {
     background: white;
     padding: 0;
 }
@@ -226,7 +224,7 @@ table.boxes {
 }
 .navbar-brand img {
     height: 100%;
-}
+} */
 .dart .ui-widget-content {
     border: 0;
 }
@@ -353,14 +351,14 @@ body.glossary li.glossary a {
 
 .panel {
     padding: 1rem;
+
     border-radius: 1rem;
     width: 99%;
-    margin-right: 0.5%;
+    margin-top: 2%;
+    margin-bottom:2%;
+    margin-right:0.5%;
 }
-.panel p {
-    padding: 1rem;
-    border-radius: 1rem;
-}
+
 .panel>h1, .panel>h2 {
     color: #eee;
 }
@@ -613,6 +611,7 @@ body.glossary li.glossary a {
 .benefit-cost-model-report table tr td {
     padding: 0.5rem;
     border-bottom: 1px solid #ddd;
+    height:20px;
 }
 td.subhead {
     text-align: left;
@@ -691,7 +690,7 @@ body.sales-tax-summary .controls .operationstartyear { display: none; }
     color: orange
 }
 .padding-top {
-    padding-top: 60px
+    padding-top: 15px;
 }
 .center {
     margin: auto;
@@ -707,10 +706,10 @@ body.sales-tax-summary .controls .operationstartyear { display: none; }
 }
 table {
     margin: auto;
-    width: 80%;
+    width: 95%;
 }
 tr.header-row {
-    background-color: #173A79;
+    background-color: maroon;
     color: #fff;
 }
 .page-header {
@@ -902,7 +901,7 @@ tr.year-row th {
 
 .benefit-cost-model-report table {
     margin: 0 auto;
-    width: 80%;
+    width: 95%;
 }
 .benefit-cost-model-report table tr td {
     padding: 0.5rem;

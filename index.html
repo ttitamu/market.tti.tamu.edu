@@ -14,9 +14,10 @@
   <script type="text/javascript" src="js/array.js"></script>
   <script type="text/javascript" src ="js/tti.storage.js"> </script>
   <script type="text/javascript" src ="js/tti.pubsub.js"> </script>
-  <script type="text/javascript" src ="js/bootup.js"> </script>
+  <script type="text/javascript" src ="js/main.js"> </script>
   <script type="text/javascript" src ="js/underscore.js"> </script>
   <script type="text/javascript" src ="js/tti.models.benefitcostanalysis.js"> </script>
+  <script type="text/javascript" src ="js/tti.widgets.glossary.js"> </script>
 
 
     <style>
@@ -66,7 +67,7 @@
     color:white;
   } */
   .input-group-addon{
-    width:60%;
+    width:70%;
     text-align: left;
   }
   .form-control-feedback{
@@ -76,6 +77,12 @@
   }
   .input-group{
     width:100%;
+  }
+  .list-group-item{
+    background-color:maroon;
+    color:white;
+    font-size:1.5rem;
+    font-weight:bold;
   }
   .white-text{
     color:white;
@@ -96,8 +103,51 @@
   }
 
   .navbar {
-    background-color: color:maroon;
+
   }
+
+  #modal-intro .modal-dialog {
+    width:50%;
+
+  }
+
+  #modal-glossary .modal-dialog {
+    width:50%;
+  }
+  .navbar-header {
+    width:80%;
+
+  }
+ .navbar-header .title {
+        display:inline-block;
+        color:white;
+        font-size: 4.1em;
+        line-height: 1.5em;
+        font-weight: bold;
+        padding-right: 0.1em;
+        border-right: 3px solid #0ff;
+ }
+ .navbar-header .subtitle {
+   display:inline-block;
+   vertical-align: top;
+   color:white;
+     font-size: 1.3rem;
+     line-height: 1.4rem;
+     width: 50%;
+     padding: 0 0 0 0.1em;
+
+ }
+
+ .navbar-header ul {
+    width: 100%;
+    color: White;
+    list-style-type: none;
+    margin-bottom: 2px;
+    margin-top:2px;
+ }
+ /* .navbar-header ul {
+   float: left;
+  } */
   /*
   .navbar {
       margin-bottom: 0;
@@ -130,11 +180,41 @@
   <!-- <div class="jumbotron text-center" style="margin-bottom:0">
     <h1>MARKET</h1>
   </div> -->
-
-  <nav class="navbar navbar-fixed-top">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">M.A.R.K.E.T.</a>
+      <!-- <a class="navbar-brand" href="#">M.A.R.K.E.T.</a> -->
+      <ul>
+                  <li class="title">M.A.R.K.E.T.</li>
+                  <li class="subtitle">
+                    Measuring<br/>
+                    Agricultural<br/>
+                    Relevance of<br/>
+                    Key<br/>
+                    Expenditures in<br/>
+                    Transportation
+                  </li>
+      </ul>
+    </div>
+    <ul class="nav navbar-nav pull-right">
+      <li><a href=# data-toggle="modal" data-target="#modal-intro">Intro</a></li>
+      <li><a href="#" data-toggle="modal" data-target="#modal-glossary">Glossary</a></li>
+      <li><a href="#">User's Guide</a></li>
+    </ul>
+  </div>
+</nav>
+  <!-- <nav class="navbar navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="logo">M.A.R.K.E.T.</div>
+      <span>
+        MIT<br>
+        Alpha<br>
+        Rio<br>
+        Krypton<br>
+        ET<br>
+        TAMU<br>
+      </span>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#">User's Guide</a></li>
@@ -142,52 +222,75 @@
       <li><a href="#">Contact Us</a></li>
     </ul>
   </div>
-</nav>
+</nav> -->
 <div class="jumbotron">
   <div class="container-fluid padding-top container-dart">
-    <!-- <div class="modal show" id="myModal" role="dialog">
-     <div class="modal-dialog">
-
-
-       <div class="modal-content">
-         <div class="modal-header">
-           <h4 class="modal-title">Modal Header</h4>
-           <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-         </div>
-         <div class="modal-body">
-           <p>Some text in the modal.</p>
-         </div>
-
-       </div>
-
-     </div>
-   </div> -->
 
      <div class="panel black-bg-30pct pull-right">
     <div class="row-fluid">
-      <div class="col-md-6">
-        <div class="panel panel-horizontal white-bg-80pct pull-right">
+      <div class="panel panel-horizontal white-bg-80pct pull-right">
+      <div class="col-md-5">
+
         <div class="panel-heading">INPUTS</div>
         <div class="panel-body" id="panel-inputs"> </div>
-        <div class="panel-body"> <button type="button" class="btn btn-primary btn-block" id="btn-calculate">Calculate</button>
-
+        <div class="panel-body">
+           <button type="button" class="btn btn-primary btn-block" id="btn-calculate">Calculate</button>
         </div>
       </div>
+      <div class="col-md-7">
 
-      </div>
-      <div class="col-md-6">
-      <div class="panel white-bg-80pct pull-right">
-        <div class="panel-heading">OUTPUT</div>
-        <div class="panel-body outputs benefit-cost-model-report" id=panel-outputs>
-        </div>
+        <div class="panel-heading">OUTPUTS</div>
+        <div class="panel-body outputs benefit-cost-model-report" id=panel-outputs>        </div>
 
-      </div>
+
 
     </div>
+
+      </div>
+
+  </div>
   </div>
 </div>
 </div>
+<div class="modal fade" id="modal-intro" role="dialog">
+ <div class="modal-dialog">
+
+
+   <div class="modal-content">
+     <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal">&times;</button>
+       <h4 class="modal-title">M.A.R.K.E.T.(Measuring Agricultural Relevance of Key Expenditures in Transportation)</h4>
+
+
+     </div>
+     <div class="modal-body">
+       <p>Some text in the modal.</p>
+     </div>
+
+   </div>
+
+ </div>
+</div>
+
+<div class="modal fade" id="modal-glossary" role="dialog">
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;</button>
+       <h3 class="modal-title">Glossary</h3>
+
+
+     </div>
+     <div class="modal-body">
+
+     </div>
+
+   </div>
+
+ </div>
+</div>
+
 
   <!-- <div class="jumbotron text-center" style="margin-bottom:0;margin-top:30px">
     <p>Footer</p>
