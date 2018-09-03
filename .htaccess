@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+#RewriteBase /market
+#RewriteRule ^index\.php$ - [L]
+
+RewriteRule ^styles - [L]
+RewriteRule ^css - [L]
+RewriteRule ^js - [L]
+RewriteRule ^json - [L]
+RewriteRule ^javascript - [L]
+RewriteRule ^images - [L]
+RewriteRule ^temp - [L]
+RewriteRule ^csv - [L]
+
+#RewriteRule php$ /index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
+</IfModule>
+<FilesMatch "\.(json)$">
+    Allow from all
+</FilesMatch>
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+Header set Cache-Control "max-age=604800, public"
+</FilesMatch>
