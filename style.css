@@ -163,13 +163,16 @@ table.boxes {
     background-color: white;
 }
 .outputs table tr.total-benefits td {
-    background-color: #FCD006;
+    background-color: #FFCCCB;
+
 }
 .outputs table tr.total-costs td {
-    background-color: #FCD006;
+    background-color: #FFCCCB;
+  
 }
 .outputs table tr.benefit-cost-ratio td {
-    background-color: #FCD006;
+    background-color: #FFCCCB;
+
 }
 .outputs table td, .outputs table th {
     padding: 0.35rem;
@@ -726,15 +729,7 @@ tr.header-row {
 .outputs table td {
     background-color: white;
 }
-.outputs table tr.total-benefits td {
-    background-color: #FCD006;
-}
-.outputs table tr.total-costs td {
-    background-color: #FCD006;
-}
-.outputs table tr.benefit-cost-ratio td {
-    background-color: #FCD006;
-}
+
 .outputs table td, .outputs table th {
     padding: 0.35rem;
     padding-right: 3px;

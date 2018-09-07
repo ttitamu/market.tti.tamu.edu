@@ -503,10 +503,6 @@ TTI.Widgets.ConvertToTbl = function(spec){
                 c = DOM.td(rounded);
             }
 
-
-
-
-
             c.addClass('value-cell');
           }
           row.append(c);
@@ -530,33 +526,37 @@ TTI.Widgets.ConvertToTbl = function(spec){
 }
 TTI.Widgets.BenefitCostInputs = function(spec) {
   var self = TTI.PubSub({});
-  var cityList = ["Pharr","Progresso","Laredo","El Paso","Santa Theresa","Columbus","Nogales","San Luis II","Calexico East","Otay Mesa"];
-  var inputItemsCost = [
+  const cityList = ["Pharr","Progresso","Laredo","El Paso","Santa Theresa","Columbus","Nogales","San Luis II","Calexico East","Otay Mesa"];
+  const yearList = Array.from({length:25}, (v, k) => k+2018);
+  const inputItemsCost = [
     {
       propertyName: "constructionCost",
       label: "Construction Cost(M$)",
       control:"input",
       value: 77.59,
       format:function(x){return x;},
-      unit: "M$"
+
     },
     {
       propertyName: "constructionStartYear",
       label: "Construction Start Year",
-      control:"input",
-      value: 2022
+      control:"dropdown list",
+      value: 2022,
+      options: yearList
     },
     {
       propertyName: "operationStartYear",
       label: "Operation Start Year",
-      control:"input",
-      value: 2027
+      control:"dropdown list",
+      value: 2027,
+      options: yearList
     },
     {
       propertyName: "constantYear",
       label: "Constant Dollar Year",
-      control:"input",
-      value: 2018
+      control:"dropdown list",
+      value: 2018,
+      options: yearList
     }
   ];
 
@@ -566,7 +566,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       label: "Truck Percent",
       control:"input",
       value: 28.6,
-      unit:"%"
+
     },
     {
       propertyName: "AADT",
@@ -583,7 +583,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       label: "Average Speed (Base)",
       control:"input",
       value: 64.8,
-      unit:"mph"
+
     }
   ];
 
@@ -593,7 +593,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       label: "Average Speed (Project)",
       control:"input",
       value: 65.8,
-      unit:"mph"
+
     },
     {
       propertyName: "projectLength",
@@ -601,7 +601,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       control:"input",
       value: 10,
       format:function(x){return x;},
-      unit:"miles"
+
     },
     {
       propertyName: "region",
@@ -612,7 +612,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
     },
     {
       propertyName: "city",
-      label: "City",
+      label: "Port of Entry",
       control:"dropdown list",
       value: "Pharr",
       options: cityList
@@ -661,9 +661,9 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
 
   self.renderOn = function(wrap) {
     var box = DOM.ul().addClass('list-group');
-    var headerCost = DOM.li('Cost').addClass('list-group-item');
-    var headerBaseline = DOM.li('Baseline').addClass('list-group-item');
-    var headerProject = DOM.li('Project').addClass('list-group-item');;
+    var headerCost = DOM.li('Project Parameters').addClass('list-group-item');
+    var headerBaseline = DOM.li('Scenario-Baseline').addClass('list-group-item');
+    var headerProject = DOM.li('Scenario-Project').addClass('list-group-item');;
     box.append(headerCost);
     drawOn(inputItemsCost,box);
     box.append(headerBaseline);
@@ -678,7 +678,6 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
 TTI.Widgets.BenefitCostReports = function(spec){
   var self = TTI.PubSub({});
   var converter = TTI.Widgets.ConvertToTbl({});
-  var data;
   merge = function(dataArr){
     var d = dataArr[0];
     var elem = {};
@@ -687,22 +686,15 @@ TTI.Widgets.BenefitCostReports = function(spec){
     elem[headers[0]] = "Total Agriculture Benefits","Present Value";
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
-    elem = dataArr[1].Rows[12];
-    elem[headers[0]] = "Project Prioritization Factor","Present Value";
+    elem = dataArr[1].Rows[12];  
+    elem[headers[0]] = ["Project Prioritization Factor","Present Value"];
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
     return d;
   }
   var wrap = spec.container;
-  var data;
   self.renderOn = function(){
-    if (Array.isArray(spec.data))
-    {
-      data = merge(spec.data);
-    }
-    else {
-      data=spec.data;
-    }
+    var data = Array.isArray(spec.data)?merge(spec.data):spec.data;
     wrap.append(converter.convert(data));
   }
   return self;
