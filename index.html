@@ -233,16 +233,11 @@ TAMU<br>
 
             <div class="panel-heading">INPUTS</div>
             <div class="panel-body" id="panel-inputs"> </div>
-            <div class="panel-body">
-              <button type="button" class="btn btn-primary btn-block" id="btn-calculate">Calculate</button>
-            </div>
           </div>
           <div class="col-md-7">
 
             <div class="panel-heading">OUTPUTS</div>
             <div class="panel-body outputs benefit-cost-model-report" id=panel-outputs>        </div>
-
-
 
           </div>
 
@@ -333,11 +328,11 @@ $("#btn-calculate").on("click",function(){
     scale:{Truck: 1,Passenger:1},
   };
   input.constructionCost = parseFloat($("#constructionCost").val())*1000000;
-  input.constructionStartYear = parseFloat($("#constructionStartYear").val());
-  input.operationStartYear = parseFloat($("#operationStartYear").val());
-  input.constantDollarYear = parseFloat($("#constantDollarYear").val());
+  input.constructionStartYear = parseInt($("#constructionStartYear").val());
+  input.operationStartYear = parseInt($("#operationStartYear").val());
+  input.constantDollarYear = parseInt($("#constantYear").val());
   input.truckPercent = parseFloat($("#truckPercent").val())/100;
-  input.AADT = parseFloat($("#AADT").val());
+  input.AADT = parseInt($("#AADT").val().replace(/,/g,''));
   input.averageSpeedBase = parseFloat($("#averageSpeedBase").val());
   input.averageSpeedProj = parseFloat($("#averageSpeedProj").val());
   input.projectLength = parseFloat($("#projectLength").val());

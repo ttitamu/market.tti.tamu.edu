@@ -159,6 +159,10 @@ table.boxes {
     height: 2.8em;
     float: right;
 }
+
+#btn-calculate {
+  height:50px;
+}
 .outputs table td {
     background-color: white;
 }
@@ -168,7 +172,7 @@ table.boxes {
 }
 .outputs table tr.total-costs td {
     background-color: #FFCCCB;
-  
+
 }
 .outputs table tr.benefit-cost-ratio td {
     background-color: #FFCCCB;

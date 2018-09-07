@@ -483,7 +483,6 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
     var p = defaults({input:args.input,scenario:'project'});//get from args
     var spec = { base: b, project:p};
     var scale = args.input.scale;
-    console.log("travelImpacts:spec"+spec);
     function run(x) {
       //x: input arguments object
 

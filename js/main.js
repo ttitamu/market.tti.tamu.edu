@@ -1,3 +1,6 @@
+Number.prototype.format = function(){
+   return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+};
 
 function init() {
     if (typeof TTI == "undefined") { TTI = {}; }
@@ -494,7 +497,7 @@ TTI.Widgets.ConvertToTbl = function(spec){
             var rounded = v/1000000;
             rounded = accounting.formatMoney(rounded, '$', 2) + 'M';
             c = DOM.td(rounded);
-            if (bcRatio||ppFactor) {
+            if (bcRatio) {
               rounded = v.toFixed(2);
               c = DOM.td(rounded + ' : 1');
             }
@@ -502,7 +505,10 @@ TTI.Widgets.ConvertToTbl = function(spec){
                 rounded = accounting.toFixed(rounded, 0);
                 c = DOM.td(rounded);
             }
-
+            if (ppFactor){
+              rounded = (v*100).toFixed(2);
+              c = DOM.td(rounded);
+            }
             c.addClass('value-cell');
           }
           row.append(c);
@@ -528,6 +534,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
   var self = TTI.PubSub({});
   const cityList = ["Pharr","Progresso","Laredo","El Paso","Santa Theresa","Columbus","Nogales","San Luis II","Calexico East","Otay Mesa"];
   const yearList = Array.from({length:25}, (v, k) => k+2018);
+  const constYearList = Array.from({length:5}, (v, k) => k+2014);
   const inputItemsCost = [
     {
       propertyName: "constructionCost",
@@ -541,22 +548,22 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       propertyName: "constructionStartYear",
       label: "Construction Start Year",
       control:"dropdown list",
-      value: 2022,
+      value: "2022",
       options: yearList
     },
     {
       propertyName: "operationStartYear",
       label: "Operation Start Year",
       control:"dropdown list",
-      value: 2027,
+      value: "2027",
       options: yearList
     },
     {
       propertyName: "constantYear",
       label: "Constant Dollar Year",
       control:"dropdown list",
-      value: 2018,
-      options: yearList
+      value: "2018",
+      options: constYearList
     }
   ];
 
@@ -574,8 +581,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       control:"input",
       value: 15397,
       format: function(x){
-        x=x.toLocaleString();
-        return parseFloat(x.replace(/\,/g,''),10);
+        return x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
       }
     },
     {
@@ -629,10 +635,11 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       var v = item.value;
       if (item.format) {
         v = item.format(item.value);
-        // input.on('keyup',function(){
-        //   var n = item.format($(this).val());
-        //   $(this).val(n.toLocaleString());
-        // });
+        input.on('keyup',function(){
+          var n = item.format($(this).val().replace(/,/g,''));
+        //  console.log(n);
+          $(this).val(n.toLocaleString());
+        });
       }
       input.val(v);
 
@@ -643,7 +650,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       input = DOM.select().addClass('form-control');
       item.options.forEach(function(o,i){
         var opt = DOM.option().val(o).html(o);
-        if (item.value===o) opt.attr('selected',true);
+        if (item.value.match(o)) opt.attr('selected',true);
         input.append(opt);
       });
     }
@@ -671,6 +678,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
     box.append(headerProject);
     drawOn(inputItemsProj,box);
     wrap.append(box);
+    wrap.append(DOM.button().addClass('btn btn-primary btn-block').attr('id','btn-calculate').html('Calculate'));
   };
   return self;
 };
@@ -687,7 +695,8 @@ TTI.Widgets.BenefitCostReports = function(spec){
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
     elem = dataArr[1].Rows[12];
-    elem[headers[0]] = "Project Prioritization Factor","Present Value";
+    elem[headers[0]] = "Project Prioritization Factor";
+    
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
     return d;
@@ -696,6 +705,7 @@ TTI.Widgets.BenefitCostReports = function(spec){
   self.renderOn = function(){
     var data = Array.isArray(spec.data)?merge(spec.data):spec.data;
     wrap.append(converter.convert(data));
+
   }
   return self;
 }
