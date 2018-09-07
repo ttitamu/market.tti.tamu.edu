@@ -686,8 +686,8 @@ TTI.Widgets.BenefitCostReports = function(spec){
     elem[headers[0]] = "Total Agriculture Benefits","Present Value";
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
-    elem = dataArr[1].Rows[12];  
-    elem[headers[0]] = ["Project Prioritization Factor","Present Value"];
+    elem = dataArr[1].Rows[12];
+    elem[headers[0]] = "Project Prioritization Factor","Present Value";
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
     return d;
