@@ -304,6 +304,7 @@ campfire.subscribe('boot-ui', function() {
   campfire.publish("import-json");
   campfire.publish("render-inputs");
   TTI.createGlossaryTxt();
+  TTI.createTooltips();
 });
 
 
@@ -312,17 +313,24 @@ campfire.subscribe('import-json', function() {
   //TTI.commodityMix = {};
   //TTI.commodityCostAg = {};
   //TTI.commodityMixAg = {};
-  TTI.importJSON('data/commodityCost.json',function(data){
+  TTI.importJSON('data/commodityCostByTons.json',function(data){
     TTI.commodityCost = data;
   });
   TTI.importJSON('data/commodityMix.json',function(data){
     TTI.commodityMix = data;
   });
-  TTI.importJSON('data/commodityCostAg.json',function(data){
+  TTI.importJSON('data/commodityCostByTonsAg.json',function(data){
     TTI.commodityCostAg = data;
   });
   TTI.importJSON('data/commodityMixAg.json',function(data){
     TTI.commodityMixAg = data;
+  });
+
+  TTI.importJSON('data/jitCost.json',function(data){
+    TTI.jitCost = data;
+  });
+  TTI.importJSON('data/perishCost.json',function(data){
+    TTI.perishCost = data;
   });
 });
 
@@ -696,7 +704,7 @@ TTI.Widgets.BenefitCostReports = function(spec){
     d.RowIndex.push(d.RowIndex.length);
     elem = dataArr[1].Rows[12];
     elem[headers[0]] = "Project Prioritization Factor";
-    
+
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
     return d;

@@ -485,23 +485,21 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
     var scale = args.input.scale;
     function run(x) {
       //x: input arguments object
-
-
       var output = {};
       output.RowIndex = getBenefitYears();
       output.Headers = [];
       output.Rows = [];
-
+      //var count = 0;
       var fnList = {
         "Phase-in of Operations Impact by Year": function (args) {
           return 1.0 * Math.pow(1 + args[0], args[1]);
         },
 
         "Trips-Truck": function (args) {
-          return scale.Truck*args[0] * args[1] * args[2];
+          return args[0] * args[1] * args[2];
         },
         "Trips-Passenger": function (args) {
-          return scale.Passenger*args[0] * (1 - args[1]) * args[2];
+          return args[0] * (1 - args[1]) * args[2];
         },
         "VMT-Truck": function (args) {
           return args[0] * args[1];
@@ -516,37 +514,39 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
           return args[0] / args[1];
         },
         "Congested Operation Cost-Truck": function (args) {
-          return args[0] * args[1] * args[2]; //Fuel cost
+
+          return scale.Truck*args[0] * args[1] * args[2]; //Fuel cost, gallons
         },
         "Congested Operation Cost-Passenger": function (args) {
-          return args[0] * args[1] * args[2];
+          return scale.Passenger*args[0] * args[1] * args[2];
         },
         "Free Flow Operation Cost-Truck": function (args) {
-          return args[0] * (1 - args[1]) * args[2];//Labor cost
+          return scale.Truck*args[0] * (1 - args[1]) * args[2];//Labor cost
         },
         "Free Flow Operation Cost-Passenger": function (args) {
-          return args[0] * (1 - args[1]) * args[2];
+          return scale.Passenger*args[0] * (1 - args[1]) * args[2];
         },
         "Value of Time-Business Truck": function (args) {
-          return args[0] * args[1] * args[2];
+          return scale.Truck*args[0] * args[1] * args[2];
         },
         "Value of Time-Business Passenger": function (args) {
-          return args[0] * args[1] * args[2] * args[3];
+          return scale.Passenger*args[0] * args[1] * args[2] * args[3];
         },
         "Value of Time-Personal": function (args) {
-          return args[0] * args[1] * args[2] * args[3];
+          return scale.Passenger*args[0] * args[1] * args[2] * args[3];
         },
         "Environmental Cost-Truck": function (args) {
-          return args[0] * args[1];
+          return scale.Truck*args[0] * args[1];
         },
         "Environmental Cost-Passenger": function (args) {
-          return args[0] * args[1];
+          return scale.Passenger*args[0] * args[1];
         },
         "Safety Cost-Truck": function (args) {
-          return args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]);
+          //if(count++<1) console.log(scale.Truck*args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]));
+          return scale.Truck*args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]);
         },
         "Safety Cost-Passenger": function (args) {
-          return args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]);
+          return scale.Passenger*args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]);
         },
       };
       var fn = function (r, k) { return r[k]; };
@@ -789,12 +789,15 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
     var tonsPerVehicle = d.Default_Vehicle_Loading_Factors.Freight_US_Tons_per_Vehicle.Truck;
     var cost = args.input.commodityCost;
     var mix = args.input.commodityMix;
+    var perishCost = args.input.perishCost;
+    var jitCost = args.input.jitCost;
+
   //  var cost = args.input.commodityCost;
   //  var mix = args.input.commodityMix;
     var output = {};
     var spec = {};
-    var bi = { cost: cost, mix: mix };
-    var pi = { cost: cost, mix: mix };
+    var bi = { cost, mix, perishCost, jitCost};
+    var pi = { cost, mix, perishCost, jitCost };
     spec.base = {input:bi,data:data.base};
     spec.project = {input:pi,data:data.project};
 
@@ -808,8 +811,13 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
       var r = { Headers: [], Rows: [], RowIndex: [] };
       r.RowIndex = getBenefitYears();
       r.Headers = ["VHT-Truck"].concat(h1,h2);
-
-
+      const perishCost = o.input.perishCost;
+      const jitCost = o.input.jitCost;
+      const ctcFactor = 0.1/5400;//Commodity Time Cost Constant
+      const vhtFactor = 1.05; //VHT buffer time constant
+      const perishCostFactor = 0.001; // perishability cost factor, unit: dollars per buffer hour
+      const jitCostFactor = 0.002;// Just in time cost factor, unit: dollars per buffer hour
+      //var count0=0;
       var fnList = {
         "VHT-Truck": function (args) {
           return args[0];
@@ -819,11 +827,12 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
           return sum;
         },
         "Shipper/Logistics Cost": function (args) {
-          return args[0] * args[1];
+          // if(count0++<1) console.log(args);
+          return args[0];
         }
       };
       var argsList = {
-        "VHT-Truck": function (r, j) { return [rows[j]["VHT-Truck"]]; },
+        "VHT-Truck": function (r, j) { return [rows[j]["VHT-Truck"]*vhtFactor]; },
         "Total": function (r, j) {
           var t = [];
           h1.forEach(function (k) { t.push(r[k]); });
@@ -833,23 +842,27 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
           return [r["Total"], logisticsFactor];
         }
       };
+      //var count = 0;
       h1.forEach(function (k) {
-        fnList[k] = function (args) { return args[0] * args[1] * args[2] * args[3]; };
-        argsList[k] = function (r, j) { return [r["VHT-Truck"], tonsPerVehicle, mix[k], cost[k]]; };
+        fnList[k] = function (args) {
+          // if (count++<43){
+          //    console.log("The %s is %f",k,args[0] * args[1] *args[2]* args[3]*(args[4]+ args[5]*args[6]+ args[7]*args[8]));
+          // }
+          return args[0] * args[1] *args[2]* args[3]*(args[4]+ args[5]*args[6]+ args[7]*args[8]);
+        };
+        argsList[k] = function (r, j) { return [r["VHT-Truck"], tonsPerVehicle, mix[k], cost[k],ctcFactor,perishCost[k],perishCostFactor,jitCost[k],jitCostFactor]; };
       });
-
-
-
 
       r.Rows = indexes.map(function (i) {
         return computeRow(i, r.Headers, fnList, argsList);
       });
+
       return r;
     };
 
 
     ["base", "project"].forEach(function (o) {
-
+      // console.log(spec[o]);
       output[o] = run(spec[o]);
     });
     return output;
@@ -898,10 +911,15 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
     var id = 0;
     var regionFactor = function(r,t){
       var d = {
-        Urban:{Passenger:0.9,Truck:0.75},
-        Suburban:{Passenger:0.75,Truck:0.6},
-        Rural:{Passenger:0.6,Truck:0.5}
-      };
+        Urban:{Passenger:1,Truck:1},
+        Suburban:{Passenger:1,Truck:1},
+        Rural:{Passenger:1,Truck:1}
+      };//Use national numbers in MARKET
+      // {
+      //   Urban:{Passenger:0.9,Truck:0.75},
+      //   Suburban:{Passenger:0.75,Truck:0.6},
+      //   Rural:{Passenger:0.6,Truck:0.5}
+      // };
       var cd = d[r];
       var f = [];
       t.forEach(function(k){f.push(cd[k])});
@@ -1193,7 +1211,7 @@ self.setInputs = function(args)
   }, inputs.costs);
   //self.setCosts({constructionCost:constructionCost,omCost:omCost});
   self.setFreightTimeCost(inputs.travelImpacts, inputs.freightTimeCost);
-  self.setFreightTimeCost({commodityMix:a.commodityMix,commodityCost:a.commodityCost}, inputs.freightTimeCost);
+  self.setFreightTimeCost({commodityMix:a.commodityMix,commodityCost:a.commodityCost,perishCost:a.perishCost,jitCost:a.jitCost}, inputs.freightTimeCost);
   indexes = getIndexes();
   years = getYears();
 };
