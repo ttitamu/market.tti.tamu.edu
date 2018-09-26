@@ -16,6 +16,9 @@ function init() {
     TTI.Flags = {
 
     };
+    TTI.report = DOM.div().addClass('outputs');
+    TTI.cssLocation = ["print.css"];
+    TTI.reportName = "M.A.R.K.E.T. Model Report";
 
 }
 
@@ -295,7 +298,6 @@ TTI.noParens = function(o) {
   }
   return o.replace(/\(.*\)/, '').trim();
 };
-TTI.report = DOM.div().addClass('outputs');
 
 campfire.subscribe('boot-ui', function() {
   TTI.checkVersion(function() {
@@ -303,10 +305,78 @@ campfire.subscribe('boot-ui', function() {
   });
   campfire.publish("import-json");
   campfire.publish("render-inputs");
-  TTI.createGlossaryTxt();
-  TTI.createTooltips();
+  campfire.publish("bind-events");
+
+  setTimeout(function(){
+    $("#btn-calculate").click();
+    TTI.createTooltips();
+    TTI.createGlossaryTxt();
+  },500);
+
 });
 
+campfire.subscribe("bind-events",function(){
+  $("#btn-calculate").on("click",function(){
+    var input = {
+      serviceType:'Rail',
+      closestStation:'Lawnview',
+      milesToStation:5,
+      projectLength:10,
+      AADT:15397,
+      truckPercent:0.286,
+      averageSpeed:64.8,
+      averageSpeedBase:64.8,
+      averageSpeedProj:65.8,
+      rider:50000,
+      constructionCost:77590000,
+      omCost:0,
+      discountRate:0.03,
+      constructionStartYear:2022,
+      operationStartYear:2027,
+      percentCongested:0,
+      totalYears:30,
+      constantYear:2018,
+      projectScenario:0.02,
+      commodityMix:TTI.commodityMix["Pharr"],
+      commodityCost:TTI.commodityCost,
+      perishCost:TTI.perishCost,
+      jitCost:TTI.jitCost,
+      region:'Urban',
+      scale:{Truck: 1,Passenger:1},
+    };
+    input.constructionCost = parseFloat($("#constructionCost").val())*1000000;
+    input.constructionStartYear = parseInt($("#constructionStartYear").val());
+    input.operationStartYear = parseInt($("#operationStartYear").val());
+    input.constantDollarYear = parseInt($("#constantYear").val());
+    input.truckPercent = parseFloat($("#truckPercent").val())/100;
+    input.AADT = parseInt($("#AADT").val().replace(/,/g,''));
+    input.averageSpeedBase = parseFloat($("#averageSpeedBase").val());
+    input.averageSpeedProj = parseFloat($("#averageSpeedProj").val());
+    input.projectLength = parseFloat($("#projectLength").val());
+    input.region = ($("#region").val());
+    input.city = ($("#city").val());
+    input.commodityMix = TTI.commodityMix[input.city];
+    input.commodityCost = TTI.commodityCost;
+    input.scale={Truck:1,Passenger:1};
+    var model= TTI.Models.BenefitCostAnalysis({input:input});
+    var inputAg = input;
+    inputAg.commodityMix = TTI.commodityMixAg[input.city];
+    inputAg.commodityCost = TTI.commodityCostAg;
+    inputAg.scale={Truck:input.commodityMix["Percent Ag"],Passenger:0};
+    var modelAg = TTI.Models.BenefitCostAnalysis({input:inputAg});
+    TTI.results = [model.run().results, modelAg.run().results];
+    campfire.publish("render-outputs");
+
+  });
+  $("#link-print").on("click",function(){
+    campfire.publish("generate-report");
+    campfire.publish("print-report");
+  });
+  $("#link-reset").on("click",function(){
+    campfire.publish("boot-ui");
+  });
+
+});
 
 campfire.subscribe('import-json', function() {
   //TTI.commodityCost = {};
@@ -374,6 +444,8 @@ TTI.Widgets.PDFHelper = function(spec) {
     }
     printOptions += 'filename=' + spec.filename + '&';
     pdfForm.attr('action', pdfUrl + printOptions);
+    var reportsHtml = DOM.div();
+    pdfForm.append(reportsHtml);
     //AJAX is not working here?
 
 
@@ -383,65 +455,71 @@ TTI.Widgets.PDFHelper = function(spec) {
 
 
     var absolutePath = TTI.cssLocation; //need to make sure this is a valid url
-    absolutePath = absolutePath.replace(/^http:/, '');
+    //absolutePath = absolutePath.replace(/^http:/, '');
 
     //console.log('absolutePath****',absolutePath);
     if (true) {
-      var cssUrl = absolutePath + 'report.css';
-      var footerUrl = absolutePath + 'PDFfooter.html';
-      var headerUrl = absolutePath + 'PDFheader.html';
+      var cssUrl = absolutePath;
+      var wrap = DOM.div();
+      var html = DOM.html();
+      html.attr('xmlns', 'http://www.w3.org/1999/xhtml');
+      var head = DOM.head();
+      //var head = jQuery('head');
+      var body = DOM.body();
+      var link = DOM.link();
+      // var footerUrl = absolutePath + 'PDFfooter.html';
+      // var headerUrl = absolutePath + 'PDFheader.html';
       //console.log('path:', absolutePath);
+      cssUrl.forEach(function(e){
+        TTI.importCSV(e, function(data) {
 
-      TTI.importCSV(cssUrl, function(data) {
-        var wrap = DOM.div();
-        var html = DOM.html();
-        html.attr('xmlns', 'http://www.w3.org/1999/xhtml');
-        var head = DOM.head();
-        //var head = jQuery('head');
-        var body = DOM.body();
-        var link = DOM.link();
-        var style = DOM.style();
-        style.attr("type/css");
-        // var absolutePath = window.location.protocol + "//" + window.location.host + "/";
-        //console.log('path:', absolutePath);
+          var style = DOM.style();
+          style.attr("type/css");
+          // var absolutePath = window.location.protocol + "//" + window.location.host + "/";
+          //console.log('path:', absolutePath);
 
-        //If this works on public domain, there is no need to append the whole css file to the wrap
-        link.attr('href', cssUrl);
-        link.attr('rel', 'stylesheet');
+          //If this works on public domain, there is no need to append the whole css file to the wrap
+          link.attr('href', e);
+          link.attr('rel', 'stylesheet');
 
-        head.append(link);
-        /////////////////////////////////////
-        var flag = true;
-        //var fileUrl=absolutePath + 'style.css';
-        //style.append(readTextFile(fileUrl));
-        style.append(data);
-        //console.log('style:', style);
-        head.append(style);
+          head.append(link);
+          /////////////////////////////////////
+          var flag = true;
+          //var fileUrl=absolutePath + 'style.css';
+          //style.append(readTextFile(fileUrl));
+          style.append(data);
+          //console.log('style:', style);
+          head.append(style);
+
+
+          //console.log(wrap.html());
+          //Important! Encode the html first
+
+        });
+      });
+
+      // TTI.importCSV(footerUrl, function(data) {
+      //   var wrap = $(data);
+      //   wrap.find('#book-name').text('DART Report');
+      //   var markup = encodeURI(wrap.html());
+      //   var placeholder = jQuery('#ReportsFooter');
+      //   placeholder.val(markup);
+      // });
+      // TTI.importCSV(headerUrl, function(data) {
+      //   var wrap = $(data);
+      //   wrap.find('#book-name').text('DART Report');
+      //   var markup = encodeURI(wrap.html());
+      //   var placeholder = jQuery('#ReportsHeader');
+      //   placeholder.val(markup);
+      // });
+      setTimeout(function() {
         body.append(spec.panel.html());
         html.append(head);
         html.append(body);
         wrap.append(html);
-        //console.log(wrap.html());
-        //Important! Encode the html first
         var markup = encodeURI(wrap.html());
-        var reportsHtml = jQuery('#ReportsHtml');
+        var reportsHtml = jQuery('#report-contents');
         reportsHtml.val(markup);
-      });
-      TTI.importCSV(footerUrl, function(data) {
-        var wrap = $(data);
-        wrap.find('#book-name').text('DART Report');
-        var markup = encodeURI(wrap.html());
-        var placeholder = jQuery('#ReportsFooter');
-        placeholder.val(markup);
-      });
-      TTI.importCSV(headerUrl, function(data) {
-        var wrap = $(data);
-        wrap.find('#book-name').text('DART Report');
-        var markup = encodeURI(wrap.html());
-        var placeholder = jQuery('#ReportsHeader');
-        placeholder.val(markup);
-      });
-      setTimeout(function() {
         pdfForm.submit();
       }, 500);
     }
@@ -646,10 +724,10 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
         input.on('keyup',function(){
           var n = item.format($(this).val().replace(/,/g,''));
         //  console.log(n);
-          $(this).val(n.toLocaleString());
+          $(this).val(n.toLocaleString()).html(n.toLocaleString());
         });
       }
-      input.val(v);
+      input.val(v).html(v.toString());
 
     }
 
@@ -718,6 +796,7 @@ TTI.Widgets.BenefitCostReports = function(spec){
   return self;
 }
 campfire.subscribe('render-inputs',function(){
+  $("#panel-inputs").empty();
   TTI.Widgets.BenefitCostInputs({}).renderOn($('#panel-inputs'));
 });
 campfire.subscribe('render-outputs',function(){
@@ -725,25 +804,33 @@ campfire.subscribe('render-outputs',function(){
   TTI.Widgets.BenefitCostReports({data:[TTI.results[0].report,TTI.results[1].report],container:$('#panel-outputs')}).renderOn();
 });
 
-campfire.subscribe('generate-report-economic-impacts-o', function() { //Economic Impact
-  TTI.report.append(DOM.h1($('label.locale').html()));
-  TTI.report.append(DOM.h2('Economic Impacts Report'));
-  [1, 2].forEach(function(n) {
-    TTI.storage.getItem('html-economic-impact-o-' + n, function(markup) {
-      TTI.report.append(DOM.div(markup));
-    });
-  });
-});
-campfire.subscribe('generate-report-traveler-impacts-o', function() { //Traveler Impacts (B/C)
-  TTI.report.append(DOM.h2('Traveler Impacts Report'));
-  TTI.storage.getItem('html-traveler-impacts-o', function(markup) {
-    TTI.report.append(DOM.div(markup));
-  });
 
-});
 
 campfire.subscribe('generate-report', function() {
   TTI.report.empty();
+  TTI.report.append(DOM.h2("Inputs Summary"));
+  var table = DOM.table().addClass("input-summary");
+  table.append(DOM.tr().append(DOM.th("Project Parameters").attr("colspan",2)).addClass("header-row"));
+  table.append(DOM.tr().append(DOM.td("Construction Cost(M$)").append(DOM.td($("#constructionCost").val()))));
+  table.append(DOM.tr().append(DOM.td("Construction Start Year").append(DOM.td($("#constructionStartYear").val()))));
+  table.append(DOM.tr().append(DOM.td("Operation Start Year").append(DOM.td($("#operationStartYear").val()))));
+  table.append(DOM.tr().append(DOM.td("Constant Dollar Year").append(DOM.td($("#constantYear").val()))));
+  table.append(DOM.tr().append(DOM.th("Senario-Baseline").attr("colspan",2)).addClass("header-row"));
+  table.append(DOM.tr().append(DOM.td("Truck Percent").append(DOM.td($("#truckPercent").val()))));
+  table.append(DOM.tr().append(DOM.td("AADT").append(DOM.td($("#AADT").val()))));
+  table.append(DOM.tr().append(DOM.td("Average Speed (Base)").append(DOM.td($("#averageSpeedBase").val()))));
+
+  table.append(DOM.tr().append(DOM.th("Scenario-Project").attr("colspan",2)).addClass("header-row"));
+  table.append(DOM.tr().append(DOM.td("Average Speed (Project)").append(DOM.td($("#averageSpeedProj").val()))));
+  table.append(DOM.tr().append(DOM.td("Project Length (Miles)").append(DOM.td($("#projectLength").val()))));
+  table.append(DOM.tr().append(DOM.td("Type (Urban, Suburban, Rural)").append(DOM.td($("#region").val()))));
+  table.append(DOM.tr().append(DOM.td("Port of Entry").append(DOM.td($("#city").val()))));
+  TTI.report.append(table);
+  //TTI.report.append($($("#panel-inputs").html()));
+  TTI.report.append(DOM.div('&nbsp;').addClass('page')); //page break line
+  TTI.report.append(DOM.h2("Outputs Summary"));
+  TTI.report.append($($("#panel-outputs").html()));
+
 });
 campfire.subscribe('print-report', function() {
 

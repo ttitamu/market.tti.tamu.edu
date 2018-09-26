@@ -178,10 +178,6 @@ table.boxes {
     background-color: #FFCCCB;
 
 }
-.outputs table td, .outputs table th {
-    padding: 0.35rem;
-    padding-right: 3px;
-}
 
 /***
 .outputs table {
@@ -253,32 +249,7 @@ table.boxes {
 
 /* #9D8277; } /*#007989; } */
 
-.dart .ui-slider-horizontal {
-    background: rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
-.navbar-dart {
-    background: #1B3E7A;
-}
-.navbar-dart a {
-    color: #ddd;
-}
-.navbar-dart a:hover {
-    background: background: #FCD006;
-    color: black;
-}
-.navbar-dart .navbar-nav>.active>a {
-    background: #FCD006;
-    color: black;
-}
-.navbar-dart .active {
-    background: #FCD006;
-    color: black;
-}
-.navbar-dart .navbar-nav>li>a {
-    color: #ddd;
-}
-.container-dart {}
+
 td.value-cell {
     text-align: right;
 }
@@ -616,9 +587,18 @@ body.glossary li.glossary a {
     width: 80%;
 }
 .benefit-cost-model-report table tr td {
-    padding: 0.5rem;
-    border-bottom: 1px solid #ddd;
-    height:20px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;;
+  color: #555;
+  text-align: left;
+  display:table-cell;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.benefit-cost-model-report table tr td:last-child{
+  text-align: right;
 }
 td.subhead {
     text-align: left;
@@ -718,6 +698,12 @@ table {
 tr.header-row {
     background-color: maroon;
     color: #fff;
+
+}
+.header-row th{
+  font-size: 1.5rem;
+  line-height: 1.42857143;
+  padding: 10px 15px;
 }
 .page-header {
     width: 100%;
@@ -734,10 +720,7 @@ tr.header-row {
     background-color: white;
 }
 
-.outputs table td, .outputs table th {
-    padding: 0.35rem;
-    padding-right: 3px;
-}
+
 
 /***
 .outputs table {
@@ -898,26 +881,12 @@ tr.year-row th {
 
 /* PER-PAGE CUSTOM CSS */
 
-.benefit-cost-model-report table {
-    margin: 0 auto;
-    width: 95%;
-}
-.benefit-cost-model-report table tr td {
-    padding: 0.5rem;
-    border-bottom: 1px solid #ddd;
-}
+
 td.subhead {
     text-align: left;
 }
-.economic-impact-summary .outputs table {
-    margin: 0 auto;
-    width: 80%;
-}
-.economic-impact-summary .outputs table tr td {
-    padding: 0.5rem;
-    border-bottom: 1px solid #ddd;
-    border-right: 0;
-}
+
+
 
 /**Input Summary**/
 
@@ -951,4 +920,128 @@ tr.environmental-benefits {
     margin: auto;
     top: 0;
     clear: both;
+}
+/*For MARKET */
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+
+.container-dart {
+  background: transparent url(img/border.jpg) 0 0 no-repeat;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  background-position: 0%, 60px;
+  min-height: 900px;
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+
+/* .navbar-brand{
+margin-bottom: 0;
+padding-top:10px;
+z-index: 9999;
+border: 0;
+font-size: 20px !important;
+line-height: 1.42857143 !important;
+letter-spacing: 4px;
+border-radius: 0;
+color:white;
+} */
+.input-group-addon{
+  width:70%;
+  text-align: left;
+}
+.form-control-feedback{
+  top:3px;
+  width:5%;
+  font-size: 1.5rem;
+}
+.input-group{
+  width:100%;
+}
+.list-group-item{
+  background-color:maroon;
+  color:white;
+  font-size:1.5rem;
+  font-weight:bold;
+}
+.white-text{
+  color:white;
+}
+.panel-heading{
+  font-size: 3em;
+  color: maroon;
+}
+.construction-jobs {
+  display:none
+}
+.o-m-jobs{
+  display:none
+}
+
+.o-m-costs{
+  display:none
+}
+
+.navbar {
+
+}
+
+#modal-intro .modal-dialog {
+  width:50%;
+
+}
+
+#modal-glossary .modal-dialog {
+  width:50%;
+}
+.navbar-header {
+  width:70%;
+
+}
+.navbar-header .title {
+  display:inline-block;
+  color:white;
+  font-size: 4.1em;
+  line-height: 1.5em;
+  font-weight: bold;
+  padding-right: 0.1em;
+  border-right: 3px solid #0ff;
+}
+.navbar-header .subtitle {
+  display:inline-block;
+  vertical-align: top;
+  color:white;
+  font-size: 1.3rem;
+  line-height: 1.4rem;
+  width: 50%;
+  padding: 0 0 0 0.1em;
+
+}
+
+.navbar-header ul {
+  width: 100%;
+  color: White;
+  list-style-type: none;
+  margin-bottom: 2px;
+  margin-top:2px;
+}
+#panel-inputs .list-group{
+  margin-bottom: 0;
 }

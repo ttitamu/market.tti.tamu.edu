@@ -7,8 +7,9 @@
   <!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="all">
   <link href="style.css" rel="stylesheet">
+  <link href="print.css" type="text/css" rel="stylesheet" media="print">
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src ="lib/accounting.min.js"> </script>
   <script type="text/javascript" src="js/dom.js"></script>
@@ -20,161 +21,6 @@
   <script type="text/javascript" src ="js/tti.models.benefitcostanalysis.js"> </script>
   <script type="text/javascript" src ="js/tti.widgets.glossary.js"> </script>
 
-
-  <style>
-  /* .fakeimg {
-  height: 200px;
-  background: #aaa;
-  } */
-
-  .modal {
-    text-align: center;
-  }
-
-  @media screen and (min-width: 768px) {
-    .modal:before {
-      display: inline-block;
-      vertical-align: middle;
-      content: " ";
-      height: 100%;
-    }
-  }
-
-  .modal-dialog {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
-  }
-
-  .container-dart {
-    background: transparent url(img/border.jpg) 0 0 no-repeat;
-    background-size: 100% auto;
-    background-attachment: fixed;
-    background-position: 0%, 60px;
-    min-height: 900px;
-    margin-top: 0px;
-    margin-bottom: 8px;
-  }
-
-  /* .navbar-brand{
-  margin-bottom: 0;
-  padding-top:10px;
-  z-index: 9999;
-  border: 0;
-  font-size: 20px !important;
-  line-height: 1.42857143 !important;
-  letter-spacing: 4px;
-  border-radius: 0;
-  color:white;
-  } */
-  .input-group-addon{
-    width:70%;
-    text-align: left;
-  }
-  .form-control-feedback{
-    top:3px;
-    width:5%;
-    font-size: 1.5rem;
-  }
-  .input-group{
-    width:100%;
-  }
-  .list-group-item{
-    background-color:maroon;
-    color:white;
-    font-size:1.5rem;
-    font-weight:bold;
-  }
-  .white-text{
-    color:white;
-  }
-  .panel-heading{
-    font-size: 3em;
-    color: maroon;
-  }
-  .construction-jobs {
-    display:none
-  }
-  .o-m-jobs{
-    display:none
-  }
-
-  .o-m-costs{
-    display:none
-  }
-
-  .navbar {
-
-  }
-
-  #modal-intro .modal-dialog {
-    width:50%;
-
-  }
-
-  #modal-glossary .modal-dialog {
-    width:50%;
-  }
-  .navbar-header {
-    width:80%;
-
-  }
-  .navbar-header .title {
-    display:inline-block;
-    color:white;
-    font-size: 4.1em;
-    line-height: 1.5em;
-    font-weight: bold;
-    padding-right: 0.1em;
-    border-right: 3px solid #0ff;
-  }
-  .navbar-header .subtitle {
-    display:inline-block;
-    vertical-align: top;
-    color:white;
-    font-size: 1.3rem;
-    line-height: 1.4rem;
-    width: 50%;
-    padding: 0 0 0 0.1em;
-
-  }
-
-  .navbar-header ul {
-    width: 100%;
-    color: White;
-    list-style-type: none;
-    margin-bottom: 2px;
-    margin-top:2px;
-  }
-  /* .navbar-header ul {
-  float: left;
-  } */
-  /*
-  .navbar {
-  margin-bottom: 0;
-  background-color: #f4511e;
-  z-index: 9999;
-  border: 0;
-  font-size: 12px !important;
-  line-height: 1.42857143 !important;
-  letter-spacing: 4px;
-  border-radius: 0;
-}
-
-.navbar li a, .navbar .navbar-brand {
-color: #fff !important;
-}
-
-.navbar-nav li a:hover, .navbar-nav li.active a {
-color: #f4511e !important;
-background-color: #fff !important;
-}
-
-.navbar-default .navbar-toggle {
-border-color: transparent;
-color: #fff !important;
-} */
-</style>
 </head>
 <body>
 
@@ -198,9 +44,11 @@ color: #fff !important;
       </ul>
     </div>
     <ul class="nav navbar-nav pull-right">
-      <li><a href=# data-toggle="modal" data-target="#modal-intro">Intro</a></li>
+      <li><a href="#" id="link-reset"><span class="glyphicon glyphicon-refresh"></span>Reset</a></li>
+      <li><a href="#" id="link-print"><span class="glyphicon glyphicon-download-alt"></span>Print Report</a><li>
+      <li><a target="_blank" href="User's Guide.pdf"><span class="glyphicon glyphicon-book"></span>User's Guide</a></li>
       <li><a href="#" data-toggle="modal" data-target="#modal-glossary">Glossary</a></li>
-      <li><a target="_blank" href="User's Guide.pdf">User's Guide</a></li>
+      <li><a href=# data-toggle="modal" data-target="#modal-intro">About</a></li>
     </ul>
   </div>
 </nav>
@@ -229,6 +77,7 @@ TAMU<br>
 
     <div class="panel black-bg-30pct pull-right">
       <div class="row-fluid">
+        <!-- <input type="button" value="Print Div Contents" id="btnPrint" /> -->
         <div class="panel panel-horizontal white-bg-80pct pull-right">
           <div class="col-md-5">
 
@@ -250,10 +99,8 @@ TAMU<br>
 </div>
 <div class="modal fade" id="modal-intro" role="dialog">
   <div class="modal-dialog">
-
-
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header black-bg-80pct white-fg">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">M.A.R.K.E.T.(Measuring Agricultural Relevance of Key Expenditures in Transportation)</h4>
       </div>
@@ -276,14 +123,14 @@ TAMU<br>
 <div class="modal fade" id="modal-glossary" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+      <div class="modal-header black-bg-80pct white-fg">
+        <button type="button" class="close white-fg" data-dismiss="modal" aria-hidden="true">
           &times;</button>
           <h3 class="modal-title">Glossary</h3>
 
 
         </div>
-        <div class="modal-body">
+        <div class="modal-body white-bg-80pct">
 
         </div>
 
@@ -293,6 +140,10 @@ TAMU<br>
   </div>
 
 
+<form id="pdf-form" method="post" target="_blank">
+      <input type="hidden" name="ReportsHtml" id="report-contents">
+
+</form>
   <!-- <div class="jumbotron text-center" style="margin-bottom:0;margin-top:30px">
   <p>Footer</p>
 </div> -->
@@ -302,60 +153,16 @@ TAMU<br>
 // });
 
 campfire.publish("boot-ui");
-$("#btn-calculate").on("click",function(){
-  var input = {
-    serviceType:'Rail',
-    closestStation:'Lawnview',
-    milesToStation:5,
-    projectLength:10,
-    AADT:15397,
-    truckPercent:0.286,
-    averageSpeed:64.8,
-    averageSpeedBase:64.8,
-    averageSpeedProj:65.8,
-    rider:50000,
-    constructionCost:77590000,
-    omCost:0,
-    discountRate:0.03,
-    constructionStartYear:2022,
-    operationStartYear:2027,
-    percentCongested:0,
-    totalYears:30,
-    constantYear:2018,
-    projectScenario:0.02,
-    commodityMix:TTI.commodityMix["Pharr"],
-    commodityCost:TTI.commodityCost,
-    perishCost:TTI.perishCost,
-    jitCost:TTI.jitCost,
-    region:'Urban',
-    scale:{Truck: 1,Passenger:1},
-  };
-  input.constructionCost = parseFloat($("#constructionCost").val())*1000000;
-  input.constructionStartYear = parseInt($("#constructionStartYear").val());
-  input.operationStartYear = parseInt($("#operationStartYear").val());
-  input.constantDollarYear = parseInt($("#constantYear").val());
-  input.truckPercent = parseFloat($("#truckPercent").val())/100;
-  input.AADT = parseInt($("#AADT").val().replace(/,/g,''));
-  input.averageSpeedBase = parseFloat($("#averageSpeedBase").val());
-  input.averageSpeedProj = parseFloat($("#averageSpeedProj").val());
-  input.projectLength = parseFloat($("#projectLength").val());
-  input.region = ($("#region").val());
-  input.city = ($("#city").val());
-  input.commodityMix = TTI.commodityMix[input.city];
-  input.commodityCost = TTI.commodityCost;
-  input.scale={Truck:1,Passenger:1};
-  var model= TTI.Models.BenefitCostAnalysis({input:input});
-  var inputAg = input;
-  inputAg.commodityMix = TTI.commodityMixAg[input.city];
-  inputAg.commodityCost = TTI.commodityCostAg;
-  inputAg.scale={Truck:input.commodityMix["Percent Ag"],Passenger:0};
-  var modelAg = TTI.Models.BenefitCostAnalysis({input:inputAg});
-  TTI.results = [model.run().results, modelAg.run().results];
-  campfire.publish("render-outputs");
-});
-setTimeout(function(){
-  $("#btn-calculate").click();
-},500);
+// $("#btnPrint").on("click",function(){
+//   var divContents = $("#panel-outputs").html();
+//   var printWindow = window.open('','','height=400,width=800');
+//   printWindow.document.write('<html><head><title>INPUTS</title>');
+//   printWindow.document.write('</head><body>');
+//   printWindow.document.write(divContents);
+//   printWindow.document.write('</body></html>');
+//   printWindow.document.close();
+//   printWindow.print();
+// });
 // setTimeout(function(){
 //   var test = TTI.Models.BenefitCostAnalysis({input:{
 //     serviceType:'Rail',
