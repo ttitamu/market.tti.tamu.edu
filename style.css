@@ -584,7 +584,7 @@ body.glossary li.glossary a {
 
 .benefit-cost-model-report table {
     margin: 0 auto;
-    width: 80%;
+    width: 100%;
 }
 .benefit-cost-model-report table tr td {
   padding: 6px 12px;
@@ -597,7 +597,7 @@ body.glossary li.glossary a {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-.benefit-cost-model-report table tr td:last-child{
+table tr td:last-child{
   text-align: right;
 }
 td.subhead {
@@ -1044,4 +1044,26 @@ color:white;
 }
 #panel-inputs .list-group{
   margin-bottom: 0;
+}
+.modal-content{
+  background-color: transparent;
+}
+
+.modal-header {
+  background-color:rgb(88,88,88,0.6);
+}
+input.form-control{
+  text-align-last: right;
+  padding-right: 3rem;
+}
+select.form-control{
+  text-align-last: right;
+}
+option{
+  direction:rtl;
+}
+#modal-glossary h4{
+  font-style: italic;
+  font-size: 1.5rem;
+  color:maroon;
 }

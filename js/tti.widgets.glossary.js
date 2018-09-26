@@ -1,4 +1,14 @@
 TTI.glossary = {
+  "Construction Cost":"The total cost of the project in 2018 dollars.",
+  "Construction Start Year":"The year in which the construction begins.",
+  "Operation Start Year":"The year in which the operation begins.",
+  "Constant Dollar Year":"The year in which the constant dollar value is set",
+  "Truck Percent":"The percent of vehicles on the project roadway that are commercial freight trucks.",
+  "AADT":"'Avearge Annual Daily Travel', the average number of vehicle trips on the project roadway each day.",
+  "Average Speed":"The average speed of vehicles on the project roadway in miles per hour(mph).",
+  "Project Length":"The total distance of the project in miles.",
+  "Type":"Project type, can be Urban, Suburban, or Rural, depending on the project.",
+  "Port of Entry":"The place where the project will be located.",
     "Discount Rate": " Translates future costs and benefits into present-day values to account for the time value of money. A high discount rate may reduce future benefits and costs to smaller present values; whereas a lower rate reduces future values less, causing the value of future benefits and costs to be closer to current dollar values. ",
   //  "Travel Growth Rate": " average annual growth rate of vehicles traveling on roadways ",
   //  "One Time Change in Land Value due to New Service": " Initial, one time increase in property values within a quarter- or half-mile radius of the new station.",
@@ -12,8 +22,8 @@ TTI.glossary = {
     "Positive Economic Effect of Wage Income": "The degree to which wage compensation is positively affected by the effects of commuting time reliability on business productivity.",
     "Capital Costs":"Capital Costs include startup costs to initialize, design, and construct the project.",
     "Benefit / Cost Ratio": "The benefit/cost ratio is simply the total benefits derived from the project divided by the total cost of the project. A benefit/cost ratio of greater than 1.0 is positive (the benefits of building the project outweigh the cost).",
-    "Total Agriculture Benefits": "",
-    "Project Prioritization Factor": "A factor used to rank the priority of projects.",
+    "Total Agriculture Benefits": "Total benefits that are directly accrued to the agricultural sector.",
+    "Project Prioritization Factor": "A factor that provides an estimate of the relative benefit to the agricultural sector per dollar spent on the transportation project.",
 
 };
 

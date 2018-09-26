@@ -288,9 +288,9 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
       travelGrowthRate: 0.02,
       projectScenario:0.02,
       "Per_Vehicle_Cost_Factors": {
-        "Fatalities_Accident": 9600000,
-        "Personal_Injury_Accident": 174030,
-        "Propery_Damage_Accident": 4252,
+        "Fatalities_Accident": 9967928,
+        "Personal_Injury_Accident": 180700,
+        "Propery_Damage_Accident": 4415,
         "Environmental": {
           Truck: 0.63,
           Passenger: 0.03
@@ -300,20 +300,23 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
           Passenger: 0.32
         },
         "Vehicle_Operating_Free_Flow": {
-          Truck: 22.56,
+          Truck: 23.11,
           Passenger: 5.03
         }
       },
       "Time_Value_Factors": {
         "Personal_Cost": {
-          Truck: 29.48,
-          Passenger: 11.53
+          Truck: 29.7,
+          Passenger: 14.74
         },
         "Feight_Logistics": {
           Truck: 1.67
         },
         "Buffer_Time_Cost": {
           Truck: 72.57
+        },
+        "Business_Cost":{
+          Passenger:27.52
         }
       },
       "Default_Vehicle_Loading_Factors": {
@@ -323,20 +326,23 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
         },
         "Freight_US_Tons_per_Vehicle": {
           Truck: 24.05
+        },
+        "Person_per_Vehicle_Business":{
+          Passenger:1.2
         }
       },
       "Accident_Rates": {
         "Fatality_Accident": {
           Truck: 0.196,
-          Passenger: 1.127
+          Passenger: 1.08
         },
         "Personal_Injury_Accident": {
-          Truck: 6.762,
-          Passenger: 73.5
+          Truck: 9.7,
+          Passenger: 77
         },
         "Property_Damage_Accident": {
-          Truck: 94.08,
-          Passenger: 182.28
+          Truck: 157,
+          Passenger: 200
         }
       },
       "Discount_Rate": {
@@ -352,29 +358,29 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
     accidentRates.base = {"Accident_Rates":{
       "Fatality_Accident": {
         Truck: 0.2,
-        Passenger: 1.15
+        Passenger: 1.08
       },
       "Personal_Injury_Accident": {
-        Truck: 6.9,
-        Passenger: 75
+        Truck: 9.7,
+        Passenger: 77
       },
       "Property_Damage_Accident": {
-        Truck: 96,
-        Passenger: 186
+        Truck: 157,
+        Passenger: 200
       }
     }};
     accidentRates.proj = {"Accident_Rates":{
       "Fatality_Accident": {
         Truck: 0.196,
-        Passenger: 1.127
+        Passenger: 1.0584
       },
       "Personal_Injury_Accident": {
-        Truck: 6.762,
-        Passenger: 73.5
+        Truck: 9.506,
+        Passenger: 75.46
       },
       "Property_Damage_Accident": {
-        Truck: 94.08,
-        Passenger: 182.28
+        Truck: 153.86,
+        Passenger: 196
       }
     }};
     update(args.input,r);
@@ -555,7 +561,8 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
       var congestedFactors = costFactors["Vehicle_Operating_Congested"];
       var freeFlowFactors = costFactors["Vehicle_Operating_Free_Flow"];
       var personPerVehicle = x["Default_Vehicle_Loading_Factors"]["Person_per_Vehicle"];
-      //var businessCost = x["Time_Value_Factors"]["Business_Cost"];
+      var personPerVehicleB = x["Default_Vehicle_Loading_Factors"]["Person_per_Vehicle_Business"];
+      var businessCost = x["Time_Value_Factors"]["Business_Cost"];
       var personalCost = x["Time_Value_Factors"]["Personal_Cost"];
       var enviromentalCost = costFactors["Environmental"];
       var accidentRate = x["Accident_Rates"];
@@ -573,7 +580,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
         "Free Flow Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), x.percentCongested, freeFlowFactors.Truck]; },
         "Free Flow Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), x.percentCongested, freeFlowFactors.Passenger]; },
         "Value of Time-Business Truck": function (r, j) { return [personPerVehicle.Truck, personalCost.Truck, fn(r, "VHT-Truck")] },
-        "Value of Time-Business Passenger": function (r, j) { return [1.2, 33.58, fn(r, "VHT-Passenger"), x.Passenger_Business_Time] },//Fix the hard coded number
+        "Value of Time-Business Passenger": function (r, j) { return [personPerVehicleB.Passenger, businessCost.Passenger, fn(r, "VHT-Passenger"), x.Passenger_Business_Time] },//Fix the hard coded number
         "Value of Time-Personal": function (r, j) { return [personPerVehicle.Passenger, personalCost.Passenger, fn(r, "VHT-Passenger"), x.Passenger_Personal_Time] },
         "Environmental Cost-Truck": function (r, j) {
           return [fn(r, "VHT-Truck"), enviromentalCost.Truck];
