@@ -974,7 +974,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
       factor:  regionFactor(region,['Passenger'])
     },
     {
-      name: 'Logistics/Freight Cost Savings',
+      name: 'Freight Time Cost Savings',
       category: 'Benefits',
       data: benefits,
       items: ['Shipper/Logistics Cost'],
@@ -1018,7 +1018,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
     },
   ];
   var r = { Headers: [], RowIndex: [], Rows: [] };
-  r.Headers = ['Benefits and Costs', 'Present Value (2018)'];
+  r.Headers = ['Benefits and Costs', 'Present Value ({0})'.format(args.inputs.costs.constantYear.toString())];
   var sum = 0;
   var val = {};
 
@@ -1132,7 +1132,8 @@ self.run = function(){
     benefits: results.benefits.Totals,
     costs: results.costs,
     region:inputs.region,
-    scale:inputs.scale//mask the businessOutput in the Ag model
+    scale:inputs.scale,//mask the businessOutput in the Ag model
+    inputs
   }
 );
 

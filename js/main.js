@@ -347,7 +347,7 @@ campfire.subscribe("bind-events",function(){
     input.constructionCost = parseFloat($("#constructionCost").val().match(/(\d+).(\d+)/g,'$&')[0])*1000000;
     input.constructionStartYear = parseInt($("#constructionStartYear").val());
     input.operationStartYear = parseInt($("#operationStartYear").val());
-    input.constantDollarYear = parseInt($("#constantYear").val());
+    input.constantYear = parseInt($("#constantYear").val());
     input.truckPercent = parseFloat($("#truckPercent").val())/100;
     input.AADT = parseInt($("#AADT").val().replace(/,/g,''));
     input.averageSpeedBase = parseFloat($("#averageSpeedBase").val());

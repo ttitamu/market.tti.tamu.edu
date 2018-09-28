@@ -582,6 +582,9 @@ background-position: 50% 0;
 table tr td:last-child{
   text-align: right;
 }
+table tr th:last-child{
+  text-align: right;
+}
 td.subhead {
   text-align: left;
 }
@@ -924,9 +927,9 @@ tr.environmental-benefits {
   background: transparent url(img/border.jpg) 0 0 no-repeat;
   background-size: 100% auto;
   background-attachment: fixed;
-  background-position: 0%, 60px;
+  background-position: 0% 7%;
   min-height: 900px;
-  margin-top: 0px;
+  margin-top: 20px;
   margin-bottom: 8px;
 }
 
@@ -991,7 +994,7 @@ color:white;
 }
 .navbar-header {
   width:70%;
-
+  /* height:100px; */
 }
 .navbar-header .title {
   display:inline-block;
@@ -1001,6 +1004,7 @@ color:white;
   font-weight: bold;
   padding-right: 0.1em;
   border-right: 3px solid #0ff;
+  vertical-align: top;
 }
 .navbar-header .subtitle {
   display:inline-block;
@@ -1008,7 +1012,7 @@ color:white;
   color:white;
   font-size: 1.3rem;
   line-height: 1.4rem;
-  width: 50%;
+  width: auto;
   padding: 0 0 0 0.1em;
 
 }
@@ -1079,5 +1083,15 @@ option{
   float:right;
 
   padding-top: 1.5rem;
+  padding-right:2rem;
   height:50px;
+}
+.logo-wrap{
+  display:inline-block;
+}
+.logo-wrap .logo
+{
+  height:90px;
+  float:none;
+  margin-left: 2rem;
 }
