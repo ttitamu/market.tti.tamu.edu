@@ -344,7 +344,7 @@ campfire.subscribe("bind-events",function(){
       region:'Urban',
       scale:{Truck: 1,Passenger:1},
     };
-    input.constructionCost = parseFloat($("#constructionCost").val())*1000000;
+    input.constructionCost = parseFloat($("#constructionCost").val().match(/(\d+).(\d+)/g,'$&')[0])*1000000;
     input.constructionStartYear = parseInt($("#constructionStartYear").val());
     input.operationStartYear = parseInt($("#operationStartYear").val());
     input.constantDollarYear = parseInt($("#constantYear").val());
@@ -624,10 +624,10 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
   const inputItemsCost = [
     {
       propertyName: "constructionCost",
-      label: "Construction Cost(M$)",
+      label: "Construction Cost (M$)",
       control:"input",
       value: 77.59,
-      format:function(x){return x;},
+      format:function(x){return x.toString().replace(/^(\d|-)?(\d|,)*\.?\d*$/g,"$$$&");},
 
     },
     {
@@ -697,7 +697,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
     },
     {
       propertyName: "region",
-      label: "Type (Urban, Suburban,Rural)",
+      label: "Area Type",
       control:"dropdown list",
       value: "Rural",
       options: ["Urban","Suburban","Rural"]
