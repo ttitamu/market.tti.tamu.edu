@@ -1,29 +1,29 @@
 Number.prototype.format = function(){
-   return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 };
 
 function init() {
-    if (typeof TTI == "undefined") { TTI = {}; }
-    if (typeof console == "undefined") {
-        console = {};
-        console.log = function (x) { return "console not implemented"; };
-    }
-    if (typeof TTI.Widgets == "undefined") { TTI.Widgets = {}; }
-    if (typeof TTI.Models == "undefined") { TTI.Models = {}; }
-    initLocalStorage();
+  if (typeof TTI == "undefined") { TTI = {}; }
+  if (typeof console == "undefined") {
+    console = {};
+    console.log = function (x) { return "console not implemented"; };
+  }
+  if (typeof TTI.Widgets == "undefined") { TTI.Widgets = {}; }
+  if (typeof TTI.Models == "undefined") { TTI.Models = {}; }
+  initLocalStorage();
 
 
-    TTI.Flags = {
+  TTI.Flags = {
 
-    };
-    TTI.report = DOM.div().addClass('outputs');
-    TTI.cssLocation = ["print.css"];
-    TTI.reportName = "M.A.R.K.E.T. Model Report";
+  };
+  TTI.report = DOM.div().addClass('outputs');
+  TTI.cssLocation = ["print.css"];
+  TTI.reportName = "M.A.R.K.E.T. Model Report";
 
 }
 
 function initLocalStorage() {
-    if (TTI.LocalStorage == undefined) { TTI.LocalStorage = {}; }
+  if (TTI.LocalStorage == undefined) { TTI.LocalStorage = {}; }
 
 
 }
@@ -249,8 +249,8 @@ TTI.precision = function(value, digits) {
 
 TTI.getObjectTotal = function(obj){
   return Object.keys(obj).reduce(function(sum, key){
-               return sum + parseFloat(obj[key]);
-             }, 0);
+    return sum + parseFloat(obj[key]);
+  }, 0);
 };
 
 TTI.importJSON = function(url, callback) {
@@ -368,8 +368,11 @@ campfire.subscribe("bind-events",function(){
     {
       alert("Operation start year must be no earlier than construction start year!");
     }
-    TTI.results = [model.run().results, modelAg.run().results];
-    campfire.publish("render-outputs");
+    else
+    {
+      TTI.results = [model.run().results, modelAg.run().results];
+      campfire.publish("render-outputs");
+    }
 
   });
   $("#link-print").on("click",function(){
@@ -594,8 +597,8 @@ TTI.Widgets.ConvertToTbl = function(spec){
               c = DOM.td(rounded + ' : 1');
             }
             if (jobs) {
-                rounded = accounting.toFixed(rounded, 0);
-                c = DOM.td(rounded);
+              rounded = accounting.toFixed(rounded, 0);
+              c = DOM.td(rounded);
             }
             if (ppFactor){
               rounded = (v*100).toFixed(2);
@@ -615,7 +618,7 @@ TTI.Widgets.ConvertToTbl = function(spec){
         nTbl.append(convertToTbl(d[k]));
         tbl.append(nTbl);
       });
-     self.table=tbl;
+      self.table=tbl;
 
     }
     return self.table;
@@ -729,7 +732,7 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
         v = item.format(item.value);
         input.on('keyup',function(){
           var n = item.format($(this).val().replace(/,/g,''));
-        //  console.log(n);
+          //  console.log(n);
           $(this).val(n.toLocaleString()).html(n.toLocaleString());
         });
       }
