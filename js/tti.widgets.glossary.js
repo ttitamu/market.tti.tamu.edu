@@ -1,8 +1,8 @@
 TTI.glossary = {
-  "Construction Cost":"The total cost of the project in millions of dollars.",
+  "Construction Cost":"The total cost of the project in 2018, in millions of dollars.",
   "Construction Start Year":"The year in which project construction begins.",
   "Operation Start Year":"The year in which the project begins operation.",
-  "Constant Dollar Year":"The year in which all costs and benefits are presented in.",
+  // "Constant Dollar Year":"The year in which all costs and benefits are presented in.",
   "Truck Percent":"The percent of vehicles on the project roadway that are commercial freight trucks.",
   "AADT":"Average Annual Daily Travel: The average number of vehicle trips on the project roadway each day.",
   "Average Speed (Base)":"The average speed of vehicles on the existing roadway in miles per hour.",
