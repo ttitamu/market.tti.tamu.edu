@@ -344,7 +344,7 @@ campfire.subscribe("bind-events",function(){
       region:'Urban',
       scale:{Truck: 1,Passenger:1},
     };
-    input.constructionCost = parseFloat($("#constructionCost").val().match(/(\d+).(\d+)/g,'$&')[0])*1000000;
+    input.constructionCost = parseFloat($("#constructionCost").val().replace(/\$/g,''))*1000000;
     input.constructionStartYear = parseInt($("#constructionStartYear").val());
     input.operationStartYear = parseInt($("#operationStartYear").val());
     input.constantYear = parseInt($("#constantYear").val());
@@ -364,6 +364,10 @@ campfire.subscribe("bind-events",function(){
     inputAg.commodityCost = TTI.commodityCostAg;
     inputAg.scale={Truck:input.commodityMix["Percent Ag"],Passenger:0};
     var modelAg = TTI.Models.BenefitCostAnalysis({input:inputAg});
+    if (input.operationStartYear<input.constructionStartYear)
+    {
+      alert("Operation start year must be no earlier than construction start year!");
+    }
     TTI.results = [model.run().results, modelAg.run().results];
     campfire.publish("render-outputs");
 
@@ -377,6 +381,8 @@ campfire.subscribe("bind-events",function(){
   });
 
 });
+
+
 
 campfire.subscribe('import-json', function() {
   //TTI.commodityCost = {};
