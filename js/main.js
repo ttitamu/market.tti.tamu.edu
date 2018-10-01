@@ -798,6 +798,7 @@ TTI.Widgets.BenefitCostReports = function(spec){
 campfire.subscribe('render-inputs',function(){
   $("#panel-inputs").empty();
   TTI.Widgets.BenefitCostInputs({}).renderOn($('#panel-inputs'));
+  $("#constantYear").parent().css("display","none");
 });
 campfire.subscribe('render-outputs',function(){
   $('#panel-outputs').empty();

@@ -1207,7 +1207,7 @@ self.setInputs = function(args)
     scale: a.scale//percentAg
   }, inputs.travelImpacts);
   //self.setTravelImpacts({averageSpeed:48.7,percentCongested:0.25746,truckPercent:0.089,projectLength:7.2305317,projectScenario:0.1,AADT:48959,rider:330921,riderReduction:0.75});
-  self.setBenefits({ discountRate: a.discountRate, constantYear:2014}, inputs.benefits); //Check the constant year
+  self.setBenefits({ discountRate: a.discountRate, constantYear:a.constantYear}, inputs.benefits); //Check the constant year
   self.setCosts({
     discountRate: a.discountRate,
     constructionStartYear: a.constructionStartYear,
