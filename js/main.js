@@ -628,8 +628,8 @@ TTI.Widgets.ConvertToTbl = function(spec){
 TTI.Widgets.BenefitCostInputs = function(spec) {
   var self = TTI.PubSub({});
   const cityList = ["Pharr","Progresso","Laredo","El Paso","Santa Theresa","Columbus","Nogales","San Luis II","Calexico East","Otay Mesa"];
-  const yearList = Array.from({length:25}, (v, k) => k+2018);
-  const constYearList = Array.from({length:5}, (v, k) => k+2014);
+  const yearList = Array.from({length:25}, function(v, k){return k+2018;} );
+  const constYearList = Array.from({length:5}, function(v, k){return k+2014;});
   const inputItemsCost = [
     {
       propertyName: "constructionCost",

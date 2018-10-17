@@ -30,6 +30,11 @@
 </div> -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     <div class="navbar-header">
       <!-- <a class="navbar-brand" href="#">M.A.R.K.E.T.</a> -->
       <ul>
@@ -46,16 +51,17 @@
       </ul>
 
     </div>
-
-    <ul class="nav navbar-nav pull-right">
-      <li><a href="#" id="link-reset"><span class="glyphicon glyphicon-refresh"></span>Reset</a></li>
-      <li><a href="#" id="link-print"><span class="glyphicon glyphicon-download-alt"></span>Download Report</a><li>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" id="link-reset"><span class="glyphicon glyphicon-refresh"></span>Reset</a></li>
+        <li><a href="#" id="link-print"><span class="glyphicon glyphicon-download-alt"></span>Download Report</a><li>
         <li><a target="_blank" href="User's Guide.pdf"><span class="glyphicon glyphicon-book"></span>User's Guide</a></li>
         <li><a href="#" data-toggle="modal" data-target="#modal-glossary"><span class="glyphicon glyphicon-list-alt"></span>Glossary</a></li>
         <li><a href=# data-toggle="modal" data-target="#modal-intro"><span class="glyphicon glyphicon-info-sign"></span>About</a></li>
       </ul>
 
     </div>
+  </div>
   </nav>
   <!-- <nav class="navbar navbar-fixed-top">
   <div class="container-fluid">
@@ -85,29 +91,29 @@
         <!-- <input type="button" value="Print Div Contents" id="btnPrint" /> -->
         <div class="panel panel-horizontal white-bg-80pct pull-right">
           <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <strong>Warning!</strong> Operation start year must be no earlier than construction start year.
         </div> -->
-          <div class="col-md-6">
+        <div class="col-md-6">
 
-            <div class="panel-heading">INPUTS</div>
-            <div class="panel-body" id="panel-inputs"> </div>
-          </div>
+          <div class="panel-heading">INPUTS</div>
+          <div class="panel-body" id="panel-inputs"> </div>
+        </div>
 
-          <div class="col-md-6">
+        <div class="col-md-6">
 
-            <div class="panel-heading">OUTPUTS</div>
-            <div class="panel-body outputs benefit-cost-model-report" id=panel-outputs>        </div>
-
-          </div>
-
+          <div class="panel-heading">OUTPUTS</div>
+          <div class="panel-body outputs benefit-cost-model-report" id=panel-outputs>        </div>
 
         </div>
 
-      </div>
-    </div>
 
+      </div>
+
+    </div>
   </div>
+
+</div>
 </div>
 <div class="footer navbar-fixed-bottom navbar navbar-inverse">
 
@@ -117,24 +123,19 @@
     </span>
   </div>
 
-      <div class="logo logo-tti">
+  <div class="logo logo-tti">
 
-        <a href="/">
-          <img src = "img/TTI-Color-reverse.png">
-        </a>
-      </div>
-    <div class="logo logo-ams">
+    <a href="/">
+      <img src = "img/TTI-Color-reverse.png">
+    </a>
+  </div>
+  <div class="logo logo-ams">
 
-      <a href="/">
-        <img src = "img/AMS-logo.png">
-      </a>
+    <a href="/">
+      <img src = "img/AMS-logo.png">
+    </a>
 
-    </div>
-
-
-
-
-
+  </div>
   <!-- <div class="logo logo-tti">
   <span>
   Developed by
@@ -151,8 +152,6 @@ Funded by
 <img src = "img/AMS-logo.png">
 </a>
 </div> -->
-</div>
-
 
 </div>
 <div class="modal fade" id="modal-intro" role="dialog">
@@ -275,6 +274,6 @@ Funded by
         // campfire.publish("render-outputs");}
         // ,2000);
 
-      </script>
-    </body>
-    </html>
+        </script>
+      </body>
+      </html>

@@ -564,7 +564,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
       var personPerVehicleB = x["Default_Vehicle_Loading_Factors"]["Person_per_Vehicle_Business"];
       var businessCost = x["Time_Value_Factors"]["Business_Cost"];
       var personalCost = x["Time_Value_Factors"]["Personal_Cost"];
-      var enviromentalCost = costFactors["Environmental"];
+      var environmentalCost = costFactors["Environmental"];
       var accidentRate = x["Accident_Rates"];
 
       var argsList = {
@@ -583,12 +583,12 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
         "Value of Time-Business Passenger": function (r, j) { return [personPerVehicleB.Passenger, businessCost.Passenger, fn(r, "VHT-Passenger"), x.Passenger_Business_Time] },//Fix the hard coded number
         "Value of Time-Personal": function (r, j) { return [personPerVehicle.Passenger, personalCost.Passenger, fn(r, "VHT-Passenger"), x.Passenger_Personal_Time] },
         "Environmental Cost-Truck": function (r, j) {
-          return [fn(r, "VHT-Truck"), enviromentalCost.Truck];
+          return [fn(r, "VHT-Truck"), environmentalCost.Truck];
 
         },
 
         "Environmental Cost-Passenger": function (r,j) {
-          return [fn(r, "VHT-Passenger"), enviromentalCost.Passenger];
+          return [fn(r, "VHT-Passenger"), environmentalCost.Passenger];
 
         },
         "Safety Cost-Truck": function (r,j) {
@@ -803,8 +803,8 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
   //  var mix = args.input.commodityMix;
     var output = {};
     var spec = {};
-    var bi = { cost, mix, perishCost, jitCost};
-    var pi = { cost, mix, perishCost, jitCost };
+    var bi = { cost:cost, mix:mix, perishCost:perishCost, jitCost:jitCost};
+    var pi = { cost:cost, mix:mix, perishCost:perishCost, jitCost:jitCost};
     spec.base = {input:bi,data:data.base};
     spec.project = {input:pi,data:data.project};
 
@@ -1133,7 +1133,7 @@ self.run = function(){
     costs: results.costs,
     region:inputs.region,
     scale:inputs.scale,//mask the businessOutput in the Ag model
-    inputs
+    inputs:inputs
   }
 );
 
