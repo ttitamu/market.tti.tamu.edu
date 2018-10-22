@@ -19,6 +19,7 @@ TTI.glossary = {
     "Personal Time and Reliability Cost Savings": "Savings associated with the ability to maintain relatively stable travel time variability, or how long it takes to complete the same trip on different days with passenger vehicles.",
     "Safety Benefits": "The reduction in average crash rates (per 100 million VMT) for all modes, and average costs incurred for each crash type ($/accident).",
     "Freight Time Cost Savings": "Freight time costs represents the costs to industries that produce or consume the freight goods on the trucks moving through the port of entry (POE). The freight time cost savings consists of commodity time costs, perishability costs, and just in time costs. ",
+    "Environmental Benefits":"Environmental benefits are the benefits associated with a reduction in emissions from trucks and passenger vehicles, resulting from reduced roadway congestion.",
     "Business Output": "The value of business production. For productivity analysis, it is measured as net value added. (For other analyses, it may be measured as gross business revenue.)",
     "Positive Economic Effect of Wage Income": "The degree to which wage compensation is positively affected by the effects of commuting time reliability on business productivity.",
     "Capital Costs":"Capital Costs include startup costs to initialize, design, and construct the project.",
