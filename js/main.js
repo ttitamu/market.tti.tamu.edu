@@ -824,7 +824,7 @@ campfire.subscribe('generate-report', function() {
   table.append(DOM.tr().append(DOM.td("Construction Cost(M$)").append(DOM.td($("#constructionCost").val()))));
   table.append(DOM.tr().append(DOM.td("Construction Start Year").append(DOM.td($("#constructionStartYear").val()))));
   table.append(DOM.tr().append(DOM.td("Operation Start Year").append(DOM.td($("#operationStartYear").val()))));
-  table.append(DOM.tr().append(DOM.td("Constant Dollar Year").append(DOM.td($("#constantYear").val()))));
+  //table.append(DOM.tr().append(DOM.td("Constant Dollar Year").append(DOM.td($("#constantYear").val()))));
   table.append(DOM.tr().append(DOM.th("Senario-Baseline").attr("colspan",2)).addClass("header-row"));
   table.append(DOM.tr().append(DOM.td("Truck Percent").append(DOM.td($("#truckPercent").val()))));
   table.append(DOM.tr().append(DOM.td("AADT").append(DOM.td($("#AADT").val()))));
