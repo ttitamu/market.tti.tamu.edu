@@ -650,9 +650,8 @@ height: 100%;
   .total-summary caption {
     padding: 0.4rem 1rem;
   }
-  tr.environmental-benefits {
-    display: none;
-  }
+
+
   .development-summary .year-inputs-inner {
     display: none;
   }
@@ -945,9 +944,9 @@ td.subhead {
 .total-summary caption {
   padding: 0.4rem 1rem;
 }
-tr.environmental-benefits {
+/* tr.environmental-benefits {
   display: none;
-}
+} */
 .footer {
   margin: auto;
   top: 0;
