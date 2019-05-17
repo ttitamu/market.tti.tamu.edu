@@ -1,0 +1,283 @@
+---
+redirect_from: "/foo/"
+---
+<!DOCTYPE html>
+<html>
+<head>
+  <title>M.A.R.K.E.T.</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Cache-control" content="public">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="all">
+  <link href="../style.css" rel="stylesheet">
+  <link href="../print.css" type="text/css" rel="stylesheet" media="print">
+  <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src ="../lib/accounting.min.js"> </script>
+  <script type="text/javascript" src="../js/dom.js"></script>
+  <script type="text/javascript" src="../js/array.js"></script>
+  <script type="text/javascript" src ="../js/tti.storage.js"> </script>
+  <script type="text/javascript" src ="../js/tti.pubsub.js"> </script>
+  <script type="text/javascript" src ="../js/main.js"> </script>
+  <script type="text/javascript" src ="../js/underscore.js"> </script>
+  <script type="text/javascript" src ="../js/string.js"> </script>
+  <script type="text/javascript" src ="../js/tti.models.benefitcostanalysis.js"> </script>
+  <script type="text/javascript" src ="../js/tti.widgets.glossary.js"> </script>
+
+</head>
+<body>
+
+  <!-- <div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>MARKET</h1>
+</div> -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <div class="navbar-header">
+      <!-- <a class="navbar-brand" href="#">M.A.R.K.E.T.</a> -->
+      <ul>
+        <li class="title">M.A.R.K.E.T.</li>
+        <li class="subtitle">
+          Measuring<br/>
+          Agricultural<br/>
+          Relevance of<br/>
+          Key<br/>
+          Expenditures in<br/>
+          Transportation
+        </li>
+
+      </ul>
+
+    </div>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" id="link-reset"><span class="glyphicon glyphicon-refresh"></span>Reset</a></li>
+        <li><a href="#" id="link-print"><span class="glyphicon glyphicon-download-alt"></span>Download Report</a><li>
+        <li><a target="_blank" href="User's Guide.pdf"><span class="glyphicon glyphicon-book"></span>User's Guide</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#modal-glossary"><span class="glyphicon glyphicon-list-alt"></span>Glossary</a></li>
+        <li><a href=# data-toggle="modal" data-target="#modal-intro"><span class="glyphicon glyphicon-info-sign"></span>About</a></li>
+      </ul>
+
+    </div>
+  </div>
+  </nav>
+  <!-- <nav class="navbar navbar-fixed-top">
+  <div class="container-fluid">
+  <div class="navbar-header">
+  <div class="logo">M.A.R.K.E.T.</div>
+  <span>
+  MIT<br>
+  Alpha<br>
+  Rio<br>
+  Krypton<br>
+  ET<br>
+  TAMU<br>
+</span>
+</div>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="#">User's Guide</a></li>
+<li><a href="#">Glossary</a></li>
+<li><a href="#">Contact Us</a></li>
+</ul>
+</div>
+</nav> -->
+<div class="jumbotron">
+  <div class="container-fluid padding-top container-dart">
+
+    <div class="panel black-bg-30pct pull-right">
+      <div class="row-fluid">
+        <!-- <input type="button" value="Print Div Contents" id="btnPrint" /> -->
+        <div class="panel panel-horizontal white-bg-80pct pull-right">
+          <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Warning!</strong> Operation start year must be no earlier than construction start year.
+        </div> -->
+        <div class="col-md-6">
+
+          <div class="panel-heading">INPUTS</div>
+          <div class="panel-body" id="panel-inputs"> </div>
+        </div>
+
+        <div class="col-md-6">
+
+          <div class="panel-heading">OUTPUTS</div>
+          <div class="panel-body outputs benefit-cost-model-report" id=panel-outputs>        </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</div>
+<div class="footer navbar-fixed-bottom navbar navbar-inverse">
+
+  <div class="copy">
+    <span>
+      © Copyright 2018. Agriculture Marketing Service, USDA. All rights reserved.
+    </span>
+  </div>
+
+  <div class="logo logo-tti">
+
+    <a href="/">
+      <img src = "img/TTI-Color-reverse.png">
+    </a>
+  </div>
+  <div class="logo logo-ams">
+
+    <a href="/">
+      <img src = "img/AMS-logo.png">
+    </a>
+
+  </div>
+  <!-- <div class="logo logo-tti">
+  <span>
+  Developed by
+</span>
+<a href="/">
+<img src = "img/TTI-Color-reverse.png">
+</a>
+</div>
+<div class="logo logo-ams">
+<span>
+Funded by
+</span>
+<a href="/">
+<img src = "img/AMS-logo.png">
+</a>
+</div> -->
+
+</div>
+<div class="modal fade" id="modal-intro" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header white-fg">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">M.A.R.K.E.T. (Measuring Agricultural Relevance of Key Expenditures in Transportation)</h4>
+      </div>
+      <div class="modal-body white-bg-90pct">
+        <p>The M.A.R.K.E.T. model is designed to provide high-level estimates of the relative benefit to the agriculture sector of roadway infrastructure projects. Benefits included in the analysis are as follows:</p>
+        <ul><li>	vehicle operating cost savings,</li>
+          <li>	business time and reliability cost savings,</li>
+          <li>	personal time and reliability cost savings,</li>
+          <li>	safety benefits,</li>
+          <li>	freight time cost savings,</li>
+          <li>	environmental benefits,</li>
+          <li>	business output benefits, and</li>
+          <li>	wage income benefits.  </li>
+        </ul>
+
+        <p>
+          To make comments regarding the model, offer suggestions for improvements, or for
+          assistance, please contact Max Steadman at <a href="mailto:m-steadman@tti.tamu.edu">m-steadman@tti.tamu.edu</a>
+          or Brianne Glover at <a href="mailto: b-glover@tti.tamu.edu">b-glover@tti.tamu.edu</a>.
+        </p>
+
+        <div class="footer">
+          <div style="clear: both;">
+            &nbsp;</div>
+            <div class="logo logo-tti">
+              <a href="https://tti.tamu.edu">
+                <img src="img/TTI-Color.png" alt="Texas A&amp;M Transportation Institute"></a>
+              </div>
+              <div class="logo logo-ams">
+                <a href="https://www.ams.usda.gov/">
+                  <img src="img/AMS-Color.png" alt="Agricultural Marketing Service, USDA"></a>
+                </div>
+                <div style="clear: both;">
+                  &nbsp;</div>
+                  <!-- <p class="copy">
+                  © Copyright 2018. Texas Department of Transportation. All rights reserved.</p> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="modal-glossary" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header white-fg">
+                <button type="button" class="close white-fg" data-dismiss="modal" aria-hidden="true">
+                  &times;</button>
+                  <h3 class="modal-title">Glossary</h3>
+
+
+                </div>
+                <div class="modal-body white-bg-90pct">
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+          <form id="pdf-form" method="post" target="_blank">
+            <input type="hidden" name="ReportsHtml" id="report-contents">
+
+          </form>
+          <!-- <div class="jumbotron text-center" style="margin-bottom:0;margin-top:30px">
+          <p>Footer</p>
+        </div> -->
+        <script>
+        // $(window).on('load',function(){
+        //   $('#myModal').modal('show');
+        // });
+
+        campfire.publish("boot-ui");
+        // $("#btnPrint").on("click",function(){
+        //   var divContents = $("#panel-outputs").html();
+        //   var printWindow = window.open('','','height=400,width=800');
+        //   printWindow.document.write('<html><head><title>INPUTS</title>');
+        //   printWindow.document.write('</head><body>');
+        //   printWindow.document.write(divContents);
+        //   printWindow.document.write('</body></html>');
+        //   printWindow.document.close();
+        //   printWindow.print();
+        // });
+        // setTimeout(function(){
+        //   var test = TTI.Models.BenefitCostAnalysis({input:{
+        //     serviceType:'Rail',
+        //     closestStation:'Lawnview',
+        //     milesToStation:5,
+        //     projectLength:10,
+        //     AADT:15397,
+        //     truckPercent:0.286,
+        //     averageSpeed:64.8,
+        //     averageSpeedBase:64.8,
+        //     averageSpeedProj:65.8,
+        //     rider:50000,
+        //     constructionCost:77590000,
+        //     omCost:0,
+        //     discountRate:0.03,
+        //     constructionStartYear:2022,
+        //     operationStartYear:2027,
+        //     percentCongested:0,
+        //     totalYears:30,
+        //     constantYear:2018,
+        //     projectScenario:0.02,
+        //     commodityMix:TTI.commodityMix["Pharr"],
+        //     commodityCost:TTI.commodityCost,
+        //     region:'Urban',
+        //     scale:{Truck: 1,Passenger:1},
+        //   }
+        // });
+        // TTI.results = test.run().results;
+        // campfire.publish("render-outputs");}
+        // ,2000);
+
+        </script>
+      </body>
+      </html>
