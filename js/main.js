@@ -392,23 +392,23 @@ campfire.subscribe('import-json', function() {
   //TTI.commodityMix = {};
   //TTI.commodityCostAg = {};
   //TTI.commodityMixAg = {};
-  TTI.importJSON('data/commodityCostByTons.json',function(data){
+  TTI.importJSON('/data/commodityCostByTons.json',function(data){
     TTI.commodityCost = data;
   });
-  TTI.importJSON('data/commodityMix.json',function(data){
+  TTI.importJSON('/data/commodityMix.json',function(data){
     TTI.commodityMix = data;
   });
-  TTI.importJSON('data/commodityCostByTonsAg.json',function(data){
+  TTI.importJSON('/data/commodityCostByTonsAg.json',function(data){
     TTI.commodityCostAg = data;
   });
-  TTI.importJSON('data/commodityMixAg.json',function(data){
+  TTI.importJSON('/data/commodityMixAg.json',function(data){
     TTI.commodityMixAg = data;
   });
 
-  TTI.importJSON('data/jitCost.json',function(data){
+  TTI.importJSON('/data/jitCost.json',function(data){
     TTI.jitCost = data;
   });
-  TTI.importJSON('data/perishCost.json',function(data){
+  TTI.importJSON('/data/perishCost.json',function(data){
     TTI.perishCost = data;
   });
 });
