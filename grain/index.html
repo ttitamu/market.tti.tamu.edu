@@ -10,7 +10,7 @@
   <!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="all">
-  <link href="/style.css" rel="stylesheet">
+  <link href="/grain/style.css" rel="stylesheet">
   <link href="/print.css" type="text/css" rel="stylesheet" media="print">
   <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src ="/lib/accounting.min.js"> </script>
@@ -18,10 +18,10 @@
   <script type="text/javascript" src="/js/array.js"></script>
   <script type="text/javascript" src ="/js/tti.storage.js"> </script>
   <script type="text/javascript" src ="/js/tti.pubsub.js"> </script>
-  <script type="text/javascript" src ="/js/main.js"> </script>
+  <script type="text/javascript" src ="/grain/js/main.js"> </script>
   <script type="text/javascript" src ="/js/underscore.js"> </script>
   <script type="text/javascript" src ="/js/string.js"> </script>
-  <script type="text/javascript" src ="/js/tti.models.benefitcostanalysis.js"> </script>
+  <script type="text/javascript" src ="/grain/js/tti.models.benefitcostanalysis.js"> </script>
   <script type="text/javascript" src ="/js/tti.widgets.glossary.js"> </script>
 
 </head>
@@ -65,26 +65,7 @@
     </div>
   </div>
   </nav>
-  <!-- <nav class="navbar navbar-fixed-top">
-  <div class="container-fluid">
-  <div class="navbar-header">
-  <div class="logo">M.A.R.K.E.T.</div>
-  <span>
-  MIT<br>
-  Alpha<br>
-  Rio<br>
-  Krypton<br>
-  ET<br>
-  TAMU<br>
-</span>
-</div>
-<ul class="nav navbar-nav navbar-right">
-<li><a href="#">User's Guide</a></li>
-<li><a href="#">Glossary</a></li>
-<li><a href="#">Contact Us</a></li>
-</ul>
-</div>
-</nav> -->
+
 <div class="jumbotron">
   <div class="container-fluid padding-top container-dart">
 
@@ -96,13 +77,35 @@
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <strong>Warning!</strong> Operation start year must be no earlier than construction start year.
         </div> -->
-        <div class="col-md-6">
-
+        <div class="col-md-6 col-inputs">
           <div class="panel-heading">INPUTS</div>
-          <div class="panel-body" id="panel-inputs"> </div>
+          <div class="panel-body" id="panel-inputs">
+            <div class="tabbable" id="tabs-800582">
+  						<ul class="nav nav-tabs">
+  							<li class="nav-item" id="nav-tab-inputs-truck">
+  								<a class="nav-link"  href="#tab-inputs-truck" data-toggle="tab">Truck Model</a>
+  							</li>
+  							<li class="nav-item" id="nav-tab-inputs-multimodel">
+  								<a class="nav-link active show"  href="#tab-inputs-multimodel" data-toggle="tab">Multi Model</a>
+  							</li>
+  						</ul>
+  						<div class="tab-content">
+  							<div class="tab-pane active" id="tab-inputs-truck">
+  								<p>
+  									I'm in Section 1.
+  								</p>
+  							</div>
+  							<div class="tab-pane" id="tab-inputs-multimodel">
+  								<p>
+  									Howdy, I'm in Section 2.
+  								</p>
+  							</div>
+  						</div>
+  					</div></div>
+
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-outputs">
 
           <div class="panel-heading">OUTPUTS</div>
           <div class="panel-body outputs benefit-cost-model-report" id=panel-outputs>        </div>
@@ -138,22 +141,6 @@
     </a>
 
   </div>
-  <!-- <div class="logo logo-tti">
-  <span>
-  Developed by
-</span>
-<a href="/">
-<img src = "img/TTI-Color-reverse.png">
-</a>
-</div>
-<div class="logo logo-ams">
-<span>
-Funded by
-</span>
-<a href="/">
-<img src = "img/AMS-logo.png">
-</a>
-</div> -->
 
 </div>
 <div class="modal fade" id="modal-intro" role="dialog">
@@ -235,46 +222,6 @@ Funded by
         // });
 
         campfire.publish("boot-ui");
-        // $("#btnPrint").on("click",function(){
-        //   var divContents = $("#panel-outputs").html();
-        //   var printWindow = window.open('','','height=400,width=800');
-        //   printWindow.document.write('<html><head><title>INPUTS</title>');
-        //   printWindow.document.write('</head><body>');
-        //   printWindow.document.write(divContents);
-        //   printWindow.document.write('</body></html>');
-        //   printWindow.document.close();
-        //   printWindow.print();
-        // });
-        // setTimeout(function(){
-        //   var test = TTI.Models.BenefitCostAnalysis({input:{
-        //     serviceType:'Rail',
-        //     closestStation:'Lawnview',
-        //     milesToStation:5,
-        //     projectLength:10,
-        //     AADT:15397,
-        //     truckPercent:0.286,
-        //     averageSpeed:64.8,
-        //     averageSpeedBase:64.8,
-        //     averageSpeedProj:65.8,
-        //     rider:50000,
-        //     constructionCost:77590000,
-        //     omCost:0,
-        //     discountRate:0.03,
-        //     constructionStartYear:2022,
-        //     operationStartYear:2027,
-        //     percentCongested:0,
-        //     totalYears:30,
-        //     constantYear:2018,
-        //     projectScenario:0.02,
-        //     commodityMix:TTI.commodityMix["Pharr"],
-        //     commodityCost:TTI.commodityCost,
-        //     region:'Urban',
-        //     scale:{Truck: 1,Passenger:1},
-        //   }
-        // });
-        // TTI.results = test.run().results;
-        // campfire.publish("render-outputs");}
-        // ,2000);
 
         </script>
       </body>

@@ -1,0 +1,174 @@
+{
+  "Truck":{
+    "Iowa": {
+      "Percent Grains": 0.358399134104831,
+      "Cereal grains": 0.344782194834127,
+      "Milled grain prods.": 0.013616939270705
+    },
+    "Illinois": {
+      "Percent Grains": 0.214571893666738,
+      "Cereal grains": 0.20472927279868,
+      "Milled grain prods.": 0.009842620868059
+    },
+    "Indiana": {
+      "Percent Grains": 0.146586580363233,
+      "Cereal grains": 0.13696906279698,
+      "Milled grain prods.": 0.009617517566253
+    },
+    "Michigan": {
+      "Percent Grains": 0.070021866568054,
+      "Cereal grains": 0.056023245945436,
+      "Milled grain prods.": 0.013998620622618
+    },
+    "Minnesota": {
+      "Percent Grains": 0.241235324282503,
+      "Cereal grains": 0.233752687362239,
+      "Milled grain prods.": 0.007482636920265
+    },
+    "Missouri": {
+      "Percent Grains": 0.139234987542264,
+      "Cereal grains": 0.126144336315807,
+      "Milled grain prods.": 0.013090651226457
+    },
+    "North Dakota": {
+      "Percent Grains": 0.307211311683099,
+      "Cereal grains": 0.30073021233837,
+      "Milled grain prods.": 0.006481099344729
+    },
+    "Nebraska": {
+      "Percent Grains": 0.485457383651248,
+      "Cereal grains": 0.476462441282519,
+      "Milled grain prods.": 0.008994942368729
+    },
+    "Ohio": {
+      "Percent Grains": 0.069702828526883,
+      "Cereal grains": 0.058561789159868,
+      "Milled grain prods.": 0.011141039367015
+    },
+    "South Dakota": {
+      "Percent Grains": 0.443015975323945,
+      "Cereal grains": 0.440623494338058,
+      "Milled grain prods.": 0.002392480985886
+    },
+    "Wisconsin": {
+      "Percent Grains": 0.089704896538249,
+      "Cereal grains": 0.07924063213649,
+      "Milled grain prods.": 0.010464264401759
+    }
+  },
+  "Rail":{
+    "Iowa": {
+      "Percent Grains": 0.335070402094866,
+      "Cereal grains": 0.318548913957229,
+      "Milled grain prods.": 0.016521488137637
+    },
+    "Illinois": {
+      "Percent Grains": 0.246584222952912,
+      "Cereal grains": 0.237473500912759,
+      "Milled grain prods.": 0.009110722040153
+    },
+    "Indiana": {
+      "Percent Grains": 0.108792371541209,
+      "Cereal grains": 0.105566660614142,
+      "Milled grain prods.": 0.003225710927067
+    },
+    "Michigan": {
+      "Percent Grains": 0.057782600104116,
+      "Cereal grains": 0.057042086668514,
+      "Milled grain prods.": 0.000740513435602
+    },
+    "Minnesota": {
+      "Percent Grains": 0.306047405751173,
+      "Cereal grains": 0.296776628546598,
+      "Milled grain prods.": 0.009270777204575
+    },
+    "Missouri": {
+      "Percent Grains": 0.174806410253681,
+      "Cereal grains": 0.159131045008177,
+      "Milled grain prods.": 0.015675365245504
+    },
+    "North Dakota": {
+      "Percent Grains": 0.215196584975949,
+      "Cereal grains": 0.206471670746356,
+      "Milled grain prods.": 0.008724914229593
+    },
+    "Nebraska": {
+      "Percent Grains": 0.667942741566006,
+      "Cereal grains": 0.585374817155641,
+      "Milled grain prods.": 0.082567924410365
+    },
+    "Ohio": {
+      "Percent Grains": 0.114526314812163,
+      "Cereal grains": 0.106728607949777,
+      "Milled grain prods.": 0.007797706862386
+    },
+    "South Dakota": {
+      "Percent Grains": 0.662228396663211,
+      "Cereal grains": 0.657766126176106,
+      "Milled grain prods.": 0.004462270487105
+    },
+    "Wisconsin": {
+      "Percent Grains": 0.136323519522133,
+      "Cereal grains": 0.127691617978467,
+      "Milled grain prods.": 0.008631901543665
+    }
+  },
+  "Barge":{
+    "Iowa": {
+      "Percent Grains": 0.333982734637125,
+      "Cereal grains": 0.333873944914792,
+      "Milled grain prods.": 0.000108789722333
+    },
+    "Illinois": {
+      "Percent Grains": 0.221585471176482,
+      "Cereal grains": 0.220809845792593,
+      "Milled grain prods.": 0.000775625383889
+    },
+    "Indiana": {
+      "Percent Grains": 0.210311627693294,
+      "Cereal grains": 0.162819225659856,
+      "Milled grain prods.": 0.047492402033438
+    },
+    "Michigan": {
+      "Percent Grains": 0.000302310057233,
+      "Cereal grains": 0.000273004747287,
+      "Milled grain prods.": 0.000029305309947
+    },
+    "Minnesota": {
+      "Percent Grains": 0.111763282059876,
+      "Cereal grains": 0.111731598521454,
+      "Milled grain prods.": 0.000031683538423
+    },
+    "Missouri": {
+      "Percent Grains": 0.293361273988889,
+      "Cereal grains": 0.293360948628791,
+      "Milled grain prods.": 3.25360098e-7
+    },
+    "North Dakota": {
+      "Percent Grains": 0,
+      "Cereal grains": 0,
+      "Milled grain prods.": 0
+    },
+    "Nebraska": {
+      "Percent Grains": 0,
+      "Cereal grains": 0,
+      "Milled grain prods.": 0
+    },
+    "Ohio": {
+      "Percent Grains": 0.003186439738082,
+      "Cereal grains": 0.003185945560464,
+      "Milled grain prods.": 4.94177618e-7
+    },
+    "South Dakota": {
+      "Percent Grains": 0,
+      "Cereal grains": 0,
+      "Milled grain prods.": 0
+    },
+    "Wisconsin": {
+      "Percent Grains": 0.024882319959588,
+      "Cereal grains": 0.024846081661527,
+      "Milled grain prods.": 0.000036238298061
+    }
+  }
+
+}

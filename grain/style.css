@@ -922,7 +922,7 @@ td.subhead {
 
 
 .container-dart {
-  background: transparent url(/img/border-5.jpg) 0 0 no-repeat;
+  background: transparent url(/img/grain-1.jpg) 0 0 no-repeat;
   background-size: cover;
   background-attachment: fixed;
   background-position: 0% 7%;
@@ -1036,6 +1036,15 @@ color:white;
 
 #panel-inputs .list-group{
   margin-bottom: 0;
+}
+#panel-inputs {
+  padding-top:0;
+}
+.col-inputs .panel-heading{
+  padding-bottom:0;
+}
+#panel-outputs{
+  padding-top:33px;
 }
 .modal-content{
   background-color: transparent;

@@ -1,3 +1,5 @@
+/////BCA model for border crossing, tailered for soybean transportation
+
 function init() {
   if (typeof TTI == "undefined") { TTI = {}; }
   if (typeof console == "undefined") {
@@ -110,6 +112,14 @@ function getTotal(r) {
   });
   return totals;
 }
+
+function isFunction(v){
+  //If our variable is an instance of "Function"
+  if (v instanceof Function) {
+      return true;
+  }
+  return false;
+};
 /* Based on
 * - EGM Mathematical Finance class by Enrique Garcia M. <egarcia@egm.co>
 * - A Guide to the PMT, FV, IPMT and PPMT Functions by Kevin (aka MWVisa1)
@@ -572,7 +582,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
         "VMT-Passenger": function (r, j) { return [x.projectLength, fn(r, "Trips-Passenger")]; },
         "VHT-Truck": function (r, j) { return [fn(r, "VMT-Truck"), x.averageSpeed]; },
         "VHT-Passenger": function (r, j) { return [fn(r, "VMT-Passenger"), x.averageSpeed]; },
-        "Congested Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), 9.84, 2.484]; },
+        "Congested Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), 37.89,1]; },
         "Congested Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), 1.86, 2.185]; },
         "Free Flow Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), x.percentCongested, freeFlowFactors.Truck]; },
         "Free Flow Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), x.percentCongested, freeFlowFactors.Passenger]; },
@@ -852,9 +862,9 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
           // if (count++<43){
           //    console.log("The %s is %f",k,args[0] * args[1] *args[2]* args[3]*(args[4]+ args[5]*args[6]+ args[7]*args[8]));
           // }
-          return args[0] * args[1] *args[2]* args[3]*(args[4]+ args[5]*args[6]+ args[7]*args[8]);
+          return args[0] * args[1] *args[3]* (args[9]*args[4]+ args[2]*args[5]*args[6]+ args[2]*args[7]*args[8]);
         };
-        argsList[k] = function (r, j) { return [r["VHT-Truck"], tonsPerVehicle, mix[k], cost[k],ctcFactor,perishCost[k],perishCostFactor,jitCost[k],jitCostFactor]; };
+        argsList[k] = function (r, j) { return [r["VHT-Truck"], tonsPerVehicle, mix[k], cost[k],ctcFactor,perishCost[k],perishCostFactor,jitCost[k],jitCostFactor,TTI.commodityCostByHrs[k]]; };//To be fixed. don't use global variables here. Check mix and cost per hr with Max
       });
 
       r.Rows = indexes.map(function (i) {
@@ -1231,7 +1241,7 @@ self.setInputs(spec.input);
 return self;
 
 
-}
+};
 TTI.Models.DebtServicesModel = function (spec) {
   var input = {};
 
@@ -1770,25 +1780,27 @@ TTI.Models.MultiModelBCA = function (spec) {
     var y = (x.constructionStartYear === undefined) ? d.constructionStartYear : x.constructionStartYear;
     var r = indexes.map(function (i) { return y + i; });
     return r;
-  }
+  };
   var getBenefitYears = function(){
     var x = inputs.travelImpacts;
     var d = defaults({});
     var y = (x.operationStartYear === undefined) ? d.operationStartYear : x.operationStartYear;
     var r = indexes.map(function (i) { return y + i; });
     return r;
-  }
+  };
+
   var computeRow=function(i, h, lf, la) {
     var row = {};
     h.forEach(function (k) {
       var f = lf[k];
       var fa = la[k];
+      if (!isFunction(fa)) console.log(k);
       var a = fa(row, i);
       //console.log(a);
       row[k] = f(a);
     });
     return row;
-  }
+  };
   var objToArray = function (o) { return _.values(o);};
   // var data = "Hello self!";
 
@@ -1803,6 +1815,7 @@ TTI.Models.MultiModelBCA = function (spec) {
     //args={input:{averageSpeed:,percentCongested,projectScenario:}}
     var b = defaults({input:args.input,scenario:'base'});//get from args
     var p = defaults({input:args.input,scenario:'project'});//get from args
+    p.scale.Truck=0;
     var spec = { base: b, project:p};
     var scale = args.input.scale;
     function run(x) {
@@ -1825,7 +1838,7 @@ TTI.Models.MultiModelBCA = function (spec) {
       //var count = 0;
       var fnList = {
         "Phase-in of Operations Impact by Year": function (args) {
-          return 1.0 * Math.pow(1 + args[0], args[1]);
+          return 1.0 * Math.pow(1 + args[0], args[1])*args[2];
         },
 
         "Trips-Truck": function (args) {
@@ -1845,6 +1858,9 @@ TTI.Models.MultiModelBCA = function (spec) {
         },
         "VHT-Barge": function (args) {
           return args[0] * args[1];
+        },
+        "Truck VHT-Rail":function (args) {
+          return args[0]*args[1]/args[2];
         },
         "Operation Cost-Truck": function (args) {
           return args[0] * args[1]; //Fuel cost, gallons
@@ -1879,8 +1895,9 @@ TTI.Models.MultiModelBCA = function (spec) {
 
       };
       //Put parameters temperarally here!!To be fixed
+      x.annualTrips = 60000;
       x.annualTripsRail = 50;
-      x.annualTripsBarge = 50;
+      x.annualTripsBarge = 750;
       x.waitReduction = 2;
       x.hourlyIdleCost = 52.08;
       x.towboatOtherCost = 228.63;
@@ -1893,7 +1910,7 @@ TTI.Models.MultiModelBCA = function (spec) {
       x.tonsPerTruck = 24.3;
       ////////////////////////////////////////
       var argsList = {
-        "Phase-in of Operations Impact by Year": function (r, j) { return [x.travelGrowthRate, j]; },
+        "Phase-in of Operations Impact by Year": function (r, j) { return [x.travelGrowthRate, j,x.scale.Truck]; },
         "Trips-Truck": function (r, j) { return [x.annualTrips,  fn(r, "Phase-in of Operations Impact by Year")]; },
         "Trips-Rail": function (r, j) { return [x.annualTripsRail,  fn(r, "Phase-in of Operations Impact by Year")]; },
         "Trips-Barge": function (r, j) { return [x.annualTripsBarge,  fn(r, "Phase-in of Operations Impact by Year")]; },
@@ -2036,7 +2053,7 @@ TTI.Models.MultiModelBCA = function (spec) {
       };
       var argsList = {
         "Operation Cost-Truck": function (r,j) {
-          return [dFactor[j]].concat(getData(rowsT,j,["Congested Operation Cost-Truck"]));
+          return [dFactor[j]].concat(getData(rowsT,j,["Operation Cost-Truck"]));
         },
         "Operation Cost-Barge": function (r,j) {
           return [dFactor[j]].concat(getData(rowsT, j, ["Towboat Cost-Barge", "Dry Barge Cost-Barge","Tanker Barge Cost-Barge"]));
@@ -2088,10 +2105,14 @@ TTI.Models.MultiModelBCA = function (spec) {
       var mix = o.input.mix;
       var rows = o.data.Rows;
       var h1 = Object.keys(cost);
-      var h2 = ["Total"];
+      var h2 = ["Total-Truck","Total-Rail","Total-Barge"];
+      var h1Truck = h1.map(function(e){return e+"-Truck";});
+      var h1Rail = h1.map(function(e){return e+"-Rail";});
+      var h1Barge = h1.map(function(e){return e+"-Barge";});
+
       var r = { Headers: [], Rows: [], RowIndex: [] };
       r.RowIndex = getBenefitYears();
-      r.Headers = ["VHT-Truck","Truck VHT-Rail","Truck VHT-Barge"].concat(h1,h2);
+      r.Headers = ["VHT-Truck","Truck VHT-Rail","Truck VHT-Barge"].concat(h1Truck,h1Rail,h1Barge,h2);
       const perishCost = o.input.perishCost;
       const jitCost = o.input.jitCost;
       const ctcFactor = 0.1/5400;//Commodity Time Cost Constant
@@ -2271,8 +2292,8 @@ TTI.Models.MultiModelBCA = function (spec) {
       name: 'Vehicle Operating Cost Savings',
       category: 'Benefits',
       data: benefits,
-      items: ['Operation Cost-Barge', 'Operation Cost-Truck','Operation Cost-Rail'],
-      factor: [1,1,1]
+      items: ['Operation Cost-Barge', 'Operation Cost-Truck'],
+      factor: [1,1]
     },
     {
       name: 'Truck Freight Time Cost Savings',
@@ -2539,4 +2560,4 @@ self.setInputs(spec.input);
 return self;
 
 
-}
+};
