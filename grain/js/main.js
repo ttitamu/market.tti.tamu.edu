@@ -333,7 +333,7 @@ campfire.subscribe("bind-events",function(){
       discountRate:0.03,
       constructionStartYear:2022,
       operationStartYear:2027,
-      percentCongested:1,
+      percentCongested:0,
       totalYears:30,
       constantYear:2018,
       projectScenario:0.02,
@@ -342,7 +342,7 @@ campfire.subscribe("bind-events",function(){
       perishCost:TTI.perishCost,
       jitCost:TTI.jitCost,
       region:'Urban',
-      scale:{Truck: 1,Passenger:0,Grains:0},
+      scale:{Truck: 1,Passenger:1,Grains:0},
     };
     input.constructionCost = parseFloat($("#bca-inputs-constructionCost").val().replace(/\$/g,''))*1000000;
     input.constructionStartYear = parseInt($("#bca-inputs-constructionStartYear").val());
@@ -357,12 +357,17 @@ campfire.subscribe("bind-events",function(){
     input.city = ($("#bca-inputs-city").val());
     input.commodityMix = TTI.commodityMix["Truck"][input.city];
     input.commodityCost = TTI.commodityCost;
-    input.scale={Truck:1,Passenger:0,Grains:0};
+    input.scale={Truck:1,Passenger:1,Grains:0};
     var model= TTI.Models.BenefitCostAnalysis({input:input});
     var inputAg = input;
     inputAg.commodityMix = TTI.commodityMixAg["Truck"][input.city];
     inputAg.commodityCost = TTI.commodityCostAg;
     inputAg.scale={Truck:input.commodityMix["Percent Grains"],Passenger:0,Grains:1};
+    var loads = Object.keys(inputAg.commodityCost);
+    loads.forEach(function(ee){
+        inputAg.scale.Truck = inputAg.scale.Truck + inputAg.commodityMix[ee];
+    });
+
     var modelAg = TTI.Models.BenefitCostAnalysis({input:inputAg});
     if (input.operationStartYear<input.constructionStartYear)
     {

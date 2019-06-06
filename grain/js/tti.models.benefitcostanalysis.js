@@ -316,7 +316,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
       },
       "Time_Value_Factors": {
         "Personal_Cost": {
-          Truck: 29.7,
+          Truck: 28.75,
           Passenger: 14.74
         },
         "Feight_Logistics": {
@@ -582,10 +582,10 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
         "VMT-Passenger": function (r, j) { return [x.projectLength, fn(r, "Trips-Passenger")]; },
         "VHT-Truck": function (r, j) { return [fn(r, "VMT-Truck"), x.averageSpeed]; },
         "VHT-Passenger": function (r, j) { return [fn(r, "VMT-Passenger"), x.averageSpeed]; },
-        "Congested Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), 37.89,1]; },
-        "Congested Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), 1.86, 2.185]; },
-        "Free Flow Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), x.percentCongested, freeFlowFactors.Truck]; },
-        "Free Flow Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), x.percentCongested, freeFlowFactors.Passenger]; },
+        "Congested Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), 9.84,2.5]; },
+        "Congested Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), 1.86, 2.2]; },
+        "Free Flow Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), x.percentCongested, 37.89]; },
+        "Free Flow Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), x.percentCongested, 5.03]; },
         "Value of Time-Business Truck": function (r, j) { return [personPerVehicle.Truck, personalCost.Truck, fn(r, "VHT-Truck")] },
         "Value of Time-Business Passenger": function (r, j) { return [personPerVehicleB.Passenger, businessCost.Passenger, fn(r, "VHT-Passenger"), x.Passenger_Business_Time] },//Fix the hard coded number
         "Value of Time-Personal": function (r, j) { return [personPerVehicle.Passenger, personalCost.Passenger, fn(r, "VHT-Passenger"), x.Passenger_Personal_Time] },
@@ -999,14 +999,14 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
       category: 'Benefits',
       data: costs,
       items: ['Total Costs'],
-      factor: [econFactors[region].businessOutputMultiplier*(1-args.scale.Grains)]
+      factor: [econFactors[region].businessOutputMultiplier*args.scale.Passenger]
     },
     {
       name: 'Positive Economic Effect of Wage Income',
       category: 'Benefits',
       data: costs,
       items: ['Total Costs'],
-      factor:[econFactors[region].wageIncomeMultiplier*(1-args.scale.Grains)]
+      factor:[econFactors[region].wageIncomeMultiplier*args.scale.Passenger]
     }];
 
     var cItems=[{
@@ -1636,7 +1636,7 @@ TTI.Models.MultiModelBCA = function (spec) {
       },
       "Time_Value_Factors": {
         "Personal_Cost": {
-          Truck: 29.7,
+          Truck: 28.75,
           Passenger: 14.74
         },
         "Feight_Logistics": {
