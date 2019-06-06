@@ -416,6 +416,8 @@ campfire.subscribe("bind-events",function(){
     input.city = ($("#multimodel-inputs-city").val());
     input.commodityMix = {truck:TTI.commodityMix["Truck"][input.city],rail:TTI.commodityMix["Rail"][input.city],barge:TTI.commodityMix["Barge"][input.city]};
     input.commodityCost = TTI.commodityCost;
+    input.annualTrips = {truck:parseInt($("#multimodel-inputs-annualTripsTruck").val().replace(/,/g,'')),rail:parseInt($("#multimodel-inputs-annualTripsRail").val().replace(/,/g,'')),barge:parseInt($("#multimodel-inputs-annualTripsBarge").val().replace(/,/g,''))};
+    input.waitTimeReduction = {truck:parseFloat($("#multimodel-inputs-waitTimeReductionTruck").val()),rail:parseFloat($("#multimodel-inputs-waitTimeReductionRail").val()),barge:parseFloat($("#multimodel-inputs-waitTimeReductionBarge").val())};
     input.scale={Truck:1,Passenger:0};
     var model= TTI.Models.MultiModelBCA({input:input});
     var inputAg = input;
@@ -451,9 +453,7 @@ campfire.subscribe("bind-events",function(){
   $("#link-reset").on("click",function(){
     campfire.publish("boot-ui");
   });
-
 });
-
 
 TTI.Widgets.PDFHelper = function(spec) {
   var self = {};
@@ -812,7 +812,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
   var self = TTI.PubSub({});
   const cityList = ["Iowa","Illinois","Indiana","Michigan","Minnesota","Missouri","North Dakota","Nebraska","Ohio","South Dakota","Wisconsin"];
   const yearList = Array.from({length:25}, function(v, k){return k+2018;} );
-  const constYearList = Array.from({length:5}, function(v, k){return k+2014;});
+  const constYearList = Array.from({length:6}, function(v, k){return k+2014;});
   var inputItemsCost = [
     {
       propertyName: "constructionCost",
@@ -856,7 +856,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
       }
     },
     {
-      propertyName: "waitTimeRedutionBarge",
+      propertyName: "waitTimeReductionBarge",
       label: "Wait Time Reduction (Hours)",
       control:"input",
       value: 2,
@@ -877,7 +877,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
       }
     },
     {
-      propertyName: "waitTimeRedutionTruck",
+      propertyName: "waitTimeReductionTruck",
       label: "Wait Time Reduction (Hours)",
       control:"input",
       value: 2,
@@ -899,7 +899,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
       }
     },
     {
-      propertyName: "waitTimeRedutionRail",
+      propertyName: "waitTimeReductionRail",
       label: "Wait Time Reduction (Hours)",
       control:"input",
       value: 2,

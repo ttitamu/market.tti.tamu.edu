@@ -1601,7 +1601,8 @@ TTI.Models.MultiModelBCA = function (spec) {
       totalYears: 30,
       truckPercent: 0.0195,
       AADT: 89408,
-      annualTrips: 5619905,
+      annualTrips: {truck:60000,rail:50,barge:750},
+      waitTimeReduction: {truck:2,rail:2,barge:2},
       projectLength: 8.676,
       averageSpeed: 50,
       percentCongested: 0,
@@ -1713,7 +1714,7 @@ TTI.Models.MultiModelBCA = function (spec) {
       }
     }};
     update(args.input,r);
-    r.annualTrips = r.AADT*365;
+    //r.annualTrips = r.AADT*365;
     //r.averageSpeed = Math.floor(r.averageSpeed);
 
     if(args.scenario==='base')
@@ -1895,10 +1896,8 @@ TTI.Models.MultiModelBCA = function (spec) {
 
       };
       //Put parameters temperarally here!!To be fixed
-      x.annualTrips = 60000;
-      x.annualTripsRail = 50;
-      x.annualTripsBarge = 750;
-      x.waitReduction = 2;
+
+      //x.waitReduction = 2;
       x.hourlyIdleCost = 52.08;
       x.towboatOtherCost = 228.63;
       x.bargesPerTow = 15;
@@ -1911,12 +1910,12 @@ TTI.Models.MultiModelBCA = function (spec) {
       ////////////////////////////////////////
       var argsList = {
         "Phase-in of Operations Impact by Year": function (r, j) { return [x.travelGrowthRate, j,x.scale.Truck]; },
-        "Trips-Truck": function (r, j) { return [x.annualTrips,  fn(r, "Phase-in of Operations Impact by Year")]; },
-        "Trips-Rail": function (r, j) { return [x.annualTripsRail,  fn(r, "Phase-in of Operations Impact by Year")]; },
-        "Trips-Barge": function (r, j) { return [x.annualTripsBarge,  fn(r, "Phase-in of Operations Impact by Year")]; },
-        "VHT-Truck": function (r, j) { return [fn(r, "Trips-Truck"), x.waitReduction]; },//waitReduction:2
-        "VHT-Rail": function (r, j) { return [fn(r, "Trips-Rail"), x.waitReduction]; },
-        "VHT-Barge": function (r, j) { return [fn(r, "Trips-Barge"), x.waitReduction]; },
+        "Trips-Truck": function (r, j) { return [x.annualTrips.truck,  fn(r, "Phase-in of Operations Impact by Year")]; },
+        "Trips-Rail": function (r, j) { return [x.annualTrips.rail,  fn(r, "Phase-in of Operations Impact by Year")]; },
+        "Trips-Barge": function (r, j) { return [x.annualTrips.barge,  fn(r, "Phase-in of Operations Impact by Year")]; },
+        "VHT-Truck": function (r, j) { return [fn(r, "Trips-Truck"), x.waitTimeReduction.truck]; },//waitReduction:2
+        "VHT-Rail": function (r, j) { return [fn(r, "Trips-Rail"), x.waitTimeReduction.rail]; },
+        "VHT-Barge": function (r, j) { return [fn(r, "Trips-Barge"), x.waitTimeReduction.barge]; },
         "Truck VHT-Rail":function (r, j) { return [fn(r, "Trips-Rail"), x.tonsPerTrain,x.tonsPerTruck]; },
         "Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), x.hourlyIdleCost]; },//Defaults tab
         "Environmental Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), 0]; },
@@ -1927,7 +1926,7 @@ TTI.Models.MultiModelBCA = function (spec) {
         "Tanker Barge Cost-Barge": function (r, j) { return [fn(r, "VHT-Barge"), x.tankerBargeCost, x.tankerPct]; },
         "Barge Tons-Barge": function (r, j) { return [fn(r, "Trips-Barge"), x.tonsPerBarge]; },
         "Trucks-Barge": function (r, j) { return [fn(r, "Barge Tons-Barge"), x.tonsPerTruck]; },
-        "Truck VHT-Barge": function (r, j) { return [fn(r, "Trucks-Barge"), x.waitReduction]; },
+        "Truck VHT-Barge": function (r, j) { return [fn(r, "Trucks-Barge"), x.waitTimeReduction.barge]; },
       };
       output.Headers = Object.keys(fnList);
 
@@ -2530,7 +2529,9 @@ self.setInputs = function(args)
     travelGrowthRate: a.travelGrowthRate,
     averageSpeedBase: a.averageSpeedBase,
     averageSpeedProj: a.averageSpeedProj,
-    scale: a.scale//percentAg
+    scale: a.scale,//percentAg
+    waitTimeReduction: a.waitTimeReduction,
+    annualTrips: a.annualTrips
   }, inputs.travelImpacts);
   //self.setTravelImpacts({averageSpeed:48.7,percentCongested:0.25746,truckPercent:0.089,projectLength:7.2305317,projectScenario:0.1,AADT:48959,rider:330921,riderReduction:0.75});
   self.setBenefits({ discountRate: a.discountRate, constantYear:a.constantYear}, inputs.benefits); //Check the constant year
