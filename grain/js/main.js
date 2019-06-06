@@ -342,7 +342,7 @@ campfire.subscribe("bind-events",function(){
       perishCost:TTI.perishCost,
       jitCost:TTI.jitCost,
       region:'Urban',
-      scale:{Truck: 1,Passenger:0},
+      scale:{Truck: 1,Passenger:0,Grains:0},
     };
     input.constructionCost = parseFloat($("#bca-inputs-constructionCost").val().replace(/\$/g,''))*1000000;
     input.constructionStartYear = parseInt($("#bca-inputs-constructionStartYear").val());
@@ -357,12 +357,12 @@ campfire.subscribe("bind-events",function(){
     input.city = ($("#bca-inputs-city").val());
     input.commodityMix = TTI.commodityMix["Truck"][input.city];
     input.commodityCost = TTI.commodityCost;
-    input.scale={Truck:1,Passenger:0};
+    input.scale={Truck:1,Passenger:0,Grains:0};
     var model= TTI.Models.BenefitCostAnalysis({input:input});
     var inputAg = input;
     inputAg.commodityMix = TTI.commodityMixAg["Truck"][input.city];
     inputAg.commodityCost = TTI.commodityCostAg;
-    inputAg.scale={Truck:input.commodityMix["Percent Grains"],Passenger:0};
+    inputAg.scale={Truck:input.commodityMix["Percent Grains"],Passenger:0,Grains:1};
     var modelAg = TTI.Models.BenefitCostAnalysis({input:inputAg});
     if (input.operationStartYear<input.constructionStartYear)
     {
@@ -418,12 +418,18 @@ campfire.subscribe("bind-events",function(){
     input.commodityCost = TTI.commodityCost;
     input.annualTrips = {truck:parseInt($("#multimodel-inputs-annualTripsTruck").val().replace(/,/g,'')),rail:parseInt($("#multimodel-inputs-annualTripsRail").val().replace(/,/g,'')),barge:parseInt($("#multimodel-inputs-annualTripsBarge").val().replace(/,/g,''))};
     input.waitTimeReduction = {truck:parseFloat($("#multimodel-inputs-waitTimeReductionTruck").val()),rail:parseFloat($("#multimodel-inputs-waitTimeReductionRail").val()),barge:parseFloat($("#multimodel-inputs-waitTimeReductionBarge").val())};
-    input.scale={Truck:1,Passenger:0};
+    input.scale={Truck:1,Passenger:0,Grains:0,truck:1,rail:1,barge:1};
     var model= TTI.Models.MultiModelBCA({input:input});
     var inputAg = input;
     inputAg.commodityMix = {truck:TTI.commodityMixAg["Truck"][input.city],rail:TTI.commodityMixAg["Rail"][input.city],barge:TTI.commodityMixAg["Barge"][input.city]};
+    inputAg.scale={Truck:1,Passenger:0,Grains:1,truck:0,rail:0,barge:0};
     inputAg.commodityCost = TTI.commodityCostAg;
-    inputAg.scale={Truck:input.commodityMix["Percent Grain"],Passenger:0};
+    ["truck","rail","barge"].forEach(function(e){
+      var loads = Object.keys(inputAg.commodityCost);
+      loads.forEach(function(ee){
+          inputAg.scale[e] = inputAg.scale[e] + inputAg.commodityMix[e][ee];
+      });
+    });
     var modelAg = TTI.Models.MultiModelBCA({input:inputAg});
     if (input.operationStartYear<input.constructionStartYear)
     {
@@ -1032,11 +1038,11 @@ TTI.Widgets.MultimodelBCAReports = function(spec){
     var d = dataArr[0];
     var elem = {};
     var headers = dataArr[0].Headers;
-    elem = dataArr[1].Rows[8];
+    elem = dataArr[1].Rows[6];
     elem[headers[0]] = "Total Agriculture Benefits","Present Value";
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
-    elem = dataArr[1].Rows[12];
+    elem = dataArr[1].Rows[10];
     elem[headers[0]] = "Project Prioritization Factor";
 
     d.Rows.push(elem);

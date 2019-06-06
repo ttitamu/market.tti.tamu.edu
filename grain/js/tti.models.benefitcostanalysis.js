@@ -335,7 +335,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
           Passenger: 1.6
         },
         "Freight_US_Tons_per_Vehicle": {
-          Truck: 24.05
+          Truck: 24.25
         },
         "Person_per_Vehicle_Business":{
           Passenger:1.2
@@ -999,14 +999,14 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
       category: 'Benefits',
       data: costs,
       items: ['Total Costs'],
-      factor: [econFactors[region].businessOutputMultiplier*args.scale.Passenger]
+      factor: [econFactors[region].businessOutputMultiplier*(1-args.scale.Grains)]
     },
     {
       name: 'Positive Economic Effect of Wage Income',
       category: 'Benefits',
       data: costs,
       items: ['Total Costs'],
-      factor:[econFactors[region].wageIncomeMultiplier*args.scale.Passenger]
+      factor:[econFactors[region].wageIncomeMultiplier*(1-args.scale.Grains)]
     }];
 
     var cItems=[{
@@ -1655,7 +1655,7 @@ TTI.Models.MultiModelBCA = function (spec) {
           Passenger: 1.6
         },
         "Freight_US_Tons_per_Vehicle": {
-          Truck: 24.05
+          Truck: 24.25
         },
         "Person_per_Vehicle_Business":{
           Passenger:1.2
@@ -1839,17 +1839,17 @@ TTI.Models.MultiModelBCA = function (spec) {
       //var count = 0;
       var fnList = {
         "Phase-in of Operations Impact by Year": function (args) {
-          return 1.0 * Math.pow(1 + args[0], args[1])*args[2];
+          return 1.0 * Math.pow(1 + args[0], args[1]) * args[2];
         },
 
         "Trips-Truck": function (args) {
-          return args[0] * args[1];
+          return args[0] * args[1] * args[2];
         },
         "Trips-Rail": function (args) {
-          return args[0] * args[1];
+          return args[0] * args[1] * args[2];
         },
         "Trips-Barge": function (args) {
-          return args[0] * args[1];
+          return args[0] * args[1] * args[2];
         },
         "VHT-Truck": function (args) {
           return args[0] * args[1];
@@ -1861,7 +1861,7 @@ TTI.Models.MultiModelBCA = function (spec) {
           return args[0] * args[1];
         },
         "Truck VHT-Rail":function (args) {
-          return args[0]*args[1]/args[2];
+          return args[0]*args[1]/args[2]*args[3];
         },
         "Operation Cost-Truck": function (args) {
           return args[0] * args[1]; //Fuel cost, gallons
@@ -1906,17 +1906,17 @@ TTI.Models.MultiModelBCA = function (spec) {
       x.tankerBargeCost = 36.24;
       x.tonsPerTrain = 12100;
       x.tonsPerBarge = 1500;
-      x.tonsPerTruck = 24.3;
+      x.tonsPerTruck = 24.25;
       ////////////////////////////////////////
       var argsList = {
         "Phase-in of Operations Impact by Year": function (r, j) { return [x.travelGrowthRate, j,x.scale.Truck]; },
-        "Trips-Truck": function (r, j) { return [x.annualTrips.truck,  fn(r, "Phase-in of Operations Impact by Year")]; },
-        "Trips-Rail": function (r, j) { return [x.annualTrips.rail,  fn(r, "Phase-in of Operations Impact by Year")]; },
-        "Trips-Barge": function (r, j) { return [x.annualTrips.barge,  fn(r, "Phase-in of Operations Impact by Year")]; },
+        "Trips-Truck": function (r, j) { return [x.annualTrips.truck,  fn(r, "Phase-in of Operations Impact by Year"),x.scale.truck]; },
+        "Trips-Rail": function (r, j) { return [x.annualTrips.rail,  fn(r, "Phase-in of Operations Impact by Year"),x.scale.rail]; },
+        "Trips-Barge": function (r, j) { return [x.annualTrips.barge,  fn(r, "Phase-in of Operations Impact by Year"),x.scale.barge]; },
         "VHT-Truck": function (r, j) { return [fn(r, "Trips-Truck"), x.waitTimeReduction.truck]; },//waitReduction:2
         "VHT-Rail": function (r, j) { return [fn(r, "Trips-Rail"), x.waitTimeReduction.rail]; },
         "VHT-Barge": function (r, j) { return [fn(r, "Trips-Barge"), x.waitTimeReduction.barge]; },
-        "Truck VHT-Rail":function (r, j) { return [fn(r, "Trips-Rail"), x.tonsPerTrain,x.tonsPerTruck]; },
+        "Truck VHT-Rail":function (r, j) { return [fn(r, "Trips-Rail"), x.tonsPerTrain,x.tonsPerTruck,x.waitTimeReduction.rail]; },
         "Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), x.hourlyIdleCost]; },//Defaults tab
         "Environmental Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), 0]; },
         "Operation Cost-Rail": function (r, j) { return [fn(r, "VHT-Rail"), 0]; },
@@ -2115,7 +2115,7 @@ TTI.Models.MultiModelBCA = function (spec) {
       const perishCost = o.input.perishCost;
       const jitCost = o.input.jitCost;
       const ctcFactor = 0.1/5400;//Commodity Time Cost Constant
-      const vhtFactor = 1.05; //VHT buffer time constant
+      const vhtFactor = 1; //VHT buffer time constant
       const perishCostFactor = 0.001; // perishability cost factor, unit: dollars per buffer hour
       const jitCostFactor = 0.002;// Just in time cost factor, unit: dollars per buffer hour
       //var count0=0;
@@ -2144,9 +2144,9 @@ TTI.Models.MultiModelBCA = function (spec) {
         }
       };
       var argsList = {
-        "VHT-Truck": function (r, j) { return [rows[j]["VHT-Truck"]*vhtFactor]; },
-        "Truck VHT-Rail": function(r, j){ return [rows[j]["Truck VHT-Rail"]];},
-        "Truck VHT-Barge": function(r, j){ return [rows[j]["Truck VHT-Barge"]];},
+        "VHT-Truck": function (r, j) { return [rows[j]["VHT-Truck"]*1]; },
+        "Truck VHT-Rail": function(r, j){ return [rows[j]["Truck VHT-Rail"]*vhtFactor];},
+        "Truck VHT-Barge": function(r, j){ return [rows[j]["Truck VHT-Barge"]*vhtFactor];},
         "Total-Truck": function (r, j) {
           var t = [];
           h1.forEach(function (k) {
@@ -2320,14 +2320,14 @@ TTI.Models.MultiModelBCA = function (spec) {
       category: 'Benefits',
       data: costs,
       items: ['Total Costs'],
-      factor: [econFactors[region].businessOutputMultiplier*args.scale.Passenger]
+      factor: [econFactors[region].businessOutputMultiplier*(1-args.scale.Grains)]
     },
     {
       name: 'Positive Economic Effect of Wage Income',
       category: 'Benefits',
       data: costs,
       items: ['Total Costs'],
-      factor:[econFactors[region].wageIncomeMultiplier*args.scale.Passenger]
+      factor:[econFactors[region].wageIncomeMultiplier*(1-args.scale.Grains)]
     }];
 
     var cItems=[{
