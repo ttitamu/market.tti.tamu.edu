@@ -927,30 +927,40 @@ TTI.createInputItemsTruck = function() {
       propertyName:"bca-inputs-"+k,
       label: k,
       control: "input",
-      value: TTI.commodityMix["Truck"]["Iowa"][k]
+      value: TTI.commodityMix["Truck"]["Iowa"][k],
+      format: function(x){
+        if (x.toString().includes("%")) {
+          return (parseFloat(x)).toFixed(2)+"%";
+        }
+        else {
+          return (parseFloat(x)*100).toFixed(2)+"%";
+        }
+      },
+      keyup: function(x){return x;}
     });
   });
-  return {
-    categories: [{
+  return [{
       propertyName: "card-input1",
-      label: "Project Parameters"
+      label: "Project Parameters",
+      inputs: inputItemsCost
     },
     {
       propertyName: "card-input2",
-      label: "Scenario-Baseline"
+      label: "Scenario-Baseline",
+      inputs: inputItemsBase
     },
     {
       propertyName: "card-input3",
-      label: "Scenario-Project"
+      label: "Scenario-Project",
+      inputs: inputItemsProj
     },
     {
       propertyName: "card-input4",
       label: "Commodity Mix",
-      control: "collapse"
+      control: "collapse",
+      inputs: inputItemsMix
     },
-  ],
-    inputs: [inputItemsCost,inputItemsBase,inputItemsProj,inputItemsMix]
-  }
+  ];
 };
 TTI.createInputItemsMultimodel = function(){
   const cityList = ["Iowa","Illinois","Indiana","Michigan","Minnesota","Missouri","North Dakota","Nebraska","Ohio","South Dakota","Wisconsin"];
@@ -1067,29 +1077,96 @@ TTI.createInputItemsMultimodel = function(){
     }
   ];
 
-
-
-  return {
-    categories:[
+  var inputItemsMixTruck =[];
+  var inputItemsMixRail =[];
+  var inputItemsMixBarge =[];
+  Object.keys(TTI.commodityCostByHrs).forEach(function(k){
+    inputItemsMixTruck.push({
+      propertyName:"multimodel-inputs-"+k,
+      label: k,
+      control: "input",
+      value: TTI.commodityMix["Truck"]["Iowa"][k],
+      format: function(x){
+        if (x.toString().includes("%")) {
+          return (parseFloat(x)).toFixed(2)+"%";
+        }
+        else {
+          return (parseFloat(x)*100).toFixed(2)+"%";
+        }
+      },
+      keyup: function(x){return x;}
+    });
+    inputItemsMixRail.push({
+      propertyName:"multimodel-inputs-"+k,
+      label: k,
+      control: "input",
+      value: TTI.commodityMix["Rail"]["Iowa"][k],
+      format: function(x){
+        if (x.toString().includes("%")) {
+          return (parseFloat(x)).toFixed(2)+"%";
+        }
+        else {
+          return (parseFloat(x)*100).toFixed(2)+"%";
+        }
+      },
+      keyup: function(x){return x;}
+    });
+    inputItemsMixBarge.push({
+      propertyName:"multimodel-inputs-"+k,
+      label: k,
+      control: "input",
+      value: TTI.commodityMix["Barge"]["Iowa"][k],
+      format: function(x){
+        if (x.toString().includes("%")) {
+          return (parseFloat(x)).toFixed(2)+"%";
+        }
+        else {
+          return (parseFloat(x)*100).toFixed(2)+"%";
+        }
+      },
+      keyup: function(x){return x;}
+    });
+  });
+  return [
       {
           propertyName:"card-input-multimodel-1",
-          label:"Project Parameters"
+          label:"Project Parameters",
+          inputs: inputItemsCost
       },
       {
         propertyName:"card-input-multimodel-2",
-        label:"Truck"
+        label:"Truck",
+        inputs: inputItemsTruck
       },
       {
         propertyName:"card-input-multimodel-3",
-        label:"Rail"
+        label:"Rail",
+        inputs: inputItemsRail
       },
       {
         propertyName:"card-input-multimodel-4",
-        label:"Barge"
+        label:"Barge",
+        inputs: inputItemsBarge
+      },
+      {
+        propertyName:"card-input-multimodel-5",
+        label:"Commodity Mix-Truck",
+        control:"collapse",
+        inputs: inputItemsMixTruck
+      },
+      {
+        propertyName:"card-input-multimodel-6",
+        label:"Commodity Mix-Barge",
+        control:"collapse",
+        inputs: inputItemsMixBarge
+      },
+      {
+        propertyName:"card-input-multimodel-7",
+        label:"Commodity Mix-Rail",
+        control:"collapse",
+        inputs: inputItemsMixRail
       }
-    ],
-    inputs:[inputItemsCost,inputItemsTruck,inputItemsRail,inputItemsBarge]
-  };
+    ];
 }
 TTI.Widgets.Inputs = function(spec) {
   var self = TTI.PubSub({});
@@ -1138,7 +1215,7 @@ TTI.Widgets.Inputs = function(spec) {
 
   self.renderOn = function(wrap) {
     var box = DOM.ul().addClass("list-group");
-    spec.categories.forEach(function(e,i){
+    spec.forEach(function(e,i){
       var className = "list-group-item";
 
       if (e.class != null) className = e.class;
@@ -1148,15 +1225,14 @@ TTI.Widgets.Inputs = function(spec) {
         var content = DOM.div().addClass("card collapse").attr("id",e.propertyName);
         var link = DOM.a().attr("href","#");
         item.attr("data-toggle","collapse").attr("data-target","#"+e.propertyName).html(e.label);
-        drawOn(spec.inputs[i],content);
-        //item.append(link);
+        drawOn(e.inputs,content);
         box.append(item);
         box.append(content);
       }
       else{
         item.html(e.label).addClass(className);
         box.append(item);
-        drawOn(spec.inputs[i],box);
+        drawOn(e.inputs,box);
       }
 
 
