@@ -528,38 +528,38 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
         },
         "Congested Operation Cost-Truck": function (args) {
 
-          return scale.Truck*args[0] * args[1] * args[2]; //Fuel cost, gallons
+          return args[0] * args[1] * args[2]; //Fuel cost, gallons
         },
         "Congested Operation Cost-Passenger": function (args) {
-          return scale.Passenger*args[0] * args[1] * args[2];
+          return args[0] * args[1] * args[2];
         },
         "Free Flow Operation Cost-Truck": function (args) {
-          return scale.Truck*args[0] * (1 - args[1]) * args[2];//Labor cost
+          return args[0] * (1 - args[1]) * args[2];//Labor cost
         },
         "Free Flow Operation Cost-Passenger": function (args) {
-          return scale.Passenger*args[0] * (1 - args[1]) * args[2];
+          return args[0] * (1 - args[1]) * args[2];
         },
         "Value of Time-Business Truck": function (args) {
-          return scale.Truck*args[0] * args[1] * args[2];
+          return args[0] * args[1] * args[2];
         },
         "Value of Time-Business Passenger": function (args) {
-          return scale.Passenger*args[0] * args[1] * args[2] * args[3];
+          return args[0] * args[1] * args[2] * args[3];
         },
         "Value of Time-Personal": function (args) {
-          return scale.Passenger*args[0] * args[1] * args[2] * args[3];
+          return args[0] * args[1] * args[2] * args[3];
         },
         "Environmental Cost-Truck": function (args) {
-          return scale.Truck*args[0] * args[1];
+          return args[0] * args[1];
         },
         "Environmental Cost-Passenger": function (args) {
-          return scale.Passenger*args[0] * args[1];
+          return args[0] * args[1];
         },
         "Safety Cost-Truck": function (args) {
           //if(count++<1) console.log(scale.Truck*args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]));
-          return scale.Truck*args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]);
+          return args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]);
         },
         "Safety Cost-Passenger": function (args) {
-          return scale.Passenger*args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]);
+          return args[0] / 100000000 * (args[1] * args[2] + args[3] * args[4] + args[5] * args[6]);
         },
       };
       var fn = function (r, k) { return r[k]; };
@@ -576,8 +576,8 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
 
       var argsList = {
         "Phase-in of Operations Impact by Year": function (r, j) { return [x.travelGrowthRate, j]; },
-        "Trips-Truck": function (r, j) { return [x.annualTrips, x.truckPercent, fn(r, "Phase-in of Operations Impact by Year")]; },
-        "Trips-Passenger": function (r, j) { return [x.annualTrips, x.truckPercent, fn(r, "Phase-in of Operations Impact by Year")]; },
+        "Trips-Truck": function (r, j) { return [x.annualTrips*x.scale.Truck, x.truckPercent, fn(r, "Phase-in of Operations Impact by Year")]; },
+        "Trips-Passenger": function (r, j) { return [x.annualTrips*x.scale.Passenger, x.truckPercent, fn(r, "Phase-in of Operations Impact by Year")]; },
         "VMT-Truck": function (r, j) { return [x.projectLength, fn(r, "Trips-Truck")]; },
         "VMT-Passenger": function (r, j) { return [x.projectLength, fn(r, "Trips-Passenger")]; },
         "VHT-Truck": function (r, j) { return [fn(r, "VMT-Truck"), x.averageSpeed]; },

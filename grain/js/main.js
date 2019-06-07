@@ -17,8 +17,9 @@ function init() {
 
   };
   TTI.report = DOM.div().addClass('outputs');
-  TTI.cssLocation = ["print.css"];
+  TTI.cssLocation = ["/print.css"];
   TTI.reportName = "M.A.R.K.E.T. Model Report";
+
 
 }
 
@@ -304,11 +305,12 @@ campfire.subscribe('boot-ui', function() {
     TTI.clearLocalStorage();
   });
   campfire.publish("import-json");
-  campfire.publish("render-inputs");
-  campfire.publish("bind-events");
+
 
   setTimeout(function(){
-    $("#btn-calculate").click();
+    campfire.publish("render-inputs");
+    campfire.publish("bind-events");
+    $("#btn-calculate-truck").click();
     TTI.createTooltips();
     TTI.createGlossaryTxt();
   },500);
@@ -316,7 +318,7 @@ campfire.subscribe('boot-ui', function() {
 });
 
 campfire.subscribe("bind-events",function(){
-  $("#btn-calculate").on("click",function(){
+  $("#btn-calculate-truck").on("click",function(){
     var input = {
       serviceType:'Rail',
       closestStation:'Lawnview',
@@ -362,10 +364,10 @@ campfire.subscribe("bind-events",function(){
     var inputAg = input;
     inputAg.commodityMix = TTI.commodityMixAg["Truck"][input.city];
     inputAg.commodityCost = TTI.commodityCostAg;
-    inputAg.scale={Truck:input.commodityMix["Percent Grains"],Passenger:0,Grains:1};
+    inputAg.scale={Truck:0,Passenger:0,Grains:1};
     var loads = Object.keys(inputAg.commodityCost);
     loads.forEach(function(ee){
-        inputAg.scale.Truck = inputAg.scale.Truck + inputAg.commodityMix[ee];
+      inputAg.scale.Truck = inputAg.scale.Truck + inputAg.commodityMix[ee];
     });
 
     var modelAg = TTI.Models.BenefitCostAnalysis({input:inputAg});
@@ -432,7 +434,7 @@ campfire.subscribe("bind-events",function(){
     ["truck","rail","barge"].forEach(function(e){
       var loads = Object.keys(inputAg.commodityCost);
       loads.forEach(function(ee){
-          inputAg.scale[e] = inputAg.scale[e] + inputAg.commodityMix[e][ee];
+        inputAg.scale[e] = inputAg.scale[e] + inputAg.commodityMix[e][ee];
       });
     });
     var modelAg = TTI.Models.MultiModelBCA({input:inputAg});
@@ -449,7 +451,7 @@ campfire.subscribe("bind-events",function(){
   });
   $("#nav-tab-inputs-truck").on("click",function(){
     setTimeout(function(){
-      $("#btn-calculate").click();
+      $("#btn-calculate-truck").click();
     },500);
   });
   $("#nav-tab-inputs-multimodel").on("click",function(){
@@ -669,6 +671,20 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
   const constYearList = Array.from({length:5}, function(v, k){return k+2014;});
   var inputItemsCost = [
     {
+      propertyName: "city",
+      label: "State",
+      control:"dropdown list",
+      value: "Pharr",
+      options: cityList
+    },
+    {
+      propertyName: "region",
+      label: "Area Type",
+      control:"dropdown list",
+      value: "Rural",
+      options: ["Urban","Suburban","Rural"]
+    },
+    {
       propertyName: "constructionCost",
       label: "Construction Cost (M$)",
       control:"input",
@@ -740,20 +756,6 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
       value: 10,
       format:function(x){return x;},
 
-    },
-    {
-      propertyName: "region",
-      label: "Area Type",
-      control:"dropdown list",
-      value: "Rural",
-      options: ["Urban","Suburban","Rural"]
-    },
-    {
-      propertyName: "city",
-      label: "State",
-      control:"dropdown list",
-      value: "Pharr",
-      options: cityList
     }
   ];
 
@@ -819,14 +821,34 @@ TTI.Widgets.BenefitCostInputs = function(spec) {
   };
   return self;
 };
-TTI.Widgets.MultiModelBCAInputs = function(spec) {
-  var self = TTI.PubSub({});
+
+///spec = {
+//  categories:[cat1,cat2,cat3,cat4],
+//  inputs: [[input1,input2,input3],[input4,input5],[input6],[input7]] or inputs()
+//  }
+////
+
+TTI.createInputItemsTruck = function() {
   const cityList = ["Iowa","Illinois","Indiana","Michigan","Minnesota","Missouri","North Dakota","Nebraska","Ohio","South Dakota","Wisconsin"];
   const yearList = Array.from({length:25}, function(v, k){return k+2018;} );
   const constYearList = Array.from({length:6}, function(v, k){return k+2014;});
   var inputItemsCost = [
     {
-      propertyName: "constructionCost",
+      propertyName: "bca-inputs-city",
+      label: "State",
+      control:"dropdown list",
+      value: "Iowa",
+      options: cityList
+    },
+    {
+      propertyName: "bca-inputs-region",
+      label: "Area Type",
+      control:"dropdown list",
+      value: "Rural",
+      options: ["Urban","Suburban","Rural"]
+    },
+    {
+      propertyName: "bca-inputs-constructionCost",
       label: "Construction Cost (M$)",
       control:"input",
       value: 77.59,
@@ -834,21 +856,146 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
 
     },
     {
-      propertyName: "constructionStartYear",
+      propertyName: "bca-inputs-constructionStartYear",
       label: "Construction Start Year",
       control:"dropdown list",
       value: "2022",
       options: yearList
     },
     {
-      propertyName: "operationStartYear",
+      propertyName: "bca-inputs-operationStartYear",
       label: "Operation Start Year",
       control:"dropdown list",
       value: "2027",
       options: yearList
     },
     {
-      propertyName: "constantYear",
+      propertyName: "bca-inputs-constantYear",
+      label: "Constant Dollar Year",
+      control:"dropdown list",
+      value: "2018",
+      options: constYearList
+    }
+  ];
+
+  var inputItemsBase = [
+    {
+      propertyName: "bca-inputs-truckPercent",
+      label: "Truck Percent",
+      control:"input",
+      value: 28.6,
+
+    },
+    {
+      propertyName: "bca-inputs-AADT",
+      label: "AADT",
+      control:"input",
+      value: 15397,
+      format: function(x){
+        return x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+      }
+    },
+    {
+      propertyName: "bca-inputs-averageSpeedBase",
+      label: "Average Speed (Base)",
+      control:"input",
+      value: 64.8,
+
+    }
+  ];
+
+  var inputItemsProj = [
+    {
+      propertyName: "bca-inputs-averageSpeedProj",
+      label: "Average Speed (Project)",
+      control:"input",
+      value: 65.8,
+
+    },
+    {
+      propertyName: "bca-inputs-projectLength",
+      label: "Project Length (Miles)",
+      control:"input",
+      value: 10,
+      format:function(x){return x;},
+
+    }
+  ];
+  var inputItemsMix = [];
+  Object.keys(TTI.commodityCostByHrs).forEach(function(k){
+    inputItemsMix.push({
+      propertyName:"bca-inputs-"+k,
+      label: k,
+      control: "input",
+      value: TTI.commodityMix["Truck"]["Iowa"][k]
+    });
+  });
+  return {
+    categories: [{
+      propertyName: "card-input1",
+      label: "Project Parameters"
+    },
+    {
+      propertyName: "card-input2",
+      label: "Scenario-Baseline"
+    },
+    {
+      propertyName: "card-input3",
+      label: "Scenario-Project"
+    },
+    {
+      propertyName: "card-input4",
+      label: "Commodity Mix",
+      control: "collapse"
+    },
+  ],
+    inputs: [inputItemsCost,inputItemsBase,inputItemsProj,inputItemsMix]
+  }
+};
+TTI.createInputItemsMultimodel = function(){
+  const cityList = ["Iowa","Illinois","Indiana","Michigan","Minnesota","Missouri","North Dakota","Nebraska","Ohio","South Dakota","Wisconsin"];
+  const yearList = Array.from({length:25}, function(v, k){return k+2018;} );
+  const constYearList = Array.from({length:6}, function(v, k){return k+2014;});
+  var inputItemsCost = [
+    {
+      propertyName: "multimodel-inputs-city",
+      label: "State",
+      control:"dropdown list",
+      value: "Iowa",
+      options: cityList
+    },
+    {
+      propertyName: "multimodel-inputs-region",
+      label: "Area Type",
+      control:"dropdown list",
+      value: "Rural",
+      options: ["Urban","Suburban","Rural"]
+    },
+
+    {
+      propertyName: "multimodel-inputs-constructionCost",
+      label: "Construction Cost (M$)",
+      control:"input",
+      value: 77.59,
+      format:function(x){return x.toString().replace(/^(\d|-)?(\d|,)*\.?\d*$/g,"$$$&");},
+
+    },
+    {
+      propertyName: "multimodel-inputs-constructionStartYear",
+      label: "Construction Start Year",
+      control:"dropdown list",
+      value: "2022",
+      options: yearList
+    },
+    {
+      propertyName: "multimodel-inputs-operationStartYear",
+      label: "Operation Start Year",
+      control:"dropdown list",
+      value: "2027",
+      options: yearList
+    },
+    {
+      propertyName: "multimodel-inputs-constantYear",
       label: "Constant Dollar Year",
       control:"dropdown list",
       value: "2018",
@@ -858,7 +1005,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
 
   var inputItemsBarge = [
     {
-      propertyName: "annualTripsBarge",
+      propertyName: "multimodel-inputs-annualTripsBarge",
       label: "Annual Barge Traffic",
       control:"input",
       value: 750,
@@ -867,7 +1014,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
       }
     },
     {
-      propertyName: "waitTimeReductionBarge",
+      propertyName: "multimodel-inputs-waitTimeReductionBarge",
       label: "Wait Time Reduction (Hours)",
       control:"input",
       value: 2,
@@ -879,7 +1026,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
 
   var inputItemsTruck = [
     {
-      propertyName: "annualTripsTruck",
+      propertyName: "multimodel-inputs-annualTripsTruck",
       label: "Annual Truck Traffic",
       control:"input",
       value: 60000,
@@ -888,7 +1035,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
       }
     },
     {
-      propertyName: "waitTimeReductionTruck",
+      propertyName: "multimodel-inputs-waitTimeReductionTruck",
       label: "Wait Time Reduction (Hours)",
       control:"input",
       value: 2,
@@ -901,7 +1048,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
 
   var inputItemsRail = [
     {
-      propertyName: "annualTripsRail",
+      propertyName: "multimodel-inputs-annualTripsRail",
       label: "Annual Rail Traffic",
       control:"input",
       value: 50,
@@ -910,7 +1057,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
       }
     },
     {
-      propertyName: "waitTimeReductionRail",
+      propertyName: "multimodel-inputs-waitTimeReductionRail",
       label: "Wait Time Reduction (Hours)",
       control:"input",
       value: 2,
@@ -920,31 +1067,42 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
     }
   ];
 
-  var inputItemsOther = [
-    {
-      propertyName: "region",
-      label: "Area Type",
-      control:"dropdown list",
-      value: "Rural",
-      options: ["Urban","Suburban","Rural"]
-    },
-    {
-      propertyName: "city",
-      label: "State",
-      control:"dropdown list",
-      value: "Iowa",
-      options: cityList
-    }
-  ];
 
+
+  return {
+    categories:[
+      {
+          propertyName:"card-input-multimodel-1",
+          label:"Project Parameters"
+      },
+      {
+        propertyName:"card-input-multimodel-2",
+        label:"Truck"
+      },
+      {
+        propertyName:"card-input-multimodel-3",
+        label:"Rail"
+      },
+      {
+        propertyName:"card-input-multimodel-4",
+        label:"Barge"
+      }
+    ],
+    inputs:[inputItemsCost,inputItemsTruck,inputItemsRail,inputItemsBarge]
+  };
+}
+TTI.Widgets.Inputs = function(spec) {
+  var self = TTI.PubSub({});
   function getInputDOM(item){
     var inputGroup = DOM.div().addClass("input-group input-group-md");
     inputGroup.append(DOM.div().addClass("input-group-addon").html(item.label));
     var input;
+    var v;
+    //if (isFunction(input.value)) v= input.value();
     if (item.control==="input")
     {
       input=DOM.input();
-      var v = item.value;
+      v = item.value;
       if (item.format) {
         v = item.format(item.value);
         input.on('keyup',function(){
@@ -966,7 +1124,7 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
         input.append(opt);
       });
     }
-    input.addClass('form-control').attr('id',"multimodel-inputs-"+item.propertyName);
+    input.addClass('form-control').attr('id',item.propertyName);
     inputGroup.append(input);
     inputGroup.append(DOM.span().addClass("form-control-feedback pull-right").html(item.unit?item.unit:""));
     return inputGroup;
@@ -977,35 +1135,36 @@ TTI.Widgets.MultiModelBCAInputs = function(spec) {
       wrap.append(getInputDOM(o));
     });
   }
-  self.setInputList = function(spec){
-    ///To be fixed! Change the input to array instead of object so it is more generalized.
-    if(spec.itemsCost)    var inputItemsCost = spec.itemsCost;
-    if(spec.itemsTruck)    var inputItemsTruck = spec.itemsTruck;
-    if(spec.itemsRail)    var inputItemsRail = spec.itemsRail;
-    if(spec.itemsBarge)    var inputItemsBarge = spec.itemsBarge;
-    if(spec.itemsOther)    var inputItemsOther = spec.itemsOther;
 
-  }
   self.renderOn = function(wrap) {
-    var box = DOM.ul().addClass('list-group');
-    var headerCost = DOM.li('Project Parameters').addClass('list-group-item');
-    var headerBarge = DOM.li('Barge').addClass('list-group-item');
-    var headerTruck = DOM.li('Truck').addClass('list-group-item');
-    var headerRail = DOM.li('Rail').addClass('list-group-item');
-    var headerOther = DOM.li('Other').addClass('list-group-item');
+    var box = DOM.ul().addClass("list-group");
+    spec.categories.forEach(function(e,i){
+      var className = "list-group-item";
 
-    box.append(headerCost);
-    drawOn(inputItemsCost,box);
-    box.append(headerTruck);
-    drawOn(inputItemsTruck,box);
-    box.append(headerBarge);
-    drawOn(inputItemsBarge,box);
-    box.append(headerRail);
-    drawOn(inputItemsRail,box);
-    box.append(headerOther);
-    drawOn(inputItemsOther,box);
+      if (e.class != null) className = e.class;
+      var item = DOM.li().addClass(className);
+      if (e.control== "collapse"){
+                //var header = DOM.h5().addClass("mb-0");
+        var content = DOM.div().addClass("card collapse").attr("id",e.propertyName);
+        var link = DOM.a().attr("href","#");
+        item.attr("data-toggle","collapse").attr("data-target","#"+e.propertyName).html(e.label);
+        drawOn(spec.inputs[i],content);
+        //item.append(link);
+        box.append(item);
+        box.append(content);
+      }
+      else{
+        item.html(e.label).addClass(className);
+        box.append(item);
+        drawOn(spec.inputs[i],box);
+      }
+
+
+
+
+    });
     wrap.append(box);
-    wrap.append(DOM.button().addClass('btn btn-primary btn-block').attr('id','btn-calculate-multimodel').html('Calculate Results'));
+    self.publish("append",wrap);
   };
   return self;
 };
@@ -1035,7 +1194,6 @@ TTI.Widgets.BenefitCostReports = function(spec){
   }
   return self;
 }
-
 TTI.Widgets.MultimodelBCAReports = function(spec){
   var self = TTI.PubSub({});
   var converter = TTI.Widgets.ConvertToTbl({});
@@ -1069,8 +1227,12 @@ campfire.subscribe('render-inputs',function(){
 });
 campfire.subscribe('render-inputs-truck',function(){
   $("#tab-inputs-truck").empty();
-  TTI.Widgets.BenefitCostInputs({}).renderOn($('#tab-inputs-truck'));
-  $("#constantYear").parent().css("display","none");
+  var createInputs = TTI.Widgets.Inputs(TTI.createInputItemsTruck());
+  createInputs.subscribe("append",function(obj){
+    obj.append(DOM.button().addClass('btn btn-primary btn-block').attr('id','btn-calculate-truck').html('Calculate Results'));
+  });
+  createInputs.renderOn($('#tab-inputs-truck'));
+//  $("#bca-inputs-constantYear").parent().css("display","none");
 });
 campfire.subscribe('render-outputs-truck',function(){
   $('#panel-outputs').empty();
@@ -1079,8 +1241,12 @@ campfire.subscribe('render-outputs-truck',function(){
 
 campfire.subscribe('render-inputs-multimodel',function(){
   $("#tab-inputs-multimodel").empty();
-  TTI.Widgets.MultiModelBCAInputs({}).renderOn($('#tab-inputs-multimodel'));
-  $("#constantYear").parent().css("display","none");
+  var createInputs = TTI.Widgets.Inputs(TTI.createInputItemsMultimodel());
+  createInputs.subscribe("append",function(obj){
+    obj.append(DOM.button().addClass('btn btn-primary btn-block').attr('id','btn-calculate-multimodel').html('Calculate Results'));
+  });
+  createInputs.renderOn($('#tab-inputs-multimodel'));
+//  $("#multimodel-inputs-constantYear").parent().css("display","none");
 });
 campfire.subscribe('render-outputs-multimodel',function(){
   $('#panel-outputs').empty();
@@ -1092,20 +1258,20 @@ campfire.subscribe('generate-report', function() {
   TTI.report.append(DOM.h2("Inputs Summary"));
   var table = DOM.table().addClass("input-summary");
   table.append(DOM.tr().append(DOM.th("Project Parameters").attr("colspan",2)).addClass("header-row"));
-  table.append(DOM.tr().append(DOM.td("Construction Cost(M$)").append(DOM.td($("#constructionCost").val()))));
-  table.append(DOM.tr().append(DOM.td("Construction Start Year").append(DOM.td($("#constructionStartYear").val()))));
-  table.append(DOM.tr().append(DOM.td("Operation Start Year").append(DOM.td($("#operationStartYear").val()))));
+  table.append(DOM.tr().append(DOM.td("Construction Cost(M$)").append(DOM.td($("#bca-inputs-constructionCost").val()))));
+  table.append(DOM.tr().append(DOM.td("Construction Start Year").append(DOM.td($("#bca-inputs-constructionStartYear").val()))));
+  table.append(DOM.tr().append(DOM.td("Operation Start Year").append(DOM.td($("#bca-inputs-operationStartYear").val()))));
   //table.append(DOM.tr().append(DOM.td("Constant Dollar Year").append(DOM.td($("#constantYear").val()))));
   table.append(DOM.tr().append(DOM.th("Senario-Baseline").attr("colspan",2)).addClass("header-row"));
-  table.append(DOM.tr().append(DOM.td("Truck Percent").append(DOM.td($("#truckPercent").val()))));
-  table.append(DOM.tr().append(DOM.td("AADT").append(DOM.td($("#AADT").val()))));
-  table.append(DOM.tr().append(DOM.td("Average Speed (Base)").append(DOM.td($("#averageSpeedBase").val()))));
+  table.append(DOM.tr().append(DOM.td("Truck Percent").append(DOM.td($("#bca-inputs-truckPercent").val()))));
+  table.append(DOM.tr().append(DOM.td("AADT").append(DOM.td($("#bca-inputs-AADT").val()))));
+  table.append(DOM.tr().append(DOM.td("Average Speed (Base)").append(DOM.td($("#bca-inputs-averageSpeedBase").val()))));
 
   table.append(DOM.tr().append(DOM.th("Scenario-Project").attr("colspan",2)).addClass("header-row"));
-  table.append(DOM.tr().append(DOM.td("Average Speed (Project)").append(DOM.td($("#averageSpeedProj").val()))));
-  table.append(DOM.tr().append(DOM.td("Project Length (Miles)").append(DOM.td($("#projectLength").val()))));
-  table.append(DOM.tr().append(DOM.td("Type (Urban, Suburban, Rural)").append(DOM.td($("#region").val()))));
-  table.append(DOM.tr().append(DOM.td("State").append(DOM.td($("#city").val()))));
+  table.append(DOM.tr().append(DOM.td("Average Speed (Project)").append(DOM.td($("#bca-inputs-averageSpeedProj").val()))));
+  table.append(DOM.tr().append(DOM.td("Project Length (Miles)").append(DOM.td($("#bca-inputs-projectLength").val()))));
+  table.append(DOM.tr().append(DOM.td("Type (Urban, Suburban, Rural)").append(DOM.td($("#bca-inputs-region").val()))));
+  table.append(DOM.tr().append(DOM.td("State").append(DOM.td($("#bca-inputs-city").val()))));
   TTI.report.append(table);
   //TTI.report.append($($("#panel-inputs").html()));
   TTI.report.append(DOM.div('&nbsp;').addClass('page')); //page break line
