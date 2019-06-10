@@ -309,6 +309,23 @@ campfire.subscribe('boot-ui', function() {
 
   setTimeout(function(){
     campfire.publish("render-inputs");
+    $(document).ready(function () {
+     $('.collapse')
+         .on('shown.bs.collapse', function() {
+             $(this)
+                 .prev()
+                 .find(".glyphicon-plus")
+                 .removeClass("glyphicon-plus")
+                 .addClass("glyphicon-minus");
+             })
+         .on('hidden.bs.collapse', function() {
+             $(this)
+                 .prev()
+                 .find(".glyphicon-minus")
+                 .removeClass("glyphicon-minus")
+                 .addClass("glyphicon-plus");
+             });
+         });
     campfire.publish("bind-events");
     $("#btn-calculate-truck").click();
     TTI.createTooltips();
@@ -1223,9 +1240,14 @@ TTI.Widgets.Inputs = function(spec) {
       if (e.control== "collapse"){
                 //var header = DOM.h5().addClass("mb-0");
         var content = DOM.div().addClass("card collapse").attr("id",e.propertyName);
-        var link = DOM.a().attr("href","#");
-        item.attr("data-toggle","collapse").attr("data-target","#"+e.propertyName).html(e.label);
+        //var link = DOM.a().attr("data-toggle","collapse").attr("data-target","#"+e.propertyName);
+        var icon = DOM.span().addClass("pull-right glyphicon glyphicon-plus");
+        item.attr("data-toggle","collapse").attr("data-target","#"+e.propertyName);
+        item.html(e.label);
+        item.append(icon);
+        //link.append(item);
         drawOn(e.inputs,content);
+        //box.append(link);
         box.append(item);
         box.append(content);
       }
