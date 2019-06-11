@@ -576,21 +576,22 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
 
       var argsList = {
         "Phase-in of Operations Impact by Year": function (r, j) { return [x.travelGrowthRate, j]; },
-        "Trips-Truck": function (r, j) { return [x.annualTrips*x.scale.Truck, x.truckPercent, fn(r, "Phase-in of Operations Impact by Year")]; },
+        "Trips-Truck": function (r, j) { return [x.annualTrips, x.truckPercent, fn(r, "Phase-in of Operations Impact by Year")]; },
         "Trips-Passenger": function (r, j) { return [x.annualTrips*x.scale.Passenger, x.truckPercent, fn(r, "Phase-in of Operations Impact by Year")]; },
         "VMT-Truck": function (r, j) { return [x.projectLength, fn(r, "Trips-Truck")]; },
         "VMT-Passenger": function (r, j) { return [x.projectLength, fn(r, "Trips-Passenger")]; },
         "VHT-Truck": function (r, j) { return [fn(r, "VMT-Truck"), x.averageSpeed]; },
         "VHT-Passenger": function (r, j) { return [fn(r, "VMT-Passenger"), x.averageSpeed]; },
-        "Congested Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), 9.84,2.5]; },
-        "Congested Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), 1.86, 2.2]; },
-        "Free Flow Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), x.percentCongested, 37.89]; },
+        "VHT-Passenger": function (r, j) { return [fn(r, "VMT-Passenger"), x.averageSpeed]; },
+        "Congested Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck")*x.scale.Truck, 9.84,2.484]; },
+        "Congested Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), 1.86, 2.185]; },
+        "Free Flow Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck")*x.scale.Truck, x.percentCongested, 37.89]; },
         "Free Flow Operation Cost-Passenger": function (r, j) { return [fn(r, "VHT-Passenger"), x.percentCongested, 5.03]; },
-        "Value of Time-Business Truck": function (r, j) { return [personPerVehicle.Truck, personalCost.Truck, fn(r, "VHT-Truck")] },
+        "Value of Time-Business Truck": function (r, j) { return [personPerVehicle.Truck, personalCost.Truck, fn(r, "VHT-Truck")*x.scale.Truck] },
         "Value of Time-Business Passenger": function (r, j) { return [personPerVehicleB.Passenger, businessCost.Passenger, fn(r, "VHT-Passenger"), x.Passenger_Business_Time] },//Fix the hard coded number
         "Value of Time-Personal": function (r, j) { return [personPerVehicle.Passenger, personalCost.Passenger, fn(r, "VHT-Passenger"), x.Passenger_Personal_Time] },
         "Environmental Cost-Truck": function (r, j) {
-          return [fn(r, "VHT-Truck"), environmentalCost.Truck];
+          return [fn(r, "VHT-Truck")*x.scale.Truck, environmentalCost.Truck];
 
         },
 
@@ -599,7 +600,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
 
         },
         "Safety Cost-Truck": function (r,j) {
-          return [fn(r, "VMT-Truck"), accidentRate.Fatality_Accident.Truck, costFactors.Fatalities_Accident, accidentRate.Personal_Injury_Accident.Truck, costFactors.Personal_Injury_Accident, accidentRate.Property_Damage_Accident.Truck, costFactors.Propery_Damage_Accident];
+          return [fn(r, "VMT-Truck")*x.scale.Truck, accidentRate.Fatality_Accident.Truck, costFactors.Fatalities_Accident, accidentRate.Personal_Injury_Accident.Truck, costFactors.Personal_Injury_Accident, accidentRate.Property_Damage_Accident.Truck, costFactors.Propery_Damage_Accident];
 
 
         },
@@ -1902,7 +1903,7 @@ TTI.Models.MultiModelBCA = function (spec) {
       x.towboatOtherCost = 228.63;
       x.bargesPerTow = 15;
       x.dryBargeCost = 6.55;
-      x.tankerPct = 0.009;
+      x.tankerPct = 0.009 * (1-x.scale.Grains);
       x.tankerBargeCost = 36.24;
       x.tonsPerTrain = 12100;
       x.tonsPerBarge = 1500;
@@ -1910,20 +1911,20 @@ TTI.Models.MultiModelBCA = function (spec) {
       ////////////////////////////////////////
       var argsList = {
         "Phase-in of Operations Impact by Year": function (r, j) { return [x.travelGrowthRate, j,x.scale.Truck]; },
-        "Trips-Truck": function (r, j) { return [x.annualTrips.truck,  fn(r, "Phase-in of Operations Impact by Year"),x.scale.truck]; },
-        "Trips-Rail": function (r, j) { return [x.annualTrips.rail,  fn(r, "Phase-in of Operations Impact by Year"),x.scale.rail]; },
-        "Trips-Barge": function (r, j) { return [x.annualTrips.barge,  fn(r, "Phase-in of Operations Impact by Year"),x.scale.barge]; },
+        "Trips-Truck": function (r, j) { return [x.annualTrips.truck,  fn(r, "Phase-in of Operations Impact by Year"),1]; },
+        "Trips-Rail": function (r, j) { return [x.annualTrips.rail,  fn(r, "Phase-in of Operations Impact by Year"),1]; },
+        "Trips-Barge": function (r, j) { return [x.annualTrips.barge,  fn(r, "Phase-in of Operations Impact by Year"),1]; },
         "VHT-Truck": function (r, j) { return [fn(r, "Trips-Truck"), x.waitTimeReduction.truck]; },//waitReduction:2
         "VHT-Rail": function (r, j) { return [fn(r, "Trips-Rail"), x.waitTimeReduction.rail]; },
         "VHT-Barge": function (r, j) { return [fn(r, "Trips-Barge"), x.waitTimeReduction.barge]; },
         "Truck VHT-Rail":function (r, j) { return [fn(r, "Trips-Rail"), x.tonsPerTrain,x.tonsPerTruck,x.waitTimeReduction.rail]; },
-        "Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), x.hourlyIdleCost]; },//Defaults tab
-        "Environmental Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck"), 0]; },
-        "Operation Cost-Rail": function (r, j) { return [fn(r, "VHT-Rail"), 0]; },
-        "Environmental Cost-Rail": function (r, j) { return [fn(r, "VHT-Rail"), 0]; },
-        "Towboat Cost-Barge": function (r, j) { return [fn(r, "VHT-Barge"), x.towboatOtherCost,x.bargesPerTow]; },//Defaults tab
-        "Dry Barge Cost-Barge": function (r, j) { return [fn(r, "VHT-Barge"), x.dryBargeCost, x.tankerPct]; },
-        "Tanker Barge Cost-Barge": function (r, j) { return [fn(r, "VHT-Barge"), x.tankerBargeCost, x.tankerPct]; },
+        "Operation Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck")*x.scale.truck, x.hourlyIdleCost]; },//Defaults tab
+        "Environmental Cost-Truck": function (r, j) { return [fn(r, "VHT-Truck")*x.scale.truck, 0]; },
+        "Operation Cost-Rail": function (r, j) { return [fn(r, "VHT-Rail")*x.scale.rail, 0]; },
+        "Environmental Cost-Rail": function (r, j) { return [fn(r, "VHT-Rail")*x.scale.rail, 0]; },
+        "Towboat Cost-Barge": function (r, j) { return [fn(r, "VHT-Barge")*x.scale.barge, x.towboatOtherCost,x.bargesPerTow]; },//Defaults tab
+        "Dry Barge Cost-Barge": function (r, j) { return [fn(r, "VHT-Barge")*x.scale.barge, x.dryBargeCost, x.tankerPct]; },
+        "Tanker Barge Cost-Barge": function (r, j) { return [fn(r, "VHT-Barge")*x.scale.barge, x.tankerBargeCost, x.tankerPct]; },
         "Barge Tons-Barge": function (r, j) { return [fn(r, "Trips-Barge"), x.tonsPerBarge]; },
         "Trucks-Barge": function (r, j) { return [fn(r, "Barge Tons-Barge"), x.tonsPerTruck]; },
         "Truck VHT-Barge": function (r, j) { return [fn(r, "Trucks-Barge"), x.waitTimeReduction.barge]; },
@@ -2035,19 +2036,19 @@ TTI.Models.MultiModelBCA = function (spec) {
       dFactor = years.map(function (y) { return 1/Math.pow(1+rate,(y-args.input.constantYear)); });
       var fnList = {
         "Operation Cost-Truck": function (args) {
-          return args[0]*(args[1]-args[2]);
+          return args[0]*(args[1]);
         },
         "Operation Cost-Barge": function (args) {
-          return args[0] * (args[1] + args[2] - args[3] - args[4]);
+          return args[0] * (args[1] + args[2] + args[3]);
         },
         "Freight Time Cost-Truck": function (args) {
-          return args[0] * (args[1]-args[2]);
+          return args[0] * (args[1]);
         },
         "Freight Time Cost-Barge": function (args) {
-          return args[0] * (args[1] - args[2]);
+          return args[0] * (args[1]);
         },
         "Freight Time Cost-Rail": function (args) {
-          return args[0] * (args[1] - args[2]);
+          return args[0] * (args[1]);
         }
       };
       var argsList = {

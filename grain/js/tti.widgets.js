@@ -250,7 +250,7 @@ TTI.createInputItemsTruck = function() {
       value: TTI.inputs.constructionStartYear,
       options: yearList,
       onchange: function(x){
-        TTI.inputs.constructionStartYear = x;
+        TTI.inputs.constructionStartYear = parseInt(x);
       }
     },
     {
@@ -260,7 +260,7 @@ TTI.createInputItemsTruck = function() {
       value: TTI.inputs.operationStartYear,
       options: yearList,
       onchange: function(x) {
-        TTI.inputs.operationStartYear = x;
+        TTI.inputs.operationStartYear = parseInt(x);
       }
     },
     {
@@ -270,7 +270,7 @@ TTI.createInputItemsTruck = function() {
       value: TTI.inputs.constantDollarYear,
       options: constYearList,
       onchange: function(x) {
-        TTI.inputs.constantDollarYear = x;
+        TTI.inputs.constantDollarYear = parseInt(x);
       }
     }
   ];
@@ -282,7 +282,7 @@ TTI.createInputItemsTruck = function() {
       control:"input",
       value: TTI.inputs.truckPercent,
       onchange: function(x) {
-        TTI.inputs.truckPercent = x;
+        TTI.inputs.truckPercent = parseFloat(x);
       }
     },
     {
@@ -297,7 +297,7 @@ TTI.createInputItemsTruck = function() {
         return x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
       },
       onchange: function(x){
-        TTI.inputs.AADT = x;
+        TTI.inputs.AADT = parseInt(x);
       }
     },
     {
@@ -306,7 +306,7 @@ TTI.createInputItemsTruck = function() {
       control:"input",
       value: TTI.inputs.averageSpeedBase,
       onchange: function(x){
-        TTI.inputs.averageSpeedBase =x;
+        TTI.inputs.averageSpeedBase =parseFloat(x);
       }
     }
   ];
@@ -318,7 +318,7 @@ TTI.createInputItemsTruck = function() {
       control:"input",
       value: TTI.inputs.averageSpeedProj,
       onchange: function(x){
-        TTI.inputs.averageSpeedProj = x;
+        TTI.inputs.averageSpeedProj = parseFloat(x);
       }
     },
     {
@@ -328,7 +328,7 @@ TTI.createInputItemsTruck = function() {
       value: TTI.inputs.projectLength,
       format:function(x){return x;},
       onchange: function(x){
-        TTI.inputs.projectLength = x;
+        TTI.inputs.projectLength = parseFloat(x);
       }
 
     }
@@ -422,7 +422,7 @@ TTI.createInputItemsMultimodel = function(){
       value: TTI.inputs.constructionStartYear,
       options: yearList,
       onchange: function(x){
-        TTI.inputs.constructionStartYear = x;
+        TTI.inputs.constructionStartYear = parseInt(x);
       }
     },
     {
@@ -432,7 +432,7 @@ TTI.createInputItemsMultimodel = function(){
       value: TTI.inputs.operationStartYear,
       options: yearList,
       onchange: function(x){
-        TTI.inputs.operationStartYear = x;
+        TTI.inputs.operationStartYear = parseInt(x);
       }
     },
     {
@@ -442,7 +442,7 @@ TTI.createInputItemsMultimodel = function(){
       value: TTI.inputs.constantDollarYear,
       options: constYearList,
       onchange: function(x){
-        TTI.inputs.constantDollarYear = x;
+        TTI.inputs.constantDollarYear = parseInt(x);
       }
     }
   ];
@@ -460,7 +460,7 @@ TTI.createInputItemsMultimodel = function(){
         return x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
       },
       onchange: function(x){
-        TTI.inputs.annualTrips.barge = x;
+        TTI.inputs.annualTrips.barge = parseInt(x);
       }
     },
     {
@@ -475,7 +475,7 @@ TTI.createInputItemsMultimodel = function(){
         return x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
       },
       onchange: function(x){
-        TTI.inputs.waitTime.barge = x;
+        TTI.inputs.waitTime.barge = parseInt(x);
       }
     }
   ];
@@ -508,7 +508,7 @@ TTI.createInputItemsMultimodel = function(){
         return x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
       },
       onchange: function(x){
-        TTI.inputs.waitTime.truck = x;
+        TTI.inputs.waitTime.truck = parseFloat(x);
       }
     }
 
@@ -527,7 +527,7 @@ TTI.createInputItemsMultimodel = function(){
         return x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
       },
       onchange: function(x){
-        TTI.inputs.annualTrips.rail = x;
+        TTI.inputs.annualTrips.rail = parseInt(x);
       }
     },
     {
@@ -542,7 +542,7 @@ TTI.createInputItemsMultimodel = function(){
         return this.format(x);
       },
       onchange: function(x){
-        TTI.inputs.waitTime.rail = x;
+        TTI.inputs.waitTime.rail = parseFloat(x);
       }
 
     }
@@ -645,7 +645,7 @@ TTI.Widgets.Inputs = function(spec) {
     // e.target.setSelectionRange(cursorStart, cursorEnd);
     // }
     function getNumber(n){
-      console.log(n);
+      //console.log(n);
       return n.toString().match(/\d+[,\.]?\d+/)[0].replace(",","");
     }
     if (item.control==="input")

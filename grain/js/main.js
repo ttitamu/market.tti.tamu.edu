@@ -18,7 +18,7 @@ function init() {
   TTI.cssLocation = ["/print.css"];
   TTI.reportName = "M.A.R.K.E.T. Model Report";
   TTI.inputs = {
-    state: "Indiana",
+    state: "Iowa",
     region: "Rural",
     constructionCost: 77.59,
     constructionStartYear: 2022,
@@ -327,13 +327,38 @@ campfire.subscribe('boot-ui', function() {
   TTI.checkVersion(function() {
     TTI.clearLocalStorage();
   });
+  TTI.inputs = {
+    state: "Iowa",
+    region: "Rural",
+    constructionCost: 77.59,
+    constructionStartYear: 2022,
+    operationStartYear: 2027,
+    constantDollarYear: 2018,
+    truckPercent: 28.6,
+    AADT: 15397,
+    averageSpeedBase: 64.8,
+    averageSpeedProj: 65.8,
+    projectLength: 10,
+    commodityMix: {},
+    commodityMixAg:{},
+    annualTrips: {
+      barge: 750,
+      rail: 50,
+      truck: 60000
+    },
+    waitTime: {
+      barge: 2,
+      rail: 2,
+      truck: 2
+    }
+  };
   campfire.publish("import-json");
 
 
   setTimeout(function(){
     campfire.publish("render-inputs");
     campfire.publish("bind-events");
-    $("#btn-calculate-truck").click();
+    $("#nav-tab-inputs-truck .nav-link").click();
     TTI.createTooltips();
     TTI.createGlossaryTxt();
   },500);
@@ -341,19 +366,15 @@ campfire.subscribe('boot-ui', function() {
 });
 campfire.subscribe("bind-events",function(){
 
-  campfire.publish("bind-events-inputs-truck");
-  campfire.publish("bind-events-inputs-multimodel");
-  $("#nav-tab-inputs-truck").on("click",function(){
+  $("#nav-tab-inputs-truck .nav-link").on("click",function(){
     setTimeout(function(){
       campfire.publish("render-inputs-truck");
-      campfire.publish("bind-events-inputs-truck");
     },100);
     $("#btn-calculate-truck").click();
   });
-  $("#nav-tab-inputs-multimodel").on("click",function(){
+  $("#nav-tab-inputs-multimodel .nav-link").on("click",function(){
     setTimeout(function(){
       campfire.publish("render-inputs-multimodel");
-      campfire.publish("bind-events-inputs-multimodel");
     },100);
     $("#btn-calculate-multimodel").click();
   });
@@ -397,7 +418,7 @@ campfire.subscribe("bind-events-inputs-truck",function(){
     input.constructionCost = TTI.inputs.constructionCost*1000000;
     input.constructionStartYear = TTI.inputs.constructionStartYear;
     input.operationStartYear = TTI.inputs.operationStartYear;
-    input.constantYear = TTI.inputs.constantYear;
+    input.constantYear = TTI.inputs.constantDollarYear;
     input.truckPercent = TTI.inputs.truckPercent/100;
     input.AADT = TTI.inputs.AADT;
     input.averageSpeedBase = TTI.inputs.averageSpeedBase;
@@ -512,6 +533,7 @@ campfire.subscribe('render-inputs-truck',function(){
     obj.append(DOM.button().addClass('btn btn-primary btn-block').attr('id','btn-calculate-truck').html('Calculate Results'));
   });
   createInputs.renderOn($('#tab-inputs-truck'));
+  campfire.publish("bind-events-inputs-truck");
 
 //  $("#bca-inputs-constantYear").parent().css("display","none");
 });
@@ -526,6 +548,7 @@ campfire.subscribe('render-inputs-multimodel',function(){
     obj.append(DOM.button().addClass('btn btn-primary btn-block').attr('id','btn-calculate-multimodel').html('Calculate Results'));
   });
   createInputs.renderOn($('#tab-inputs-multimodel'));
+  campfire.publish("bind-events-inputs-multimodel");
 //  $("#multimodel-inputs-constantYear").parent().css("display","none");
 });
 campfire.subscribe('render-outputs-multimodel',function(){
