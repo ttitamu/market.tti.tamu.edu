@@ -359,11 +359,11 @@ campfire.subscribe('boot-ui', function() {
     campfire.publish("render-inputs");
     campfire.publish("bind-events");
     $("#nav-tab-inputs-truck .nav-link").click();
-
+    $("#modal-intro").modal("show")
     TTI.createTooltips();
     TTI.createGlossaryTxt();
   },500);
-  $("#link-intro").click();
+  //$("#link-intro").click();
 
 });
 campfire.subscribe("bind-events",function(){
