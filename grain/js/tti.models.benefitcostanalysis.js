@@ -863,7 +863,7 @@ TTI.Models.BenefitCostAnalysis = function (spec) {
           // if (count++<43){
           //    console.log("The %s is %f",k,args[0] * args[1] *args[2]* args[3]*(args[4]+ args[5]*args[6]+ args[7]*args[8]));
           // }
-          return args[0] * args[1] *args[3]* (args[9]*args[4]+ args[2]*args[5]*args[6]+ args[2]*args[7]*args[8]);
+          return args[0] * args[1] *args[3]* (args[2]*args[4]+ args[2]*args[5]*args[6]+ args[2]*args[7]*args[8]);
         };
         argsList[k] = function (r, j) { return [r["VHT-Truck"], tonsPerVehicle, mix[k], cost[k],ctcFactor,perishCost[k],perishCostFactor,jitCost[k],jitCostFactor,TTI.commodityCostByHrs[k]]; };//To be fixed. don't use global variables here. Check mix and cost per hr with Max
       });

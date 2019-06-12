@@ -267,6 +267,9 @@ TTI.createInputItemsTruck = function() {
       propertyName: "bca-inputs-constantYear",
       label: "Constant Dollar Year",
       control:"dropdown list",
+      attribute:{
+        "class":"hidden",
+      },
       value: TTI.inputs.constantDollarYear,
       options: constYearList,
       onchange: function(x) {
@@ -346,9 +349,27 @@ TTI.createInputItemsTruck = function() {
       onchange: function(x) {
         var v = (parseFloat(x)).toFixed(2);
         TTI.inputs.commodityMix["Truck"][TTI.inputs.state][k] = v/100;
+        var total = TTI.getObjectTotal(TTI.inputs.commodityMix["Truck"][TTI.inputs.state])*100;
+        $("#bca-inputs-mix-total").val(total).change();
         return v;
       },
     });
+  });
+  inputItemsMix.push({
+    propertyName:"bca-inputs-mix-total",
+    label: "Total Mix",
+    control: "input",
+    attribute: {
+      "disabled": true
+    },
+    value: TTI.getObjectTotal(TTI.inputs.commodityMix["Truck"][TTI.inputs.state])*100,
+    format: function(x){
+        return (parseFloat(x)).toFixed(2);
+    },
+    onchange: function(x){
+        var v = this.format(x);
+        return v;
+    }
   });
   return [{
       propertyName: "card-input1",
@@ -439,6 +460,9 @@ TTI.createInputItemsMultimodel = function(){
       propertyName: "multimodel-inputs-constantYear",
       label: "Constant Dollar Year",
       control:"dropdown list",
+      attribute: {
+        "class":"hidden"
+      },
       value: TTI.inputs.constantDollarYear,
       options: constYearList,
       onchange: function(x){
@@ -553,7 +577,7 @@ TTI.createInputItemsMultimodel = function(){
   var inputItemsMixBarge =[];
   Object.keys(TTI.commodityCostByHrs).forEach(function(k){
     inputItemsMixTruck.push({
-      propertyName:"multimodel-inputs-"+k,
+      propertyName:"multimodel-inputs-mix-truck-"+k,
       label: k,
       control: "input",
       value: TTI.inputs.commodityMix["Truck"][TTI.inputs.state][k]*100,
@@ -563,28 +587,95 @@ TTI.createInputItemsMultimodel = function(){
       onchange: function(x){
           var v = this.format(x);
           TTI.inputs.commodityMix["Truck"][TTI.inputs.state][k] = v/100;
+          var total = TTI.getObjectTotal(TTI.inputs.commodityMix["Truck"][TTI.inputs.state])*100;
+          $("#multimodel-inputs-mix-truck-total").val(total).change();
           return v;
       }
     });
     inputItemsMixRail.push({
-      propertyName:"multimodel-inputs-"+k,
+      propertyName:"multimodel-inputs-mix-rail-"+k,
       label: k,
       control: "input",
       value: TTI.commodityMix["Rail"]["Iowa"][k]*100,
       format: function(x){
           return (parseFloat(x)).toFixed(2);
+      },
+      onchange: function(x){
+          var v = this.format(x);
+          TTI.inputs.commodityMix["Rail"][TTI.inputs.state][k] = v/100;
+          var total = TTI.getObjectTotal(TTI.inputs.commodityMix["Rail"][TTI.inputs.state])*100;
+          $("#multimodel-inputs-mix-rail-total").val(total).change();
+          return v;
       }
     });
     inputItemsMixBarge.push({
-      propertyName:"multimodel-inputs-"+k,
+      propertyName:"multimodel-inputs-mix-barge-"+k,
       label: k,
       control: "input",
       value: TTI.commodityMix["Barge"]["Iowa"][k]*100,
       format: function(x){
           return (parseFloat(x)).toFixed(2);
+      },
+      onchange: function(x){
+          var v = this.format(x);
+          TTI.inputs.commodityMix["Barge"][TTI.inputs.state][k] = v/100;
+          var total = TTI.getObjectTotal(TTI.inputs.commodityMix["Barge"][TTI.inputs.state])*100;
+          $("#multimodel-inputs-mix-barge-total").val(total).change();
+          return v;
       }
 
     });
+  });
+  inputItemsMixTruck.push({
+    propertyName:"multimodel-inputs-mix-truck-total",
+    label: "Total Mix",
+    control: "input",
+    attribute: {
+      "disabled": true
+    },
+    value: TTI.getObjectTotal(TTI.inputs.commodityMix["Truck"][TTI.inputs.state])*100,
+    format: function(x){
+        return (parseFloat(x)).toFixed(2);
+    },
+    onchange: function(x){
+        var v = this.format(x);
+        $("#"+this.propertyName).val(v);
+        return v;
+    }
+  });
+  inputItemsMixRail.push({
+    propertyName:"multimodel-inputs-mix-rail-total",
+    label: "Total Mix",
+    control: "input",
+    attribute: {
+      "disabled": true
+    },
+    value: TTI.getObjectTotal(TTI.inputs.commodityMix["Rail"][TTI.inputs.state])*100,
+    format: function(x){
+        return (parseFloat(x)).toFixed(2);
+    },
+    onchange: function(x){
+        var v = this.format(x);
+        $("#"+this.propertyName).val(v);
+        return v;
+    }
+  });
+  inputItemsMixBarge.push({
+    propertyName:"multimodel-inputs-mix-barge-total",
+    label: "Total Mix",
+    control: "input",
+    attribute: {
+      "disabled": true
+    },
+    value: TTI.getObjectTotal(TTI.inputs.commodityMix["Barge"][TTI.inputs.state])*100,
+    format: function(x){
+        return (parseFloat(x)).toFixed(2);
+    },
+    onchange: function(x){
+        var v = this.format(x);
+        $("#"+this.propertyName).val(v);
+        return v;
+    }
   });
   return [
       {
@@ -634,16 +725,6 @@ TTI.Widgets.Inputs = function(spec) {
     inputGroup.append(DOM.div().addClass("input-group-addon").html(item.label));
     var input;
     var v;
-    //if (isFunction(input.value)) v= input.value();
-    // function handleInputValueChange(e) {
-    //
-    // var cursorStart = e.target.selectionStart,
-    //     cursorEnd = e.target.selectionEnd;
-    //
-    //     // value manipulations...
-    //
-    // e.target.setSelectionRange(cursorStart, cursorEnd);
-    // }
     function getNumber(n){
       //console.log(n);
       return n.toString().match(/\d+[,\.]?\d+/)[0].replace(",","");
@@ -654,6 +735,12 @@ TTI.Widgets.Inputs = function(spec) {
       v = item.value;
       if (item.format) {
         v = item.format(item.value);
+      }
+      if (item.attribute) {
+        Object.keys(item.attribute).forEach(function(k){
+          inputGroup.prop(k,item.attribute[k]);
+          input.prop(k,item.attribute[k]);
+        });
       }
       input.val(v).html(v.toString());
       if (item.onkeyup){
@@ -692,6 +779,12 @@ TTI.Widgets.Inputs = function(spec) {
     if (item.control==="dropdown list")
     {
       input = DOM.select().addClass('form-control');
+      if (item.attribute) {
+        Object.keys(item.attribute).forEach(function(k){
+          inputGroup.prop(k,item.attribute[k]);
+          input.prop(k,item.attribute[k]);
+        });
+      }
       item.options.forEach(function(o,i){
         o = o.toString();
         var opt = DOM.option().val(o).html(o);
@@ -772,7 +865,7 @@ TTI.Widgets.BenefitCostReports = function(spec){
     var elem = {};
     var headers = dataArr[0].Headers;
     elem = dataArr[1].Rows[8];
-    elem[headers[0]] = "Total Agriculture Benefits","Present Value";
+    elem[headers[0]] = "Total Grain Sector Benefits","Present Value";
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
     elem = dataArr[1].Rows[12];
@@ -798,7 +891,7 @@ TTI.Widgets.MultimodelBCAReports = function(spec){
     var elem = {};
     var headers = dataArr[0].Headers;
     elem = dataArr[1].Rows[6];
-    elem[headers[0]] = "Total Agriculture Benefits","Present Value";
+    elem[headers[0]] = "Total Grain Sector Benefits","Present Value";
     d.Rows.push(elem);
     d.RowIndex.push(d.RowIndex.length);
     elem = dataArr[1].Rows[10];

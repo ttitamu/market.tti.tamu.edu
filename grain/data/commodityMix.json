@@ -1,7 +1,7 @@
 {
   "Truck":{
    "Iowa": {
-      "Percent Grains": 0.358399134104831,
+
       "Live animals/fish": 0.026112625648593,
       "Cereal grains": 0.344782194834127,
       "Other ag prods.": 0.087862717618906,
@@ -47,7 +47,7 @@
       "Unknown": 0.001350170058889
    },
    "Illinois": {
-      "Percent Grains": 0.214571893666738,
+
       "Live animals/fish": 0.004667934238684,
       "Cereal grains": 0.20472927279868,
       "Other ag prods.": 0.048481539911369,
@@ -93,7 +93,7 @@
       "Unknown": 0
    },
    "Indiana": {
-      "Percent Grains": 0.146586580363233,
+
       "Live animals/fish": 0.008446535211068,
       "Cereal grains": 0.13696906279698,
       "Other ag prods.": 0.04931466356909,
@@ -139,7 +139,7 @@
       "Unknown": 0
    },
    "Michigan": {
-      "Percent Grains": 0.070021866568054,
+
       "Live animals/fish": 0.00295061292955,
       "Cereal grains": 0.056023245945436,
       "Other ag prods.": 0.040601190819168,
@@ -185,7 +185,7 @@
       "Unknown": 0
    },
    "Minnesota": {
-      "Percent Grains": 0.241235324282503,
+
       "Live animals/fish": 0.009321577486752,
       "Cereal grains": 0.233752687362239,
       "Other ag prods.": 0.125133787110964,
@@ -231,7 +231,7 @@
       "Unknown": 0.000005824064392
    },
    "Missouri": {
-      "Percent Grains": 0.139234987542264,
+
       "Live animals/fish": 0.013501767104202,
       "Cereal grains": 0.126144336315807,
       "Other ag prods.": 0.052866609874487,
@@ -277,7 +277,7 @@
       "Unknown": 0.000031977160125
    },
    "North Dakota": {
-      "Percent Grains": 0.307211311683099,
+
       "Live animals/fish": 0.008075310811423,
       "Cereal grains": 0.30073021233837,
       "Other ag prods.": 0.251668434050493,
@@ -323,7 +323,7 @@
       "Unknown": 0
    },
    "Nebraska": {
-      "Percent Grains": 0.485457383651248,
+
       "Live animals/fish": 0.046999130885946,
       "Cereal grains": 0.476462441282519,
       "Other ag prods.": 0.085248132723559,
@@ -369,7 +369,7 @@
       "Unknown": 0
    },
    "Ohio": {
-      "Percent Grains": 0.069702828526883,
+
       "Live animals/fish": 0.003913759341277,
       "Cereal grains": 0.058561789159868,
       "Other ag prods.": 0.032473647672904,
@@ -415,7 +415,7 @@
       "Unknown": 0
    },
    "South Dakota": {
-      "Percent Grains": 0.443015975323945,
+
       "Live animals/fish": 0.025840314468878,
       "Cereal grains": 0.440623494338058,
       "Other ag prods.": 0.102486999022575,
@@ -461,7 +461,7 @@
       "Unknown": 0
    },
    "Wisconsin": {
-      "Percent Grains": 0.089704896538249,
+
       "Live animals/fish": 0.006307923092409,
       "Cereal grains": 0.07924063213649,
       "Other ag prods.": 0.036335076168157,
@@ -509,7 +509,7 @@
 },
 "Rail":{
    "Iowa": {
-      "Percent Grains": 0.335070402094866,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.318548913957229,
       "Other ag prods.": 0.045834324241382,
@@ -555,7 +555,7 @@
       "Unknown": 0
    },
    "Illinois": {
-      "Percent Grains": 0.246584222952912,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.237473500912759,
       "Other ag prods.": 0.040936894227927,
@@ -601,7 +601,7 @@
       "Unknown": 0.004880138444515
    },
    "Indiana": {
-      "Percent Grains": 0.108792371541209,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.105566660614142,
       "Other ag prods.": 0.029029904208665,
@@ -647,7 +647,7 @@
       "Unknown": 0.000730236573202
    },
    "Michigan": {
-      "Percent Grains": 0.057782600104116,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.057042086668514,
       "Other ag prods.": 0.000802460296228,
@@ -693,7 +693,7 @@
       "Unknown": 0
    },
    "Minnesota": {
-      "Percent Grains": 0.306047405751173,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.296776628546598,
       "Other ag prods.": 0.003740255790242,
@@ -739,7 +739,7 @@
       "Unknown": 0.000018257799407
    },
    "Missouri": {
-      "Percent Grains": 0.174806410253681,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.159131045008177,
       "Other ag prods.": 0.091372578760038,
@@ -785,7 +785,7 @@
       "Unknown": 0
    },
    "North Dakota": {
-      "Percent Grains": 0.215196584975949,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.206471670746356,
       "Other ag prods.": 0.12120440303329,
@@ -831,7 +831,7 @@
       "Unknown": 0.000037491476628
    },
    "Nebraska": {
-      "Percent Grains": 0.667942741566006,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.585374817155641,
       "Other ag prods.": 0.004330828268784,
@@ -877,7 +877,7 @@
       "Unknown": 0
    },
    "Ohio": {
-      "Percent Grains": 0.114526314812163,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.106728607949777,
       "Other ag prods.": 0.023810612469205,
@@ -923,7 +923,7 @@
       "Unknown": 0
    },
    "South Dakota": {
-      "Percent Grains": 0.662228396663211,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.657766126176106,
       "Other ag prods.": 0.007261306906005,
@@ -969,7 +969,7 @@
       "Unknown": 0
    },
    "Wisconsin": {
-      "Percent Grains": 0.136323519522133,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.127691617978467,
       "Other ag prods.": 0.016241636303396,
@@ -1017,7 +1017,7 @@
 },
 "Barge":{
    "Iowa": {
-      "Percent Grains": 0.333982734637125,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.333873944914792,
       "Other ag prods.": 0.469085009918212,
@@ -1063,7 +1063,7 @@
       "Unknown": 0
    },
    "Illinois": {
-      "Percent Grains": 0.221585471176482,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.220809845792593,
       "Other ag prods.": 0.194754910811041,
@@ -1109,7 +1109,7 @@
       "Unknown": 0
    },
    "Indiana": {
-      "Percent Grains": 0.210311627693294,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.162819225659856,
       "Other ag prods.": 0.034752183484543,
@@ -1155,7 +1155,7 @@
       "Unknown": 0
    },
    "Michigan": {
-      "Percent Grains": 0.000302310057233,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.000273004747287,
       "Other ag prods.": 0.000713132905519,
@@ -1201,7 +1201,7 @@
       "Unknown": 0
    },
    "Minnesota": {
-      "Percent Grains": 0.111763282059876,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.111731598521454,
       "Other ag prods.": 0.071273613394319,
@@ -1247,7 +1247,7 @@
       "Unknown": 0
    },
    "Missouri": {
-      "Percent Grains": 0.293361273988889,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.293360948628791,
       "Other ag prods.": 0.050626920105677,
@@ -1293,7 +1293,7 @@
       "Unknown": 0
    },
    "North Dakota": {
-      "Percent Grains": 0,
+
       "Live animals/fish": 0,
       "Cereal grains": 0,
       "Other ag prods.": 0,
@@ -1339,7 +1339,7 @@
       "Unknown": 0
    },
    "Nebraska": {
-      "Percent Grains": 0,
+
       "Live animals/fish": 0,
       "Cereal grains": 0,
       "Other ag prods.": 0,
@@ -1385,7 +1385,7 @@
       "Unknown": 0
    },
    "Ohio": {
-      "Percent Grains": 0.003186439738082,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.003185945560464,
       "Other ag prods.": 0.010932390264651,
@@ -1431,7 +1431,7 @@
       "Unknown": 0
    },
    "South Dakota": {
-      "Percent Grains": 0,
+
       "Live animals/fish": 0,
       "Cereal grains": 0,
       "Other ag prods.": 0,
@@ -1477,7 +1477,7 @@
       "Unknown": 0
    },
    "Wisconsin": {
-      "Percent Grains": 0.024882319959588,
+
       "Live animals/fish": 0,
       "Cereal grains": 0.024846081661527,
       "Other ag prods.": 0.006467584994762,

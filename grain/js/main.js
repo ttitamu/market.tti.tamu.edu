@@ -23,7 +23,7 @@ function init() {
     constructionCost: 77.59,
     constructionStartYear: 2022,
     operationStartYear: 2027,
-    constantDollarYear: 2018,
+    constantDollarYear: 2019,
     truckPercent: 28.6,
     AADT: 15397,
     averageSpeedBase: 64.8,
@@ -333,7 +333,7 @@ campfire.subscribe('boot-ui', function() {
     constructionCost: 77.59,
     constructionStartYear: 2022,
     operationStartYear: 2027,
-    constantDollarYear: 2018,
+    constantDollarYear: 2019,
     truckPercent: 28.6,
     AADT: 15397,
     averageSpeedBase: 64.8,
@@ -359,9 +359,11 @@ campfire.subscribe('boot-ui', function() {
     campfire.publish("render-inputs");
     campfire.publish("bind-events");
     $("#nav-tab-inputs-truck .nav-link").click();
+
     TTI.createTooltips();
     TTI.createGlossaryTxt();
   },500);
+  $("#link-intro").click();
 
 });
 campfire.subscribe("bind-events",function(){
@@ -406,7 +408,7 @@ campfire.subscribe("bind-events-inputs-truck",function(){
       operationStartYear:2027,
       percentCongested:0,
       totalYears:30,
-      constantYear:2018,
+      constantYear:2019,
       projectScenario:0.02,
       commodityMix:TTI.commodityMix["Iowa"],
       commodityCost:TTI.commodityCost,
@@ -472,7 +474,7 @@ campfire.subscribe("bind-events-inputs-multimodel",function(){
       operationStartYear:2027,
       percentCongested:0,
       totalYears:30,
-      constantYear:2018,
+      constantYear:2019,
       projectScenario:0.02,
       commodityMix:{Truck:TTI.commodityMix["Truck"]["Iowa"],Rail:TTI.commodityMix["Rail"]["Iowa"],Truck:TTI.commodityMix["Barge"]["Iowa"]},
       commodityCost:TTI.commodityCost,
