@@ -360,8 +360,6 @@ campfire.subscribe('boot-ui', function() {
     campfire.publish("bind-events");
     $("#nav-tab-inputs-truck .nav-link").click();
     $("#modal-intro").modal("show")
-    TTI.createTooltips();
-    TTI.createGlossaryTxt();
   },500);
   //$("#link-intro").click();
 
@@ -450,6 +448,9 @@ campfire.subscribe("bind-events-inputs-truck",function(){
     {
       TTI.results = [model.run().results, modelAg.run().results];
       campfire.publish("render-outputs-truck");
+      $(window).scrollTop(0);
+      TTI.createTooltips();
+      TTI.createGlossaryTxt();
     }
 
   });
@@ -520,6 +521,8 @@ campfire.subscribe("bind-events-inputs-multimodel",function(){
       TTI.results = [model.run().results, modelAg.run().results];
       campfire.publish("render-outputs-multimodel");
       $(window).scrollTop(0);
+      TTI.createTooltips();
+      TTI.createGlossaryTxt();
     }
 
   });
@@ -557,11 +560,14 @@ campfire.subscribe('render-outputs-multimodel',function(){
   $('#panel-outputs').empty();
   TTI.Widgets.MultimodelBCAReports({data:[TTI.results[0].report,TTI.results[1].report],container:$('#panel-outputs')}).renderOn();
 });
-campfire.subscribe('generate-report', function() {
+campfire.subscribe('generate-report-truck',function(){
   TTI.report.empty();
   TTI.report.append(DOM.h2("Inputs Summary"));
   var table = DOM.table().addClass("input-summary");
+
   table.append(DOM.tr().append(DOM.th("Project Parameters").attr("colspan",2)).addClass("header-row"));
+  table.append(DOM.tr().append(DOM.td("State").append(DOM.td($("#bca-inputs-city").val()))));
+  table.append(DOM.tr().append(DOM.td("Type (Urban, Suburban, Rural)").append(DOM.td($("#bca-inputs-region").val()))));
   table.append(DOM.tr().append(DOM.td("Construction Cost(M$)").append(DOM.td($("#bca-inputs-constructionCost").val()))));
   table.append(DOM.tr().append(DOM.td("Construction Start Year").append(DOM.td($("#bca-inputs-constructionStartYear").val()))));
   table.append(DOM.tr().append(DOM.td("Operation Start Year").append(DOM.td($("#bca-inputs-operationStartYear").val()))));
@@ -574,14 +580,70 @@ campfire.subscribe('generate-report', function() {
   table.append(DOM.tr().append(DOM.th("Scenario-Project").attr("colspan",2)).addClass("header-row"));
   table.append(DOM.tr().append(DOM.td("Average Speed (Project)").append(DOM.td($("#bca-inputs-averageSpeedProj").val()))));
   table.append(DOM.tr().append(DOM.td("Project Length (Miles)").append(DOM.td($("#bca-inputs-projectLength").val()))));
-  table.append(DOM.tr().append(DOM.td("Type (Urban, Suburban, Rural)").append(DOM.td($("#bca-inputs-region").val()))));
-  table.append(DOM.tr().append(DOM.td("State").append(DOM.td($("#bca-inputs-city").val()))));
+
+  table.append(DOM.tr().append(DOM.th("Commodity Mix Percent").attr("colspan",2)).addClass("header-row"));
+  Object.keys(TTI.commodityCostByHrs).forEach(function(k){
+    table.append(DOM.tr().append(DOM.td(k).append(DOM.td($("[id='"+"bca-inputs-"+k+"']").val()))));
+  });
   TTI.report.append(table);
+  // TTI.report.append($($("#panel-inputs").html()));
   //TTI.report.append($($("#panel-inputs").html()));
   TTI.report.append(DOM.div('&nbsp;').addClass('page')); //page break line
   TTI.report.append(DOM.h2("Outputs Summary"));
   TTI.report.append($($("#panel-outputs").html()));
+});
+campfire.subscribe('generate-report-multimodel',function(){
+  TTI.report.empty();
+  TTI.report.append(DOM.h2("Inputs Summary"));
+  var table = DOM.table().addClass("input-summary");
+  table.append(DOM.tr().append(DOM.th("Project Parameters").attr("colspan",2)).addClass("header-row"));
+  table.append(DOM.tr().append(DOM.td("State").append(DOM.td($("#multimodel-inputs-city").val()))));
+  table.append(DOM.tr().append(DOM.td("Type (Urban, Suburban, Rural)").append(DOM.td($("#multimodel-inputs-region").val()))));
+  table.append(DOM.tr().append(DOM.td("Construction Cost(M$)").append(DOM.td($("#multimodel-inputs-constructionCost").val()))));
+  table.append(DOM.tr().append(DOM.td("Construction Start Year").append(DOM.td($("#multimodel-inputs-constructionStartYear").val()))));
+  table.append(DOM.tr().append(DOM.td("Operation Start Year").append(DOM.td($("#multimodel-inputs-operationStartYear").val()))));
+  //table.append(DOM.tr().append(DOM.td("Constant Dollar Year").append(DOM.td($("#constantYear").val()))));
+  table.append(DOM.tr().append(DOM.th("Truck").attr("colspan",2)).addClass("header-row"));
+  table.append(DOM.tr().append(DOM.td("Annual Truck Traffic").append(DOM.td($("#multimodel-inputs-annualTripsTruck").val()))));
+  table.append(DOM.tr().append(DOM.td("Wait Time Reduction (Hours)").append(DOM.td($("#multimodel-inputs-waitTimeReductionTruck").val()))));
 
+  table.append(DOM.tr().append(DOM.th("Rail").attr("colspan",2)).addClass("header-row"));
+  table.append(DOM.tr().append(DOM.td("Annual Rail Traffic").append(DOM.td($("#multimodel-inputs-annualTripsRail").val()))));
+  table.append(DOM.tr().append(DOM.td("Wait Time Reduction (Hours)").append(DOM.td($("#multimodel-inputs-waitTimeReductionRail").val()))));
+
+  table.append(DOM.tr().append(DOM.th("Barge").attr("colspan",2)).addClass("header-row"));
+  table.append(DOM.tr().append(DOM.td("Annual Barge Traffic").append(DOM.td($("#multimodel-inputs-annualTripsBarge").val()))));
+  table.append(DOM.tr().append(DOM.td("Wait Time Reduction (Hours)").append(DOM.td($("#multimodel-inputs-waitTimeReductionBarge").val()))));
+
+
+  table.append(DOM.tr().append(DOM.th("Commodity Mix Percent-Truck").attr("colspan",2)).addClass("header-row"));
+  Object.keys(TTI.commodityCostByHrs).forEach(function(k){
+    table.append(DOM.tr().append(DOM.td(k).append(DOM.td($("[id='"+"multimodel-inputs-mix-truck-"+k+"']").val()))));
+  });
+
+  table.append(DOM.tr().append(DOM.th("Commodity Mix Percent-Rail").attr("colspan",2)).addClass("header-row"));
+  Object.keys(TTI.commodityCostByHrs).forEach(function(k){
+    table.append(DOM.tr().append(DOM.td(k).append(DOM.td($("[id='"+"multimodel-inputs-mix-rail-"+k+"']").val()))));
+  });
+
+  table.append(DOM.tr().append(DOM.th("Commodity Mix Percent-Barge").attr("colspan",2)).addClass("header-row"));
+  Object.keys(TTI.commodityCostByHrs).forEach(function(k){
+    table.append(DOM.tr().append(DOM.td(k).append(DOM.td($("[id='"+"multimodel-inputs-mix-barge-"+k+"']").val()))));
+  });
+  TTI.report.append(table);
+  // TTI.report.append($($("#panel-inputs").html()));
+  //TTI.report.append($($("#panel-inputs").html()));
+  TTI.report.append(DOM.div('&nbsp;').addClass('page')); //page break line
+  TTI.report.append(DOM.h2("Outputs Summary"));
+  TTI.report.append($($("#panel-outputs").html()));
+});
+campfire.subscribe('generate-report', function() {
+  if ($("#nav-tab-inputs-truck").prop("class").includes("active")){
+    campfire.publish('generate-report-truck');
+  }
+  else{
+    campfire.publish('generate-report-multimodel');
+  }
 });
 campfire.subscribe('print-report', function() {
 

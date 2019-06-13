@@ -214,7 +214,7 @@ TTI.createInputItemsTruck = function() {
       options: cityList,
       onchange: function(x){
         TTI.inputs.state = x;
-        campfire.publish("render-inputs");
+        campfire.publish("render-inputs");        
       }
     },
     {
@@ -596,7 +596,7 @@ TTI.createInputItemsMultimodel = function(){
       propertyName:"multimodel-inputs-mix-rail-"+k,
       label: k,
       control: "input",
-      value: TTI.commodityMix["Rail"]["Iowa"][k]*100,
+      value: TTI.commodityMix["Rail"][TTI.inputs.state][k]*100,
       format: function(x){
           return (parseFloat(x)).toFixed(2);
       },
@@ -612,7 +612,7 @@ TTI.createInputItemsMultimodel = function(){
       propertyName:"multimodel-inputs-mix-barge-"+k,
       label: k,
       control: "input",
-      value: TTI.commodityMix["Barge"]["Iowa"][k]*100,
+      value: TTI.commodityMix["Barge"][TTI.inputs.state][k]*100,
       format: function(x){
           return (parseFloat(x)).toFixed(2);
       },
