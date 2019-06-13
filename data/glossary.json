@@ -1,27 +1,29 @@
 {
-    "Discount Rate": " Translates future costs and benefits into present-day values to account for the time value of money. A high discount rate may reduce future benefits and costs to smaller present values; whereas a lower rate reduces future values less, causing the value of future benefits and costs to be closer to current dollar values. ",
-    "Travel Growth Rate": " average annual growth rate of vehicles traveling on roadways ",
-    "One Time Change in Land Value due to New Service": " Initial, one time increase in property values within a quarter- or half-mile radius of the new station.",
-    "Economic Activity (Economy Wide)": "The resulting change in a city’s economy. This value is calculated by multiplying the production value by the final demand variable for each industry. It is the total impact of all direct, induced, and indirect economic activity resulting from the sectors or activity considered in the analysis. ",
-    "Vehicle Operating Cost Savings":  "Vehicle operating costs include, but are not limited to: fuel, purchase payments, insurance premiums, tires, and repairs.",
-    "Business Time and Reliability Cost Savings": " Savings associated with the ability to maintain relatively stable travel time variability, or how long it takes to complete the same trip on different days with commercial vehicles. In other words, the variable represents reduced business operating costs that occurs when travel time variability associated with traffic congestion is diminished. ",
-    "Personal Time and Reliability Cost Savings": "Savings associated with the ability to maintain relatively stable travel time variability, or how long it takes to complete the same trip on different days with passenger vehicles.",
-    "Safety Benefits": "The reduction in average crash rates (per 100 million VMT) for all modes, and average costs incurred for each crash type ($/accident).",
-    "Logistics/Freight Cost Savings": " Savings related to costs for freight handling, including costs of loading dock handling, inventory warehousing, and product delivery. ",
-    "Business Output": " The value of business production. For productivity analysis, it is measured as net value added. (For other analyses, it may be measured as gross business revenue.)",
-    "Positive Economic Effect of Wage Income": " The degree to which wage compensation is positively affected by the effects of commuting time reliability on business productivity.",
+  "Discount Rate": " Translates future costs and benefits into present-day values to account for the time value of money. A high discount rate may reduce future benefits and costs to smaller present values; whereas a lower rate reduces future values less, causing the value of future benefits and costs to be closer to current dollar values. ",
+ "Travel Growth Rate": " average annual growth rate of vehicles traveling on roadways ",
+"One Time Change in Land Value due to New Service": " Initial, one time increase in property values within a quarter- or half-mile radius of the new station.",
+"Economic Activity (Economy Wide)": "The resulting change in a city’s economy. This value is calculated by multiplying the production value by the final demand variable for each industry. It is the total impact of all direct, induced, and indirect economic activity resulting from the sectors or activity considered in the analysis. ",
+"Vehicle Operating Cost Savings":  "Vehicle operating costs include, but are not limited to: fuel, purchase payments, insurance premiums, tires, and repairs.",
+"Business Time and Reliability Cost Savings": " Savings associated with the ability to maintain relatively stable travel time variability, or how long it takes to complete the same trip on different days with commercial vehicles. In other words, the variable represents reduced business operating costs that occurs when travel time variability associated with traffic congestion is diminished. ",
+"Personal Time and Reliability Cost Savings": "Savings associated with the ability to maintain relatively stable travel time variability, or how long it takes to complete the same trip on different days with passenger vehicles.",
+"Safety Benefits": "The reduction in average crash rates (per 100 million VMT) for all modes, and average costs incurred for each crash type ($/accident).",
+"Logistics/Freight Cost Savings": " Savings related to costs for freight handling, including costs of loading dock handling, inventory warehousing, and product delivery. ",
+"Business Output": "The value of business production. For productivity analysis, it is measured as net value added. (For other analyses, it may be measured as gross business revenue.)",
+"Positive Economic Effect of Wage Income": "The degree to which wage compensation is positively affected by the effects of commuting time reliability on business productivity.",
+"Capital Costs":"Capital Costs include startup costs to initialize, design, and construct the
+project.",
+"O&M Costs":"Costs to operate and maintain the improvement.",
+"Benefit/Cost Ratio": "The benefit/cost ratio is simply the total benefits derived from the project
+divided by the total cost of the project. A benefit/cost ratio of greater  than 1.0 is positive (the benefits of building the project outweigh the cost).",
+"Construction Jobs":"Jobs attributed to capital investment",
+"O&M Jobs":"Jobs attributed to the investment in Operations & Maintenance",
+"Annual Truck Traffic":" The total number of freight trucks moving through the project area in one year.",
+"Annual Rail Traffic":" The total number of freight trains moving through the project area in one year. The model assumes 110 cars per train and 110 tons per car.",
+"Annual Barge Traffic":" The total number of barges moving through the project area in one year. The model assumes 1 towboat for every 15 barges and 1500 tons per barge.",
+"Wait Time Reduction (Hours)":" The reduction in wait time, per trip, as a result of the project.",
+"Total Grain Sector Benefits":" The total amount of benefits accrued to the grain sector.",
+"Project Prioritization Factor":" An estimate of the relative benefit to the grain sector per dollar spent on the project. A higher factor represents a higher benefit per dollar spent relative to a project with a lower factor. This provides one point of comparison of many, when comparing potential projects.",
 
-
-    "Capital Costs":"Capital Costs include startup costs to initialize, design, and construct the
-    project.",
-    "O&M Costs":" Costs to operate and maintain the improvement.",
-
-
-    "Benefit/Cost Ratio": "The benefit/cost ratio is simply the total benefits derived from the project
-    divided by the total cost of the project. A benefit/cost ratio of greater
-    than 1.0 is positive (the benefits of building the project outweigh the cost).",
-    "Construction Jobs":"Jobs attributed to capital investment",
-    "O&M Jobs":"Jobs attributed to the investment in Operations & Maintenance",
     "Commercial": "Parcels with land and improvements associated with businesses that sell goods or services to the general public.
     ",
     "Industrial": " Parcels with land and improvements of businesses that add value to a product through development, manufacturing, fabrication or processing of that product.
