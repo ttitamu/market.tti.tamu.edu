@@ -322,6 +322,38 @@ TTI.noParens = function(o) {
   }
   return o.replace(/\(.*\)/, '').trim();
 };
+
+TTI.isInputValid = function(){
+  var errorMsg = [];
+  var isChecked = true;
+  if (TTI.inputs.operationStartYear<TTI.inputs.constructionStartYear)
+  {
+    isChecked = false;
+    errorMsg.push("Operation start year must be no earlier than construction start year!");
+  }
+  
+  if (parseFloat($("#bca-inputs-mix-total").val())!==100){
+    isChecked = false;
+    errorMsg.push("The total commodity mix percentage of the truck model must be 100%!");
+  }
+
+  if (parseFloat($("#multimodel-inputs-mix-barge-total").val())!==100){
+    isChecked = false;
+    errorMsg.push("The total barge commodity mix percentage of the multimodel must be 100%!");
+  }
+
+  if (parseFloat($("#multimodel-inputs-mix-truck-total").val())!==100){
+    isChecked = false;
+    errorMsg.push("The total truck commodity mix percentage of the multimodel must be 100%!");
+  }
+
+  if (parseFloat($("#multimodel-inputs-mix-rail-total").val())!==100){
+    isChecked = false;
+    errorMsg.push("The total rail commodity mix percentage of the multimodel must be 100%!");
+  }
+  alert(errorMsg.join("\n"));
+  return isChecked;
+}
 var campfire = TTI.PubSub({});
 campfire.subscribe('boot-ui', function() {
   TTI.checkVersion(function() {
@@ -430,28 +462,28 @@ campfire.subscribe("bind-events-inputs-truck",function(){
     input.commodityCost = TTI.commodityCost;
     input.scale={Truck:1,Passenger:1,Grains:0};
     var model= TTI.Models.BenefitCostAnalysis({input:input});
-    var inputAg = input;
+    var inputAg = {...input};
     inputAg.commodityMix = TTI.inputs.commodityMixAg["Truck"][input.city];
     inputAg.commodityCost = TTI.commodityCostAg;
     inputAg.scale={Truck:0,Passenger:0,Grains:1};
     var loads = Object.keys(inputAg.commodityCost);
     loads.forEach(function(ee){
+      inputAg.commodityMix[ee] = input.commodityMix[ee];
       inputAg.scale.Truck = inputAg.scale.Truck + inputAg.commodityMix[ee];
     });
 
     var modelAg = TTI.Models.BenefitCostAnalysis({input:inputAg});
-    if (input.operationStartYear<input.constructionStartYear)
+   
+    if (TTI.isInputValid())
     {
-      alert("Operation start year must be no earlier than construction start year!");
-    }
-    else
-    {
-      TTI.results = [model.run().results, modelAg.run().results];
+        TTI.results = [model.run().results, modelAg.run().results];
       campfire.publish("render-outputs-truck");
       $(window).scrollTop(0);
       TTI.createTooltips();
       TTI.createGlossaryTxt();
     }
+
+    
 
   });
 });
@@ -501,22 +533,19 @@ campfire.subscribe("bind-events-inputs-multimodel",function(){
     input.waitTimeReduction = TTI.inputs.waitTime;
     input.scale={Truck:1,Passenger:0,Grains:0,truck:1,rail:1,barge:1};
     var model= TTI.Models.MultiModelBCA({input:input});
-    var inputAg = input;
+    var inputAg = {...input};
     inputAg.commodityMix = {truck:TTI.commodityMix["Truck"][input.city],rail:TTI.commodityMix["Rail"][input.city],barge:TTI.commodityMix["Barge"][input.city]};
     inputAg.scale={Truck:1,Passenger:0,Grains:1,truck:0,rail:0,barge:0};
     inputAg.commodityCost = TTI.commodityCostAg;
     ["truck","rail","barge"].forEach(function(e){
       var loads = Object.keys(inputAg.commodityCost);
       loads.forEach(function(ee){
+        inputAg.commodityMix[e][ee]=input.commodityMix[e][ee];
         inputAg.scale[e] = inputAg.scale[e] + inputAg.commodityMix[e][ee];
       });
     });
     var modelAg = TTI.Models.MultiModelBCA({input:inputAg});
-    if (input.operationStartYear<input.constructionStartYear)
-    {
-      alert("Operation start year must be no earlier than construction start year!");
-    }
-    else
+    if (TTI.isInputValid())
     {
       TTI.results = [model.run().results, modelAg.run().results];
       campfire.publish("render-outputs-multimodel");
