@@ -351,7 +351,8 @@ TTI.isInputValid = function(){
     isChecked = false;
     errorMsg.push("The total rail commodity mix percentage of the multimodel must be 100%!");
   }
-  alert(errorMsg.join("\n"));
+
+  if (!isChecked) alert(errorMsg.join("\n"));
   return isChecked;
 }
 var campfire = TTI.PubSub({});
